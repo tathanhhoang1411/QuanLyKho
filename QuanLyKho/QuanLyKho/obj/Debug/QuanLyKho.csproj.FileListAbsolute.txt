@@ -2,6 +2,7 @@ D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\QuanLyK
 D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\QuanLyKho.csproj.SuggestedBindingRedirects.cache
 D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\LoginWindow.g.cs
 D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\MainWindow.g.cs
+D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\UserControlQuanLyKho\ControlBarUC.g.cs
 D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\App.g.cs
 D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\GeneratedInternalTypeHelper.g.cs
 D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\QuanLyKho_MarkupCompile.cache
@@ -21,6 +22,7 @@ D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\App.bam
 D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\LoginWindow.baml
 D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\MainWindow.baml
 D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\ResourceXAML\MainReSource.baml
+D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\UserControlQuanLyKho\ControlBarUC.baml
 D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\QuanLyKho.g.resources
 D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\QuanLyKho.Properties.Resources.resources
 D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\QuanLyKho.csproj.GenerateResource.cache
@@ -28,3 +30,4 @@ D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\QuanLyK
 D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\QuanLyKho.csproj.CopyComplete
 D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\QuanLyKho.exe
 D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\QuanLyKho.pdb
+D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\ResourceXAML\Style.baml

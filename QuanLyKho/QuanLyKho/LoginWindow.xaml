@@ -5,55 +5,86 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyKho"
         mc:Ignorable="d"
-        
-                xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:uc="clr-namespace:QuanLyKho.UserControlQuanLyKho"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      TextElement.FontWeight="Regular"
-     TextElement.FontSize="15"
+     TextElement.FontSize="13"
      TextOptions.TextFormattingMode="Ideal"
      TextOptions.TextRenderingMode="Auto"
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}"
-        
-        Title="LoginWindow" Height="400" Width="400">
-    <Grid Background="{DynamicResource MaterialDesignDarkSeparatorBackground}">
-        <StackPanel Background="DarkKhaki" Width="350" Height="300">
-            <Grid Width="300" Margin="20" >
-                <Grid.RowDefinitions  >
-                    <RowDefinition Height="150" ></RowDefinition>
-                    <RowDefinition></RowDefinition>
-                    <RowDefinition></RowDefinition>
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Name="loginWindow"
+        Title="Đăng nhập" Height="300" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition  ></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <uc:ControlBarUC Tag="{Binding Title, ElementName=loginWindow}"></uc:ControlBarUC>
+        </Grid>
+        <materialDesign:Card Grid.Row="1" Width="330" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid>
+                <Grid.Resources>
+                    <Style TargetType="Grid">
+                        <Setter Property="Margin" Value="15 10 15 10"></Setter>
+                    </Style>
+                </Grid.Resources>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
+                    <RowDefinition Height="auto"></RowDefinition>
                 </Grid.RowDefinitions>
-                <StackPanel>
-                    <TextBox Text="Tên đăng nhập" Margin="0 10 0 10" ></TextBox>
-                    <PasswordBox PasswordChar="*" Margin="0 10 0 10"></PasswordBox>
-                    <CheckBox Content="Nhớ mật khẩu" HorizontalAlignment="Right" Margin="0 10 0 10"></CheckBox>
-                </StackPanel>
-                <DockPanel Grid.Row="1"  >
-                    <Button
-                          Width="130"
-                          Content="ĐĂNG NHẬP"
-                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                          Style="{StaticResource MaterialDesignRaisedSecondaryDarkButton}">
+                <Grid Grid.Row="0">
+                    <TextBox materialDesign:HintAssist.Hint="Tên đăng nhập"
+                             Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    </TextBox>
+                </Grid>
+                <Grid Grid.Row="1">
+                    <PasswordBox x:Name="FloatingPasswordBox"
+                                 materialDesign:HintAssist.Hint="Mật khẩu"
+                                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
+                    </PasswordBox>
+                </Grid>
+                <Grid Grid.Row="2">
+                    <CheckBox x:Name="FloatingCheck"
+                                 materialDesign:HintAssist.Hint="Mật khẩu"
+                              Content="Hiện mật khẩu"
+                              HorizontalAlignment="Right">
+                    </CheckBox>
+                </Grid>
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition></ColumnDefinition>
+                        <ColumnDefinition></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Button Grid.Column="0"    
+                            Style="{StaticResource MaterialDesignRaisedButton}"    
+                            Width="110"    
+                            ToolTip="Resource name: MaterialDesignRaisedButton" Content="Đăng nhập">
                     </Button>
-                    <Button HorizontalAlignment="Right"
-                          Width="130"
-                          Content="THOÁT"
-                          IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                          Style="{StaticResource MaterialDesignRaisedLightButton}"
-                        Background="Red">
+                    <Button Grid.Column="1"    
+                            Style="{StaticResource MaterialDesignRaisedButton}"    
+                            Width="110"    
+                            Background="OrangeRed"
+                            ToolTip="Resource name: MaterialDesignRaisedButton" Content="Thoát">
                     </Button>
-                </DockPanel>
-                <StackPanel Grid.Row="2"  Margin="0 10 0 0">
+                </Grid>
+                <Grid Grid.Row="4">
                     <TextBlock>
-                        <Hyperlink NavigateUri="http://google.com" IsEnabled="True" RequestNavigate="Hyperlink_RequestNavigate" Foreground="Red">
-                        Quên mật khẩu
-                        </Hyperlink>
+                             <Hyperlink NavigateUri="http://www.example.com" Foreground="Red">
+                                 Quên mật khẩu
+                              </Hyperlink>
                     </TextBlock>
-                </StackPanel>
-                
+                </Grid>
             </Grid>
-        </StackPanel>
-  
+        </materialDesign:Card>
     </Grid>
 </Window>
