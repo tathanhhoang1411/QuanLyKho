@@ -6,13 +6,11 @@
              xmlns:local="clr-namespace:QuanLyKho.UserControlQuanLyKho"
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"             
-             
-             
              Name="ucControlBar"
              mc:Ignorable="d">
 
     <Grid>
-        <materialDesign:ColorZone Mode="PrimaryLight" >
+        <materialDesign:ColorZone Background="green" >
             <DockPanel>
                 <StackPanel DockPanel.Dock="Right"  Background="Transparent" Orientation="Horizontal">
                     <StackPanel.Resources>

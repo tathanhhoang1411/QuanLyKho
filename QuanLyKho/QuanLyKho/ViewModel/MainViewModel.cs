@@ -16,12 +16,12 @@ namespace QuanLyKho.ViewModel
         // mọi thứ xử lý sẽ nằm trong này
         public MainViewModel()
         {
-            LoadedWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
-                Isloaded = true;
-                LoginWindow loginWindow = new LoginWindow();
-                loginWindow.ShowDialog();
-            }
-              );
+              //  LoadedWindowCommand = new RelayCommand<object>((p) => { return false; }, (p) => {
+              //  Isloaded = true;
+              //  LoginWindow loginWindow = new LoginWindow();
+              //  loginWindow.ShowDialog();
+           // }
+             // );
         }
     }
 }

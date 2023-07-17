@@ -21,15 +21,173 @@
         
         Name="mainWindow"
         DataContext="{StaticResource MainVM}"
-        Title="Phần mềm quản lý kho" Height="500" Width="525">
-
+        Title="Phần mềm quản lý kho" Height="700" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <uc:ControlBarUC Tag="{Binding Title, ElementName=mainWindow}"></uc:ControlBarUC>
+        </Grid>
+        <Grid Grid.Row="1" Margin="0 5 0 5"><!--Danh sách các nav nằm dọc-->
+            <ScrollViewer VerticalScrollBarVisibility="Visible">
+                <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"></ColumnDefinition>
+                    <ColumnDefinition ></ColumnDefinition>
+
+                </Grid.ColumnDefinitions>
+                <Grid.Resources>
+                    <Style TargetType="Button">
+                        <Setter Property="Height" Value="auto"></Setter>
+                        <Setter Property="Background" Value="Green"></Setter>
+                            <Setter Property="Margin" Value="5"></Setter>
+                            <Setter Property="FontSize" Value="12"></Setter>
+                            <Setter Property="FontWeight" Value="Bold"></Setter>
+                        </Style>
+                </Grid.Resources>
+                    <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Center" >
+                            <Button ToolTip="Nhập" >
+                                <StackPanel Orientation="Vertical" >
+                                    <Label Grid.Row="0" Content="Nhập kho"></Label>
+                                    <materialDesign:PackIcon HorizontalAlignment="Center" Width="24" Height="24"  Kind="ArrowDownBoldCircleOutline">
+                                    </materialDesign:PackIcon>
+                                </StackPanel>
+                            </Button>
+                            <Button ToolTip="Xuất">
+                                <StackPanel Orientation="Vertical">
+                                    <Label Grid.Row="0" Content="Xuất kho"></Label>
+                                    <materialDesign:PackIcon Width="24" Height="24"  HorizontalAlignment="Center"  Kind="ArrowUpBoldCircleOutline">
+                                    </materialDesign:PackIcon>
+                                </StackPanel>
+                            </Button>
+                            <Button ToolTip="Vật tư">
+                                <StackPanel Orientation="Vertical">
+                                    <Label Grid.Row="0" Content="Vật tư"></Label>
+                                    <materialDesign:PackIcon Width="24" Height="24"  HorizontalAlignment="Center"  Kind="Dns">
+                                    </materialDesign:PackIcon>
+                                </StackPanel>
+                            </Button>
+                            <Button ToolTip="Đơn vị đo">
+                                <StackPanel Orientation="Vertical">
+                                    <Label Grid.Row="0" Content="Đơn vị đo"></Label>
+                                    <materialDesign:PackIcon Width="24" Height="24"  HorizontalAlignment="Center"  Kind="Dna">
+                                    </materialDesign:PackIcon>
+                                </StackPanel>
+                            </Button>
+                            <Button ToolTip="Nhà cung cấp">
+                                <StackPanel Orientation="Vertical">
+                                    <Label Grid.Row="0" Content="Nhà cung cấp"></Label>
+                                    <materialDesign:PackIcon Width="24" Height="24"  HorizontalAlignment="Center"  Kind="Factory">
+                                    </materialDesign:PackIcon>
+                                </StackPanel>
+                            </Button>
+                            <Button ToolTip="Khách hàng">
+                                <StackPanel Orientation="Vertical">
+                                    <Label Grid.Row="0" Content="Khách hàng"></Label>
+                                    <materialDesign:PackIcon Width="24" Height="24"  HorizontalAlignment="Center"  Kind="Face" >
+                                    </materialDesign:PackIcon>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </ScrollViewer>
+                    <Grid Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                            <ColumnDefinition></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto" ></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <Grid.Resources>
+                            <Style TargetType="Label">
+                                <Setter Property="Foreground" Value="White"></Setter>
+                                <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+                                <Setter Property="VerticalAlignment" Value="Center"></Setter>
+                            </Style>
+                        </Grid.Resources>
+                        <DatePicker
+                               Margin="5"
+                               materialDesign:HintAssist.Hint="Ngày bắt đầu"
+                               Style="{StaticResource MaterialDesignFilledDatePicker}">
+                        </DatePicker>
+                        <DatePicker Grid.Column="1"
+                               Margin="5"
+                               materialDesign:HintAssist.Hint="Ngày kết thúc"
+                               Style="{StaticResource MaterialDesignFilledDatePicker}">
+                        </DatePicker>
+                        <Grid Grid.Column="2">
+                            <Button
+                               ToolTip="Lọc"
+                               Margin="5"
+                               materialDesign:ButtonProgressAssist.IsIndeterminate="True"
+                               materialDesign:ButtonProgressAssist.IsIndicatorVisible="True"
+                               materialDesign:ButtonProgressAssist.Value="-1"
+                               Content="Lọc"
+                               IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                               Style="{StaticResource MaterialDesignRaisedButton}"
+                                Background="OrangeRed">
+                            </Button>
+                        </Grid>
+                        <Separator Grid.Row="1" Grid.ColumnSpan="3" ></Separator>
+                        <Grid Grid.Column="0" Grid.Row="2" >
+                            <materialDesign:Card 
+                                Background="#03a9f4" Margin="5" Width="auto"
+                                Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  
+                                Padding="0">
+                                <StackPanel Orientation="Vertical">
+                                    <Label Content="Lượng nhập"></Label>
+                                    <Label Content="10000"></Label>
+                                </StackPanel>
+                            </materialDesign:Card>
+                        </Grid>
+                        <Grid Grid.Column="1" Grid.Row="2" >
+                            <materialDesign:Card 
+                                Background="#03a9f4" Margin="5" Width="auto"
+                                Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  
+                                Padding="0">
+                                <StackPanel Orientation="Vertical">
+                                    <Label Content="Lượng xuất"></Label>
+                                    <Label Content="10000"></Label>
+                                </StackPanel>
+                            </materialDesign:Card>
+                        </Grid>
+                        <Grid Grid.Column="2" Grid.Row="2" >
+                            <materialDesign:Card 
+                                Background="#03a9f4" Margin="5" Width="auto"
+                                Foreground="{DynamicResource PrimaryHueDarkForegroundBrush}"  
+                                Padding="0">
+                                <StackPanel Orientation="Vertical">
+                                    <Label Content="Tổng vật tư tồn kho"></Label>
+                                    <Label Content="9999999"></Label>
+                                </StackPanel>
+                            </materialDesign:Card>
+                        </Grid>
+                        <Separator Grid.Column="0" Grid.Row="3" Grid.ColumnSpan="3" >
+                        </Separator>
+                        <Grid Grid.Row="4" Grid.ColumnSpan="3">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                                <ListView>
+                                    <ListView.View>
+                                        <GridView>
+                                            <GridViewColumn Header="STT"></GridViewColumn>
+                                            <GridViewColumn Header="Tên vật tư"></GridViewColumn>
+                                            <GridViewColumn Header="Số lượng tồn"></GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </ScrollViewer>
+                        </Grid>
+                    </Grid>
+            </Grid>
+    </ScrollViewer>
         </Grid>
     </Grid>
 </Window>

@@ -21,6 +21,7 @@ namespace QuanLyKho.ViewModel
         public ControlBarViewModel()
         {
             CloseWindowCommand = new RelayCommand<UserControl>((p) => { return p == null ? false : true; }, (p) => {
+                //p == null ? false : true command luôn đúng để active nút close
                 FrameworkElement window = GetWindowParent(p);
                 var w = window as Window;
                 if (w != null)

@@ -79,7 +79,11 @@
                 </Grid>
                 <Grid Grid.Row="4">
                     <TextBlock>
-                             <Hyperlink NavigateUri="http://www.example.com" Foreground="Red">
+                             <Hyperlink 
+                                 NavigateUri="http://google.com" 
+                                 Foreground="Red"
+                                 IsEnabled="True" 
+                                 RequestNavigate="Hyperlink_RequestNavigate">
                                  Quên mật khẩu
                               </Hyperlink>
                     </TextBlock>
