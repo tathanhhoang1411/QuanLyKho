@@ -4,13 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:QuanLyKho.UserControlQuanLyKho"
+             
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"             
+             
+             
              Name="ucControlBar"
              mc:Ignorable="d">
-
     <Grid>
-        <materialDesign:ColorZone Background="green" >
+        <materialDesign:ColorZone Background="Gray" >
             <DockPanel>
                 <StackPanel DockPanel.Dock="Right"  Background="Transparent" Orientation="Horizontal">
                     <StackPanel.Resources>
@@ -21,12 +23,12 @@
                     </StackPanel.Resources>
                     <Button Command="{Binding MinimizeWindowCommand}" 
                             CommandParameter="{Binding ElementName=ucControlBar}"
-                        ToolTip="Đóng" ToolBar.OverflowMode="AsNeeded" Background="ForestGreen">
+                        ToolTip="Đóng" ToolBar.OverflowMode="AsNeeded" >
                         <materialDesign:PackIcon Kind="WindowMinimize" />
                     </Button>
                     <Button Command="{Binding MaximizeWindowCommand}" 
                             CommandParameter="{Binding ElementName=ucControlBar}"
-                        ToolTip="Đóng" ToolBar.OverflowMode="AsNeeded" Background="ForestGreen">
+                        ToolTip="Đóng" ToolBar.OverflowMode="AsNeeded">
                         <materialDesign:PackIcon Kind="WindowMaximize" />
                     </Button>
                     <Button Command="{Binding CloseWindowCommand}" 

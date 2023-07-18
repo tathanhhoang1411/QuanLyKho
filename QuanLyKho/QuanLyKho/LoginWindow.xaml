@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:QuanLyKho"
         mc:Ignorable="d"
+        
         xmlns:uc="clr-namespace:QuanLyKho.UserControlQuanLyKho"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         TextElement.Foreground="{DynamicResource MaterialDesignBody}"
      TextElement.FontWeight="Regular"
      TextElement.FontSize="13"
@@ -18,8 +19,11 @@
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Name="loginWindow"
+        DataContext="{StaticResource LoginVM}"
         Title="Đăng nhập" Height="300" Width="400">
+
     <Grid>
+
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition  ></RowDefinition>
@@ -68,13 +72,16 @@
                     <Button Grid.Column="0"    
                             Style="{StaticResource MaterialDesignRaisedButton}"    
                             Width="110"    
-                            ToolTip="Resource name: MaterialDesignRaisedButton" Content="Đăng nhập">
+                            ToolTip="Resource name: MaterialDesignRaisedButton"
+                            Content="Đăng nhập"
+                            Command="{Binding MainWindowCommand}">
                     </Button>
                     <Button Grid.Column="1"    
                             Style="{StaticResource MaterialDesignRaisedButton}"    
                             Width="110"    
                             Background="OrangeRed"
-                            ToolTip="Resource name: MaterialDesignRaisedButton" Content="Thoát">
+                            ToolTip="Resource name: MaterialDesignRaisedButton" Content="Thoát"
+                            Command="{Binding CloseLoginWindow}">
                     </Button>
                 </Grid>
                 <Grid Grid.Row="4">

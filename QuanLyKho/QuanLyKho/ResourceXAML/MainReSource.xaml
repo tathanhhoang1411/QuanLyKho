@@ -3,4 +3,12 @@
                     xmlns:viewmodel="clr-namespace:QuanLyKho.ViewModel"
                     xmlns:local="clr-namespace:QuanLyKho.ResourceXAML">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
+    <viewmodel:UnitViewModel x:Key="UnitVM"></viewmodel:UnitViewModel>
+    <viewmodel:LoginViewModel x:Key="LoginVM"></viewmodel:LoginViewModel>
+    <viewmodel:AcocuntsViewModel x:Key="AccountsVM"></viewmodel:AcocuntsViewModel>
+    <viewmodel:InputViewModel x:Key="InputVM"></viewmodel:InputViewModel>
+    <viewmodel:OutputViewModel x:Key="OutputVM"></viewmodel:OutputViewModel>
+    <viewmodel:VattuViewModel x:Key="VattuVM"></viewmodel:VattuViewModel>
+    <viewmodel:SupplierViewModel x:Key="SupplierVM"></viewmodel:SupplierViewModel>
+    <viewmodel:CustomerViewModel x:Key="CustomerVM"></viewmodel:CustomerViewModel>
 </ResourceDictionary>

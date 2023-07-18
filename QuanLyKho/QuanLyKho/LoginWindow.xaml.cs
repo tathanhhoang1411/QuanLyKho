@@ -30,5 +30,6 @@ namespace QuanLyKho
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
             e.Handled = true;
         }
+
     }
 }
