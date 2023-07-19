@@ -19,11 +19,11 @@ namespace QuanLyKho.Model
         public string IdThongTinBangXuat { get; set; }
         public int IdKhachHang { get; set; }
         public Nullable<int> Count { get; set; }
-        public string Status { get; set; }
-        public double GiaXuat { get; set; }
+        public string TrangThai { get; set; }
+        public Nullable<double> GiaXuat { get; set; }
     
+        public virtual BangXuat BangXuat { get; set; }
         public virtual KhachHang KhachHang { get; set; }
         public virtual VatTu VatTu { get; set; }
-        public virtual BangXuat BangXuat { get; set; }
     }
 }

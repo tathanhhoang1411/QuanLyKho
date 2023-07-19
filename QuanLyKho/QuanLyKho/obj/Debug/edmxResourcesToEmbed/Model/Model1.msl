@@ -4,92 +4,96 @@
     <EntitySetMapping Name="BangNhaps">
       <EntityTypeMapping TypeName="QuanLyKhoModel.BangNhap">
         <MappingFragment StoreEntitySet="BangNhap">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdTaiKhoan" ColumnName="IdTaiKhoan" />
           <ScalarProperty Name="NgayNhap" ColumnName="NgayNhap" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="BangXuats">
       <EntityTypeMapping TypeName="QuanLyKhoModel.BangXuat">
         <MappingFragment StoreEntitySet="BangXuat">
-          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="IdTaiKhoan" ColumnName="IdTaiKhoan" />
           <ScalarProperty Name="NgayXuat" ColumnName="NgayXuat" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="DonViDoes">
       <EntityTypeMapping TypeName="QuanLyKhoModel.DonViDo">
         <MappingFragment StoreEntitySet="DonViDo">
-          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="KhachHangs">
       <EntityTypeMapping TypeName="QuanLyKhoModel.KhachHang">
         <MappingFragment StoreEntitySet="KhachHang">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Ten" ColumnName="Ten" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="SDT" ColumnName="SDT" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="ThongTinThem" ColumnName="ThongTinThem" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="SDT" ColumnName="SDT" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="NhaCungCaps">
       <EntityTypeMapping TypeName="QuanLyKhoModel.NhaCungCap">
         <MappingFragment StoreEntitySet="NhaCungCap">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Ten" ColumnName="Ten" />
-          <ScalarProperty Name="Address" ColumnName="Address" />
-          <ScalarProperty Name="SDT" ColumnName="SDT" />
-          <ScalarProperty Name="Email" ColumnName="Email" />
-          <ScalarProperty Name="ThongTinThem" ColumnName="ThongTinThem" />
           <ScalarProperty Name="NgayHopTac" ColumnName="NgayHopTac" />
+          <ScalarProperty Name="ThongTinThem" ColumnName="ThongTinThem" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="SDT" ColumnName="SDT" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="RoleTaiKhoans">
       <EntityTypeMapping TypeName="QuanLyKhoModel.RoleTaiKhoan">
         <MappingFragment StoreEntitySet="RoleTaiKhoan">
-          <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="TaiKhoans">
       <EntityTypeMapping TypeName="QuanLyKhoModel.TaiKhoan">
         <MappingFragment StoreEntitySet="TaiKhoan">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
-          <ScalarProperty Name="HoVaTen" ColumnName="HoVaTen" />
-          <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
           <ScalarProperty Name="IdRoleTaiKhoan" ColumnName="IdRoleTaiKhoan" />
+          <ScalarProperty Name="SDT" ColumnName="SDT" />
+          <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+          <ScalarProperty Name="HoVaTen" ColumnName="HoVaTen" />
+          <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ThongTinBangNhaps">
       <EntityTypeMapping TypeName="QuanLyKhoModel.ThongTinBangNhap">
         <MappingFragment StoreEntitySet="ThongTinBangNhap">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="IdVatTu" ColumnName="IdVatTu" />
-          <ScalarProperty Name="IdBangNhap" ColumnName="IdBangNhap" />
-          <ScalarProperty Name="Count" ColumnName="Count" />
           <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-          <ScalarProperty Name="IDTaiKhoan" ColumnName="IDTaiKhoan" />
+          <ScalarProperty Name="GiaNhap" ColumnName="GiaNhap" />
+          <ScalarProperty Name="Count" ColumnName="Count" />
+          <ScalarProperty Name="IdBangNhap" ColumnName="IdBangNhap" />
+          <ScalarProperty Name="IdVatTu" ColumnName="IdVatTu" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ThongTinBangXuats">
       <EntityTypeMapping TypeName="QuanLyKhoModel.ThongTinBangXuat">
         <MappingFragment StoreEntitySet="ThongTinBangXuat">
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="IdVatTu" ColumnName="IdVatTu" />
-          <ScalarProperty Name="IdThongTinBangXuat" ColumnName="IdThongTinBangXuat" />
-          <ScalarProperty Name="IdKhachHang" ColumnName="IdKhachHang" />
+          <ScalarProperty Name="GiaXuat" ColumnName="GiaXuat" />
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
           <ScalarProperty Name="Count" ColumnName="Count" />
-          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="IdKhachHang" ColumnName="IdKhachHang" />
+          <ScalarProperty Name="IdThongTinBangXuat" ColumnName="IdThongTinBangXuat" />
+          <ScalarProperty Name="IdVatTu" ColumnName="IdVatTu" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
@@ -97,10 +101,10 @@
       <EntityTypeMapping TypeName="QuanLyKhoModel.VatTu">
         <MappingFragment StoreEntitySet="VatTu">
           <ScalarProperty Name="QRCode" ColumnName="QRCode" />
-          <ScalarProperty Name="Id" ColumnName="Id" />
-          <ScalarProperty Name="Ten" ColumnName="Ten" />
-          <ScalarProperty Name="IdDonViDo" ColumnName="IdDonViDo" />
           <ScalarProperty Name="IdNhaCungCap" ColumnName="IdNhaCungCap" />
+          <ScalarProperty Name="IdDonViDo" ColumnName="IdDonViDo" />
+          <ScalarProperty Name="Ten" ColumnName="Ten" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

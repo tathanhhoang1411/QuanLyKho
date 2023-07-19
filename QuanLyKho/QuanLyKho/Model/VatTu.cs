@@ -18,6 +18,7 @@ namespace QuanLyKho.Model
         public VatTu()
         {
             this.ThongTinBangNhaps = new HashSet<ThongTinBangNhap>();
+            this.ThongTinBangXuats = new HashSet<ThongTinBangXuat>();
         }
     
         public string Id { get; set; }
@@ -30,5 +31,7 @@ namespace QuanLyKho.Model
         public virtual NhaCungCap NhaCungCap { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ThongTinBangNhap> ThongTinBangNhaps { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ThongTinBangXuat> ThongTinBangXuats { get; set; }
     }
 }

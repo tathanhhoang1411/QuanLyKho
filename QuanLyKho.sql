@@ -65,20 +65,23 @@ create table TaiKhoan
 	TenTaiKhoan nvarchar(max),
 	HoVaTen nvarchar(100),
 	MatKhau nvarchar(max),
+    SDT nvarchar(20),
 	IdRoleTaiKhoan int not null
 
 	foreign key (IdRoleTaiKhoan) references RoleTaiKhoan(Id)
 )
 go
-insert into TaiKhoan values(N'TaThanhHoang', N'Tạ Thanh Hoàng', N'db69fc039dcbd2962cb4d28f5891aae1', 1)
+insert into TaiKhoan values(N'TaThanhHoang', N'Tạ Thanh Hoàng', N'db69fc039dcbd2962cb4d28f5891aae1','0325793505', 1)
 go
-insert into TaiKhoan values(N'NguyenVanAn', N'Nguyễn Văn An', N'978aae9bb6bee8fb75de3e4830a1be46', 2)
+insert into TaiKhoan values(N'NguyenVanAn', N'Nguyễn Văn An', N'978aae9bb6bee8fb75de3e4830a1be46','0325793506', 2)
 go
 
 create table BangNhap
 (
 	Id nvarchar(128) primary key,
-	NgayNhap DateTime
+	NgayNhap DateTime,
+	IdTaiKhoan int not null
+	foreign key (IdTaiKhoan) references TaiKhoan(Id),
 )
 go
 
@@ -90,18 +93,19 @@ create table ThongTinBangNhap
 	Count int,
 	GiaNhap float default 0,
 	TrangThai nvarchar(max),
-	IDTaiKhoan int not null
 
 	foreign key (IdVatTu) references VatTu(Id),
 	foreign key (IdBangNhap) references BangNhap(Id),
-	foreign key (IdTaiKhoan) references TaiKhoan(Id)
 )
 go
 
 create table BangXuat
 (
 	Id nvarchar(128) primary key,
-	NgayXuat DateTime
+	NgayXuat DateTime,
+	IdTaiKhoan int not null
+
+	foreign key (IdTaiKhoan) references TaiKhoan(Id)
 )
 go
 
@@ -112,7 +116,8 @@ create table ThongTinBangXuat
 	IdThongTinBangXuat nvarchar(128) not null,
 	IdKhachHang int not null,
 	Count int,	
-	Status nvarchar(max)
+	TrangThai nvarchar(max),
+	GiaXuat float default 0,
 
 	foreign key (IdVatTu) references VatTu(Id),
 	foreign key (IdThongTinBangXuat) references BangXuat(Id),

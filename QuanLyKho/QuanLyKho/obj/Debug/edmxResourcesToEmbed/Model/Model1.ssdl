@@ -6,6 +6,7 @@
     </Key>
     <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="NgayNhap" Type="datetime" />
+    <Property Name="IdTaiKhoan" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="BangXuat">
     <Key>
@@ -13,6 +14,7 @@
     </Key>
     <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="NgayXuat" Type="datetime" />
+    <Property Name="IdTaiKhoan" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="DonViDo">
     <Key>
@@ -59,6 +61,7 @@
     <Property Name="TenTaiKhoan" Type="nvarchar(max)" />
     <Property Name="HoVaTen" Type="nvarchar" MaxLength="100" />
     <Property Name="MatKhau" Type="nvarchar(max)" />
+    <Property Name="SDT" Type="nvarchar" MaxLength="20" />
     <Property Name="IdRoleTaiKhoan" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ThongTinBangNhap">
@@ -71,7 +74,6 @@
     <Property Name="Count" Type="int" />
     <Property Name="GiaNhap" Type="float" />
     <Property Name="TrangThai" Type="nvarchar(max)" />
-    <Property Name="IDTaiKhoan" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="ThongTinBangXuat">
     <Key>
@@ -82,7 +84,8 @@
     <Property Name="IdThongTinBangXuat" Type="nvarchar" MaxLength="128" Nullable="false" />
     <Property Name="IdKhachHang" Type="int" Nullable="false" />
     <Property Name="Count" Type="int" />
-    <Property Name="Status" Type="nvarchar(max)" />
+    <Property Name="TrangThai" Type="nvarchar(max)" />
+    <Property Name="GiaXuat" Type="float" />
   </EntityType>
   <EntityType Name="VatTu">
     <Key>
@@ -94,6 +97,30 @@
     <Property Name="IdNhaCungCap" Type="int" Nullable="false" />
     <Property Name="QRCode" Type="nvarchar(max)" />
   </EntityType>
+  <Association Name="FK__BangNhap__IdTaiK__32E0915F">
+    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1" />
+    <End Role="BangNhap" Type="Self.BangNhap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaiKhoan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BangNhap">
+        <PropertyRef Name="IdTaiKhoan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__BangXuat__IdTaiK__3A81B327">
+    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1" />
+    <End Role="BangXuat" Type="Self.BangXuat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TaiKhoan">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="BangXuat">
+        <PropertyRef Name="IdTaiKhoan" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__TaiKhoan__IdRole__300424B4">
     <End Role="RoleTaiKhoan" Type="Self.RoleTaiKhoan" Multiplicity="1" />
     <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="*" />
@@ -106,7 +133,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ThongTinB__IdBan__36B12243">
+  <Association Name="FK__ThongTinB__IdBan__37A5467C">
     <End Role="BangNhap" Type="Self.BangNhap" Multiplicity="1" />
     <End Role="ThongTinBangNhap" Type="Self.ThongTinBangNhap" Multiplicity="*" />
     <ReferentialConstraint>
@@ -118,7 +145,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ThongTinB__IdKha__3E52440B">
+  <Association Name="FK__ThongTinB__IdKha__403A8C7D">
     <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
     <End Role="ThongTinBangXuat" Type="Self.ThongTinBangXuat" Multiplicity="*" />
     <ReferentialConstraint>
@@ -130,31 +157,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ThongTinB__IDTai__35BCFE0A">
-    <End Role="VatTu" Type="Self.VatTu" Multiplicity="1" />
-    <End Role="ThongTinBangNhap" Type="Self.ThongTinBangNhap" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="VatTu">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ThongTinBangNhap">
-        <PropertyRef Name="IdVatTu" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__ThongTinB__IDTai__37A5467C">
-    <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1" />
-    <End Role="ThongTinBangNhap" Type="Self.ThongTinBangNhap" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="TaiKhoan">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ThongTinBangNhap">
-        <PropertyRef Name="IDTaiKhoan" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__ThongTinB__IdTho__3D5E1FD2">
+  <Association Name="FK__ThongTinB__IdTho__3F466844">
     <End Role="BangXuat" Type="Self.BangXuat" Multiplicity="1" />
     <End Role="ThongTinBangXuat" Type="Self.ThongTinBangXuat" Multiplicity="*" />
     <ReferentialConstraint>
@@ -166,7 +169,19 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ThongTinB__Statu__3C69FB99">
+  <Association Name="FK__ThongTinB__IdVat__36B12243">
+    <End Role="VatTu" Type="Self.VatTu" Multiplicity="1" />
+    <End Role="ThongTinBangNhap" Type="Self.ThongTinBangNhap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VatTu">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ThongTinBangNhap">
+        <PropertyRef Name="IdVatTu" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__ThongTinB__IdVat__3E52440B">
     <End Role="VatTu" Type="Self.VatTu" Multiplicity="1" />
     <End Role="ThongTinBangXuat" Type="Self.ThongTinBangXuat" Multiplicity="*" />
     <ReferentialConstraint>
@@ -213,31 +228,35 @@
     <EntitySet Name="ThongTinBangNhap" EntityType="Self.ThongTinBangNhap" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="ThongTinBangXuat" EntityType="Self.ThongTinBangXuat" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="VatTu" EntityType="Self.VatTu" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__BangNhap__IdTaiK__32E0915F" Association="Self.FK__BangNhap__IdTaiK__32E0915F">
+      <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+      <End Role="BangNhap" EntitySet="BangNhap" />
+    </AssociationSet>
+    <AssociationSet Name="FK__BangXuat__IdTaiK__3A81B327" Association="Self.FK__BangXuat__IdTaiK__3A81B327">
+      <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+      <End Role="BangXuat" EntitySet="BangXuat" />
+    </AssociationSet>
     <AssociationSet Name="FK__TaiKhoan__IdRole__300424B4" Association="Self.FK__TaiKhoan__IdRole__300424B4">
       <End Role="RoleTaiKhoan" EntitySet="RoleTaiKhoan" />
       <End Role="TaiKhoan" EntitySet="TaiKhoan" />
     </AssociationSet>
-    <AssociationSet Name="FK__ThongTinB__IdBan__36B12243" Association="Self.FK__ThongTinB__IdBan__36B12243">
+    <AssociationSet Name="FK__ThongTinB__IdBan__37A5467C" Association="Self.FK__ThongTinB__IdBan__37A5467C">
       <End Role="BangNhap" EntitySet="BangNhap" />
       <End Role="ThongTinBangNhap" EntitySet="ThongTinBangNhap" />
     </AssociationSet>
-    <AssociationSet Name="FK__ThongTinB__IdKha__3E52440B" Association="Self.FK__ThongTinB__IdKha__3E52440B">
+    <AssociationSet Name="FK__ThongTinB__IdKha__403A8C7D" Association="Self.FK__ThongTinB__IdKha__403A8C7D">
       <End Role="KhachHang" EntitySet="KhachHang" />
       <End Role="ThongTinBangXuat" EntitySet="ThongTinBangXuat" />
     </AssociationSet>
-    <AssociationSet Name="FK__ThongTinB__IDTai__35BCFE0A" Association="Self.FK__ThongTinB__IDTai__35BCFE0A">
-      <End Role="VatTu" EntitySet="VatTu" />
-      <End Role="ThongTinBangNhap" EntitySet="ThongTinBangNhap" />
-    </AssociationSet>
-    <AssociationSet Name="FK__ThongTinB__IDTai__37A5467C" Association="Self.FK__ThongTinB__IDTai__37A5467C">
-      <End Role="TaiKhoan" EntitySet="TaiKhoan" />
-      <End Role="ThongTinBangNhap" EntitySet="ThongTinBangNhap" />
-    </AssociationSet>
-    <AssociationSet Name="FK__ThongTinB__IdTho__3D5E1FD2" Association="Self.FK__ThongTinB__IdTho__3D5E1FD2">
+    <AssociationSet Name="FK__ThongTinB__IdTho__3F466844" Association="Self.FK__ThongTinB__IdTho__3F466844">
       <End Role="BangXuat" EntitySet="BangXuat" />
       <End Role="ThongTinBangXuat" EntitySet="ThongTinBangXuat" />
     </AssociationSet>
-    <AssociationSet Name="FK__ThongTinB__Statu__3C69FB99" Association="Self.FK__ThongTinB__Statu__3C69FB99">
+    <AssociationSet Name="FK__ThongTinB__IdVat__36B12243" Association="Self.FK__ThongTinB__IdVat__36B12243">
+      <End Role="VatTu" EntitySet="VatTu" />
+      <End Role="ThongTinBangNhap" EntitySet="ThongTinBangNhap" />
+    </AssociationSet>
+    <AssociationSet Name="FK__ThongTinB__IdVat__3E52440B" Association="Self.FK__ThongTinB__IdVat__3E52440B">
       <End Role="VatTu" EntitySet="VatTu" />
       <End Role="ThongTinBangXuat" EntitySet="ThongTinBangXuat" />
     </AssociationSet>

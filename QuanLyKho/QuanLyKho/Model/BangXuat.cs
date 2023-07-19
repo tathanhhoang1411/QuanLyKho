@@ -22,7 +22,9 @@ namespace QuanLyKho.Model
     
         public string Id { get; set; }
         public Nullable<System.DateTime> NgayXuat { get; set; }
+        public int IdTaiKhoan { get; set; }
     
+        public virtual TaiKhoan TaiKhoan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ThongTinBangXuat> ThongTinBangXuats { get; set; }
     }

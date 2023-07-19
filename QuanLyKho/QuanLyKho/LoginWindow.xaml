@@ -89,7 +89,7 @@
                             Width="110"    
                             Background="OrangeRed"
                             ToolTip="Resource name: MaterialDesignRaisedButton" Content="Thoát"
-                            Command="{Binding CloseLoginWindow}">
+                            Command="{Binding CloseCommand}">
                     </Button>
                 </Grid>
                 <Grid Grid.Row="4">
@@ -98,7 +98,9 @@
                                  NavigateUri="http://google.com" 
                                  Foreground="Red"
                                  IsEnabled="True" 
-                                 RequestNavigate="Hyperlink_RequestNavigate">
+                                 RequestNavigate="Hyperlink_RequestNavigate"
+                                      Command="{Binding CloseCommand}"
+                            CommandParameter="{Binding ElementName=loginWindow}">
                                  Quên mật khẩu
                               </Hyperlink>
                     </TextBlock>

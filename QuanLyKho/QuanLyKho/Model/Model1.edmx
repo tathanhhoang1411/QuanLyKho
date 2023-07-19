@@ -11,6 +11,7 @@
           </Key>
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="NgayNhap" Type="datetime" />
+          <Property Name="IdTaiKhoan" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="BangXuat">
           <Key>
@@ -18,6 +19,7 @@
           </Key>
           <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="NgayXuat" Type="datetime" />
+          <Property Name="IdTaiKhoan" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="DonViDo">
           <Key>
@@ -64,6 +66,7 @@
           <Property Name="TenTaiKhoan" Type="nvarchar(max)" />
           <Property Name="HoVaTen" Type="nvarchar" MaxLength="100" />
           <Property Name="MatKhau" Type="nvarchar(max)" />
+          <Property Name="SDT" Type="nvarchar" MaxLength="20" />
           <Property Name="IdRoleTaiKhoan" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ThongTinBangNhap">
@@ -76,7 +79,6 @@
           <Property Name="Count" Type="int" />
           <Property Name="GiaNhap" Type="float" />
           <Property Name="TrangThai" Type="nvarchar(max)" />
-          <Property Name="IDTaiKhoan" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="ThongTinBangXuat">
           <Key>
@@ -87,7 +89,8 @@
           <Property Name="IdThongTinBangXuat" Type="nvarchar" MaxLength="128" Nullable="false" />
           <Property Name="IdKhachHang" Type="int" Nullable="false" />
           <Property Name="Count" Type="int" />
-          <Property Name="Status" Type="nvarchar(max)" />
+          <Property Name="TrangThai" Type="nvarchar(max)" />
+          <Property Name="GiaXuat" Type="float" />
         </EntityType>
         <EntityType Name="VatTu">
           <Key>
@@ -99,6 +102,30 @@
           <Property Name="IdNhaCungCap" Type="int" Nullable="false" />
           <Property Name="QRCode" Type="nvarchar(max)" />
         </EntityType>
+        <Association Name="FK__BangNhap__IdTaiK__32E0915F">
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1" />
+          <End Role="BangNhap" Type="Self.BangNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaiKhoan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BangNhap">
+              <PropertyRef Name="IdTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__BangXuat__IdTaiK__3A81B327">
+          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1" />
+          <End Role="BangXuat" Type="Self.BangXuat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaiKhoan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BangXuat">
+              <PropertyRef Name="IdTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__TaiKhoan__IdRole__300424B4">
           <End Role="RoleTaiKhoan" Type="Self.RoleTaiKhoan" Multiplicity="1" />
           <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="*" />
@@ -111,7 +138,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ThongTinB__IdBan__36B12243">
+        <Association Name="FK__ThongTinB__IdBan__37A5467C">
           <End Role="BangNhap" Type="Self.BangNhap" Multiplicity="1" />
           <End Role="ThongTinBangNhap" Type="Self.ThongTinBangNhap" Multiplicity="*" />
           <ReferentialConstraint>
@@ -123,7 +150,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ThongTinB__IdKha__3E52440B">
+        <Association Name="FK__ThongTinB__IdKha__403A8C7D">
           <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
           <End Role="ThongTinBangXuat" Type="Self.ThongTinBangXuat" Multiplicity="*" />
           <ReferentialConstraint>
@@ -135,31 +162,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ThongTinB__IDTai__35BCFE0A">
-          <End Role="VatTu" Type="Self.VatTu" Multiplicity="1" />
-          <End Role="ThongTinBangNhap" Type="Self.ThongTinBangNhap" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VatTu">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ThongTinBangNhap">
-              <PropertyRef Name="IdVatTu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ThongTinB__IDTai__37A5467C">
-          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1" />
-          <End Role="ThongTinBangNhap" Type="Self.ThongTinBangNhap" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="TaiKhoan">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ThongTinBangNhap">
-              <PropertyRef Name="IDTaiKhoan" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ThongTinB__IdTho__3D5E1FD2">
+        <Association Name="FK__ThongTinB__IdTho__3F466844">
           <End Role="BangXuat" Type="Self.BangXuat" Multiplicity="1" />
           <End Role="ThongTinBangXuat" Type="Self.ThongTinBangXuat" Multiplicity="*" />
           <ReferentialConstraint>
@@ -171,7 +174,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ThongTinB__Statu__3C69FB99">
+        <Association Name="FK__ThongTinB__IdVat__36B12243">
+          <End Role="VatTu" Type="Self.VatTu" Multiplicity="1" />
+          <End Role="ThongTinBangNhap" Type="Self.ThongTinBangNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VatTu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ThongTinBangNhap">
+              <PropertyRef Name="IdVatTu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ThongTinB__IdVat__3E52440B">
           <End Role="VatTu" Type="Self.VatTu" Multiplicity="1" />
           <End Role="ThongTinBangXuat" Type="Self.ThongTinBangXuat" Multiplicity="*" />
           <ReferentialConstraint>
@@ -218,31 +233,35 @@
           <EntitySet Name="ThongTinBangNhap" EntityType="Self.ThongTinBangNhap" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ThongTinBangXuat" EntityType="Self.ThongTinBangXuat" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="VatTu" EntityType="Self.VatTu" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__BangNhap__IdTaiK__32E0915F" Association="Self.FK__BangNhap__IdTaiK__32E0915F">
+            <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+            <End Role="BangNhap" EntitySet="BangNhap" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BangXuat__IdTaiK__3A81B327" Association="Self.FK__BangXuat__IdTaiK__3A81B327">
+            <End Role="TaiKhoan" EntitySet="TaiKhoan" />
+            <End Role="BangXuat" EntitySet="BangXuat" />
+          </AssociationSet>
           <AssociationSet Name="FK__TaiKhoan__IdRole__300424B4" Association="Self.FK__TaiKhoan__IdRole__300424B4">
             <End Role="RoleTaiKhoan" EntitySet="RoleTaiKhoan" />
             <End Role="TaiKhoan" EntitySet="TaiKhoan" />
           </AssociationSet>
-          <AssociationSet Name="FK__ThongTinB__IdBan__36B12243" Association="Self.FK__ThongTinB__IdBan__36B12243">
+          <AssociationSet Name="FK__ThongTinB__IdBan__37A5467C" Association="Self.FK__ThongTinB__IdBan__37A5467C">
             <End Role="BangNhap" EntitySet="BangNhap" />
             <End Role="ThongTinBangNhap" EntitySet="ThongTinBangNhap" />
           </AssociationSet>
-          <AssociationSet Name="FK__ThongTinB__IdKha__3E52440B" Association="Self.FK__ThongTinB__IdKha__3E52440B">
+          <AssociationSet Name="FK__ThongTinB__IdKha__403A8C7D" Association="Self.FK__ThongTinB__IdKha__403A8C7D">
             <End Role="KhachHang" EntitySet="KhachHang" />
             <End Role="ThongTinBangXuat" EntitySet="ThongTinBangXuat" />
           </AssociationSet>
-          <AssociationSet Name="FK__ThongTinB__IDTai__35BCFE0A" Association="Self.FK__ThongTinB__IDTai__35BCFE0A">
-            <End Role="VatTu" EntitySet="VatTu" />
-            <End Role="ThongTinBangNhap" EntitySet="ThongTinBangNhap" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ThongTinB__IDTai__37A5467C" Association="Self.FK__ThongTinB__IDTai__37A5467C">
-            <End Role="TaiKhoan" EntitySet="TaiKhoan" />
-            <End Role="ThongTinBangNhap" EntitySet="ThongTinBangNhap" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ThongTinB__IdTho__3D5E1FD2" Association="Self.FK__ThongTinB__IdTho__3D5E1FD2">
+          <AssociationSet Name="FK__ThongTinB__IdTho__3F466844" Association="Self.FK__ThongTinB__IdTho__3F466844">
             <End Role="BangXuat" EntitySet="BangXuat" />
             <End Role="ThongTinBangXuat" EntitySet="ThongTinBangXuat" />
           </AssociationSet>
-          <AssociationSet Name="FK__ThongTinB__Statu__3C69FB99" Association="Self.FK__ThongTinB__Statu__3C69FB99">
+          <AssociationSet Name="FK__ThongTinB__IdVat__36B12243" Association="Self.FK__ThongTinB__IdVat__36B12243">
+            <End Role="VatTu" EntitySet="VatTu" />
+            <End Role="ThongTinBangNhap" EntitySet="ThongTinBangNhap" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ThongTinB__IdVat__3E52440B" Association="Self.FK__ThongTinB__IdVat__3E52440B">
             <End Role="VatTu" EntitySet="VatTu" />
             <End Role="ThongTinBangXuat" EntitySet="ThongTinBangXuat" />
           </AssociationSet>
@@ -259,21 +278,77 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="QuanLyKhoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="QuanLyKhoEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BangNhaps" EntityType="QuanLyKhoModel.BangNhap" />
+          <EntitySet Name="BangXuats" EntityType="QuanLyKhoModel.BangXuat" />
+          <EntitySet Name="DonViDoes" EntityType="QuanLyKhoModel.DonViDo" />
+          <EntitySet Name="KhachHangs" EntityType="QuanLyKhoModel.KhachHang" />
+          <EntitySet Name="NhaCungCaps" EntityType="QuanLyKhoModel.NhaCungCap" />
+          <EntitySet Name="RoleTaiKhoans" EntityType="QuanLyKhoModel.RoleTaiKhoan" />
+          <EntitySet Name="TaiKhoans" EntityType="QuanLyKhoModel.TaiKhoan" />
+          <EntitySet Name="ThongTinBangNhaps" EntityType="QuanLyKhoModel.ThongTinBangNhap" />
+          <EntitySet Name="ThongTinBangXuats" EntityType="QuanLyKhoModel.ThongTinBangXuat" />
+          <EntitySet Name="VatTus" EntityType="QuanLyKhoModel.VatTu" />
+          <AssociationSet Name="FK__BangNhap__IdTaiK__32E0915F" Association="QuanLyKhoModel.FK__BangNhap__IdTaiK__32E0915F">
+            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+            <End Role="BangNhap" EntitySet="BangNhaps" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ThongTinB__IdBan__37A5467C" Association="QuanLyKhoModel.FK__ThongTinB__IdBan__37A5467C">
+            <End Role="BangNhap" EntitySet="BangNhaps" />
+            <End Role="ThongTinBangNhap" EntitySet="ThongTinBangNhaps" />
+          </AssociationSet>
+          <AssociationSet Name="FK__BangXuat__IdTaiK__3A81B327" Association="QuanLyKhoModel.FK__BangXuat__IdTaiK__3A81B327">
+            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+            <End Role="BangXuat" EntitySet="BangXuats" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ThongTinB__IdTho__3F466844" Association="QuanLyKhoModel.FK__ThongTinB__IdTho__3F466844">
+            <End Role="BangXuat" EntitySet="BangXuats" />
+            <End Role="ThongTinBangXuat" EntitySet="ThongTinBangXuats" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VatTu__IdDonViDo__2A4B4B5E" Association="QuanLyKhoModel.FK__VatTu__IdDonViDo__2A4B4B5E">
+            <End Role="DonViDo" EntitySet="DonViDoes" />
+            <End Role="VatTu" EntitySet="VatTus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ThongTinB__IdKha__403A8C7D" Association="QuanLyKhoModel.FK__ThongTinB__IdKha__403A8C7D">
+            <End Role="KhachHang" EntitySet="KhachHangs" />
+            <End Role="ThongTinBangXuat" EntitySet="ThongTinBangXuats" />
+          </AssociationSet>
+          <AssociationSet Name="FK__VatTu__IdNhaCung__2B3F6F97" Association="QuanLyKhoModel.FK__VatTu__IdNhaCung__2B3F6F97">
+            <End Role="NhaCungCap" EntitySet="NhaCungCaps" />
+            <End Role="VatTu" EntitySet="VatTus" />
+          </AssociationSet>
+          <AssociationSet Name="FK__TaiKhoan__IdRole__300424B4" Association="QuanLyKhoModel.FK__TaiKhoan__IdRole__300424B4">
+            <End Role="RoleTaiKhoan" EntitySet="RoleTaiKhoans" />
+            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ThongTinB__IdVat__36B12243" Association="QuanLyKhoModel.FK__ThongTinB__IdVat__36B12243">
+            <End Role="VatTu" EntitySet="VatTus" />
+            <End Role="ThongTinBangNhap" EntitySet="ThongTinBangNhaps" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ThongTinB__IdVat__3E52440B" Association="QuanLyKhoModel.FK__ThongTinB__IdVat__3E52440B">
+            <End Role="VatTu" EntitySet="VatTus" />
+            <End Role="ThongTinBangXuat" EntitySet="ThongTinBangXuats" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="BangNhap">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="NgayNhap" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ThongTinBangNhaps" Relationship="Self.FK__ThongTinB__IdBan__36B12243" FromRole="BangNhap" ToRole="ThongTinBangNhap" />
+          <Property Name="IdTaiKhoan" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TaiKhoan" Relationship="QuanLyKhoModel.FK__BangNhap__IdTaiK__32E0915F" FromRole="BangNhap" ToRole="TaiKhoan" />
+          <NavigationProperty Name="ThongTinBangNhaps" Relationship="QuanLyKhoModel.FK__ThongTinB__IdBan__37A5467C" FromRole="BangNhap" ToRole="ThongTinBangNhap" />
         </EntityType>
         <EntityType Name="BangXuat">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="NgayXuat" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="ThongTinBangXuats" Relationship="QuanLyKhoModel.FK__ThongTinB__IdTho__3E52440B" FromRole="BangXuat" ToRole="ThongTinBangXuat" />
+          <Property Name="IdTaiKhoan" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="TaiKhoan" Relationship="QuanLyKhoModel.FK__BangXuat__IdTaiK__3A81B327" FromRole="BangXuat" ToRole="TaiKhoan" />
+          <NavigationProperty Name="ThongTinBangXuats" Relationship="QuanLyKhoModel.FK__ThongTinB__IdTho__3F466844" FromRole="BangXuat" ToRole="ThongTinBangXuat" />
         </EntityType>
         <EntityType Name="DonViDo">
           <Key>
@@ -281,7 +356,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="VatTus" Relationship="Self.FK__VatTu__IdDonViDo__2A4B4B5E" FromRole="DonViDo" ToRole="VatTu" />
+          <NavigationProperty Name="VatTus" Relationship="QuanLyKhoModel.FK__VatTu__IdDonViDo__2A4B4B5E" FromRole="DonViDo" ToRole="VatTu" />
         </EntityType>
         <EntityType Name="KhachHang">
           <Key>
@@ -293,7 +368,7 @@
           <Property Name="SDT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ThongTinThem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="ThongTinBangXuats" Relationship="Self.FK__ThongTinB__IdKha__3E52440B" FromRole="KhachHang" ToRole="ThongTinBangXuat" />
+          <NavigationProperty Name="ThongTinBangXuats" Relationship="QuanLyKhoModel.FK__ThongTinB__IdKha__403A8C7D" FromRole="KhachHang" ToRole="ThongTinBangXuat" />
         </EntityType>
         <EntityType Name="NhaCungCap">
           <Key>
@@ -306,7 +381,7 @@
           <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
           <Property Name="ThongTinThem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="NgayHopTac" Type="DateTime" Precision="3" />
-          <NavigationProperty Name="VatTus" Relationship="Self.FK__VatTu__IdNhaCung__2B3F6F97" FromRole="NhaCungCap" ToRole="VatTu" />
+          <NavigationProperty Name="VatTus" Relationship="QuanLyKhoModel.FK__VatTu__IdNhaCung__2B3F6F97" FromRole="NhaCungCap" ToRole="VatTu" />
         </EntityType>
         <EntityType Name="RoleTaiKhoan">
           <Key>
@@ -314,7 +389,7 @@
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="TaiKhoans" Relationship="Self.FK__TaiKhoan__IdRole__300424B4" FromRole="RoleTaiKhoan" ToRole="TaiKhoan" />
+          <NavigationProperty Name="TaiKhoans" Relationship="QuanLyKhoModel.FK__TaiKhoan__IdRole__300424B4" FromRole="RoleTaiKhoan" ToRole="TaiKhoan" />
         </EntityType>
         <EntityType Name="TaiKhoan">
           <Key>
@@ -324,59 +399,69 @@
           <Property Name="TenTaiKhoan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="HoVaTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
           <Property Name="MatKhau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="SDT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SDT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="IdRoleTaiKhoan" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="RoleTaiKhoan" Relationship="Self.FK__TaiKhoan__IdRole__300424B4" FromRole="TaiKhoan" ToRole="RoleTaiKhoan" />
-          <NavigationProperty Name="ThongTinBangNhaps" Relationship="Self.FK__ThongTinB__IDTai__37A5467C" FromRole="TaiKhoan" ToRole="ThongTinBangNhap" />
+          <NavigationProperty Name="BangNhaps" Relationship="QuanLyKhoModel.FK__BangNhap__IdTaiK__32E0915F" FromRole="TaiKhoan" ToRole="BangNhap" />
+          <NavigationProperty Name="BangXuats" Relationship="QuanLyKhoModel.FK__BangXuat__IdTaiK__3A81B327" FromRole="TaiKhoan" ToRole="BangXuat" />
+          <NavigationProperty Name="RoleTaiKhoan" Relationship="QuanLyKhoModel.FK__TaiKhoan__IdRole__300424B4" FromRole="TaiKhoan" ToRole="RoleTaiKhoan" />
         </EntityType>
         <EntityType Name="ThongTinBangNhap">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IdVatTu" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IdBangNhap" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IdVatTu" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IdBangNhap" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Count" Type="Int32" />
-          <Property Name="GiaNhap" Type="Double" Nullable="false" />
+          <Property Name="GiaNhap" Type="Double" />
           <Property Name="TrangThai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="IDTaiKhoan" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="BangNhap" Relationship="Self.FK__ThongTinB__IdBan__36B12243" FromRole="ThongTinBangNhap" ToRole="BangNhap" />
-          <NavigationProperty Name="TaiKhoan" Relationship="Self.FK__ThongTinB__IDTai__37A5467C" FromRole="ThongTinBangNhap" ToRole="TaiKhoan" />
-          <NavigationProperty Name="VatTu" Relationship="Self.FK__ThongTinB__IDTai__35BCFE0A" FromRole="ThongTinBangNhap" ToRole="VatTu" />
+          <NavigationProperty Name="BangNhap" Relationship="QuanLyKhoModel.FK__ThongTinB__IdBan__37A5467C" FromRole="ThongTinBangNhap" ToRole="BangNhap" />
+          <NavigationProperty Name="VatTu" Relationship="QuanLyKhoModel.FK__ThongTinB__IdVat__36B12243" FromRole="ThongTinBangNhap" ToRole="VatTu" />
         </EntityType>
         <EntityType Name="ThongTinBangXuat">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IdVatTu" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="IdThongTinBangXuat" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IdVatTu" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="IdThongTinBangXuat" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="IdKhachHang" Type="Int32" Nullable="false" />
           <Property Name="Count" Type="Int32" />
-          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="KhachHang" Relationship="Self.FK__ThongTinB__IdKha__3E52440B" FromRole="ThongTinBangXuat" ToRole="KhachHang" />
-          <NavigationProperty Name="VatTu" Relationship="Self.FK__ThongTinB__Statu__3C69FB99" FromRole="ThongTinBangXuat" ToRole="VatTu" />
-          <Property Name="GiaXuat" Type="Double" Nullable="false" />
-          <NavigationProperty Name="BangXuat" Relationship="QuanLyKhoModel.FK__ThongTinB__IdTho__3E52440B" FromRole="ThongTinBangXuat" ToRole="BangXuat" />
+          <Property Name="TrangThai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="GiaXuat" Type="Double" />
+          <NavigationProperty Name="BangXuat" Relationship="QuanLyKhoModel.FK__ThongTinB__IdTho__3F466844" FromRole="ThongTinBangXuat" ToRole="BangXuat" />
+          <NavigationProperty Name="KhachHang" Relationship="QuanLyKhoModel.FK__ThongTinB__IdKha__403A8C7D" FromRole="ThongTinBangXuat" ToRole="KhachHang" />
+          <NavigationProperty Name="VatTu" Relationship="QuanLyKhoModel.FK__ThongTinB__IdVat__3E52440B" FromRole="ThongTinBangXuat" ToRole="VatTu" />
         </EntityType>
         <EntityType Name="VatTu">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Id" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
           <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="IdDonViDo" Type="Int32" Nullable="false" />
           <Property Name="IdNhaCungCap" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="DonViDo" Relationship="Self.FK__VatTu__IdDonViDo__2A4B4B5E" FromRole="VatTu" ToRole="DonViDo" />
-          <NavigationProperty Name="NhaCungCap" Relationship="Self.FK__VatTu__IdNhaCung__2B3F6F97" FromRole="VatTu" ToRole="NhaCungCap" />
-          <NavigationProperty Name="ThongTinBangNhaps" Relationship="Self.FK__ThongTinB__IDTai__35BCFE0A" FromRole="VatTu" ToRole="ThongTinBangNhap" />
           <Property Name="QRCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="DonViDo" Relationship="QuanLyKhoModel.FK__VatTu__IdDonViDo__2A4B4B5E" FromRole="VatTu" ToRole="DonViDo" />
+          <NavigationProperty Name="NhaCungCap" Relationship="QuanLyKhoModel.FK__VatTu__IdNhaCung__2B3F6F97" FromRole="VatTu" ToRole="NhaCungCap" />
+          <NavigationProperty Name="ThongTinBangNhaps" Relationship="QuanLyKhoModel.FK__ThongTinB__IdVat__36B12243" FromRole="VatTu" ToRole="ThongTinBangNhap" />
+          <NavigationProperty Name="ThongTinBangXuats" Relationship="QuanLyKhoModel.FK__ThongTinB__IdVat__3E52440B" FromRole="VatTu" ToRole="ThongTinBangXuat" />
         </EntityType>
-        <Association Name="FK__ThongTinB__IdBan__36B12243">
-          <End Role="BangNhap" Type="Self.BangNhap" Multiplicity="1" />
-          <End Role="ThongTinBangNhap" Type="Self.ThongTinBangNhap" Multiplicity="*" />
+        <Association Name="FK__BangNhap__IdTaiK__32E0915F">
+          <End Type="QuanLyKhoModel.TaiKhoan" Role="TaiKhoan" Multiplicity="1" />
+          <End Type="QuanLyKhoModel.BangNhap" Role="BangNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TaiKhoan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BangNhap">
+              <PropertyRef Name="IdTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ThongTinB__IdBan__37A5467C">
+          <End Type="QuanLyKhoModel.BangNhap" Role="BangNhap" Multiplicity="1" />
+          <End Type="QuanLyKhoModel.ThongTinBangNhap" Role="ThongTinBangNhap" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="BangNhap">
               <PropertyRef Name="Id" />
@@ -386,139 +471,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__VatTu__IdDonViDo__2A4B4B5E">
-          <End Role="DonViDo" Type="Self.DonViDo" Multiplicity="1" />
-          <End Role="VatTu" Type="Self.VatTu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="DonViDo">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="VatTu">
-              <PropertyRef Name="IdDonViDo" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ThongTinB__IdKha__3E52440B">
-          <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
-          <End Role="ThongTinBangXuat" Type="Self.ThongTinBangXuat" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="KhachHang">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ThongTinBangXuat">
-              <PropertyRef Name="IdKhachHang" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__VatTu__IdNhaCung__2B3F6F97">
-          <End Role="NhaCungCap" Type="Self.NhaCungCap" Multiplicity="1" />
-          <End Role="VatTu" Type="Self.VatTu" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="NhaCungCap">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="VatTu">
-              <PropertyRef Name="IdNhaCungCap" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__TaiKhoan__IdRole__300424B4">
-          <End Role="RoleTaiKhoan" Type="Self.RoleTaiKhoan" Multiplicity="1" />
-          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="RoleTaiKhoan">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="TaiKhoan">
-              <PropertyRef Name="IdRoleTaiKhoan" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ThongTinB__IDTai__37A5467C">
-          <End Role="TaiKhoan" Type="Self.TaiKhoan" Multiplicity="1" />
-          <End Role="ThongTinBangNhap" Type="Self.ThongTinBangNhap" Multiplicity="*" />
+        <Association Name="FK__BangXuat__IdTaiK__3A81B327">
+          <End Type="QuanLyKhoModel.TaiKhoan" Role="TaiKhoan" Multiplicity="1" />
+          <End Type="QuanLyKhoModel.BangXuat" Role="BangXuat" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="TaiKhoan">
               <PropertyRef Name="Id" />
             </Principal>
-            <Dependent Role="ThongTinBangNhap">
-              <PropertyRef Name="IDTaiKhoan" />
+            <Dependent Role="BangXuat">
+              <PropertyRef Name="IdTaiKhoan" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__ThongTinB__IDTai__35BCFE0A">
-          <End Role="VatTu" Type="Self.VatTu" Multiplicity="1" />
-          <End Role="ThongTinBangNhap" Type="Self.ThongTinBangNhap" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VatTu">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ThongTinBangNhap">
-              <PropertyRef Name="IdVatTu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__ThongTinB__Statu__3C69FB99">
-          <End Role="VatTu" Type="Self.VatTu" Multiplicity="1" />
-          <End Role="ThongTinBangXuat" Type="Self.ThongTinBangXuat" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="VatTu">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="ThongTinBangXuat">
-              <PropertyRef Name="IdVatTu" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <EntityContainer Name="QuanLyKhoEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="BangNhaps" EntityType="Self.BangNhap" />
-          <EntitySet Name="BangXuats" EntityType="Self.BangXuat" />
-          <EntitySet Name="DonViDoes" EntityType="Self.DonViDo" />
-          <EntitySet Name="KhachHangs" EntityType="Self.KhachHang" />
-          <EntitySet Name="NhaCungCaps" EntityType="Self.NhaCungCap" />
-          <EntitySet Name="RoleTaiKhoans" EntityType="Self.RoleTaiKhoan" />
-          <EntitySet Name="TaiKhoans" EntityType="Self.TaiKhoan" />
-          <EntitySet Name="ThongTinBangNhaps" EntityType="Self.ThongTinBangNhap" />
-          <EntitySet Name="ThongTinBangXuats" EntityType="Self.ThongTinBangXuat" />
-          <EntitySet Name="VatTus" EntityType="Self.VatTu" />
-          <AssociationSet Name="FK__ThongTinB__IdBan__36B12243" Association="Self.FK__ThongTinB__IdBan__36B12243">
-            <End Role="BangNhap" EntitySet="BangNhaps" />
-            <End Role="ThongTinBangNhap" EntitySet="ThongTinBangNhaps" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VatTu__IdDonViDo__2A4B4B5E" Association="Self.FK__VatTu__IdDonViDo__2A4B4B5E">
-            <End Role="DonViDo" EntitySet="DonViDoes" />
-            <End Role="VatTu" EntitySet="VatTus" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ThongTinB__IdKha__3E52440B" Association="Self.FK__ThongTinB__IdKha__3E52440B">
-            <End Role="KhachHang" EntitySet="KhachHangs" />
-            <End Role="ThongTinBangXuat" EntitySet="ThongTinBangXuats" />
-          </AssociationSet>
-          <AssociationSet Name="FK__VatTu__IdNhaCung__2B3F6F97" Association="Self.FK__VatTu__IdNhaCung__2B3F6F97">
-            <End Role="NhaCungCap" EntitySet="NhaCungCaps" />
-            <End Role="VatTu" EntitySet="VatTus" />
-          </AssociationSet>
-          <AssociationSet Name="FK__TaiKhoan__IdRole__300424B4" Association="Self.FK__TaiKhoan__IdRole__300424B4">
-            <End Role="RoleTaiKhoan" EntitySet="RoleTaiKhoans" />
-            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ThongTinB__IDTai__37A5467C" Association="Self.FK__ThongTinB__IDTai__37A5467C">
-            <End Role="TaiKhoan" EntitySet="TaiKhoans" />
-            <End Role="ThongTinBangNhap" EntitySet="ThongTinBangNhaps" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ThongTinB__IDTai__35BCFE0A" Association="Self.FK__ThongTinB__IDTai__35BCFE0A">
-            <End Role="VatTu" EntitySet="VatTus" />
-            <End Role="ThongTinBangNhap" EntitySet="ThongTinBangNhaps" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ThongTinB__Statu__3C69FB99" Association="Self.FK__ThongTinB__Statu__3C69FB99">
-            <End Role="VatTu" EntitySet="VatTus" />
-            <End Role="ThongTinBangXuat" EntitySet="ThongTinBangXuats" />
-          </AssociationSet>
-          <AssociationSet Name="FK__ThongTinB__IdTho__3E52440B" Association="QuanLyKhoModel.FK__ThongTinB__IdTho__3E52440B">
-            <End Role="BangXuat" EntitySet="BangXuats" />
-            <End Role="ThongTinBangXuat" EntitySet="ThongTinBangXuats" />
-          </AssociationSet>
-        </EntityContainer>
-        <Association Name="FK__ThongTinB__IdTho__3E52440B">
+        <Association Name="FK__ThongTinB__IdTho__3F466844">
           <End Type="QuanLyKhoModel.BangXuat" Role="BangXuat" Multiplicity="1" />
           <End Type="QuanLyKhoModel.ThongTinBangXuat" Role="ThongTinBangXuat" Multiplicity="*" />
           <ReferentialConstraint>
@@ -530,7 +495,79 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        <Association Name="FK__VatTu__IdDonViDo__2A4B4B5E">
+          <End Type="QuanLyKhoModel.DonViDo" Role="DonViDo" Multiplicity="1" />
+          <End Type="QuanLyKhoModel.VatTu" Role="VatTu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DonViDo">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VatTu">
+              <PropertyRef Name="IdDonViDo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ThongTinB__IdKha__403A8C7D">
+          <End Type="QuanLyKhoModel.KhachHang" Role="KhachHang" Multiplicity="1" />
+          <End Type="QuanLyKhoModel.ThongTinBangXuat" Role="ThongTinBangXuat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KhachHang">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ThongTinBangXuat">
+              <PropertyRef Name="IdKhachHang" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__VatTu__IdNhaCung__2B3F6F97">
+          <End Type="QuanLyKhoModel.NhaCungCap" Role="NhaCungCap" Multiplicity="1" />
+          <End Type="QuanLyKhoModel.VatTu" Role="VatTu" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="NhaCungCap">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="VatTu">
+              <PropertyRef Name="IdNhaCungCap" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__TaiKhoan__IdRole__300424B4">
+          <End Type="QuanLyKhoModel.RoleTaiKhoan" Role="RoleTaiKhoan" Multiplicity="1" />
+          <End Type="QuanLyKhoModel.TaiKhoan" Role="TaiKhoan" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoleTaiKhoan">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TaiKhoan">
+              <PropertyRef Name="IdRoleTaiKhoan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ThongTinB__IdVat__36B12243">
+          <End Type="QuanLyKhoModel.VatTu" Role="VatTu" Multiplicity="1" />
+          <End Type="QuanLyKhoModel.ThongTinBangNhap" Role="ThongTinBangNhap" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VatTu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ThongTinBangNhap">
+              <PropertyRef Name="IdVatTu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ThongTinB__IdVat__3E52440B">
+          <End Type="QuanLyKhoModel.VatTu" Role="VatTu" Multiplicity="1" />
+          <End Type="QuanLyKhoModel.ThongTinBangXuat" Role="ThongTinBangXuat" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="VatTu">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ThongTinBangXuat">
+              <PropertyRef Name="IdVatTu" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -539,92 +576,96 @@
           <EntitySetMapping Name="BangNhaps">
             <EntityTypeMapping TypeName="QuanLyKhoModel.BangNhap">
               <MappingFragment StoreEntitySet="BangNhap">
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdTaiKhoan" ColumnName="IdTaiKhoan" />
                 <ScalarProperty Name="NgayNhap" ColumnName="NgayNhap" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="BangXuats">
             <EntityTypeMapping TypeName="QuanLyKhoModel.BangXuat">
               <MappingFragment StoreEntitySet="BangXuat">
-                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdTaiKhoan" ColumnName="IdTaiKhoan" />
                 <ScalarProperty Name="NgayXuat" ColumnName="NgayXuat" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="DonViDoes">
             <EntityTypeMapping TypeName="QuanLyKhoModel.DonViDo">
               <MappingFragment StoreEntitySet="DonViDo">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="KhachHangs">
             <EntityTypeMapping TypeName="QuanLyKhoModel.KhachHang">
               <MappingFragment StoreEntitySet="KhachHang">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Ten" ColumnName="Ten" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="SDT" ColumnName="SDT" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
                 <ScalarProperty Name="ThongTinThem" ColumnName="ThongTinThem" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="NhaCungCaps">
             <EntityTypeMapping TypeName="QuanLyKhoModel.NhaCungCap">
               <MappingFragment StoreEntitySet="NhaCungCap">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Ten" ColumnName="Ten" />
-                <ScalarProperty Name="Address" ColumnName="Address" />
-                <ScalarProperty Name="SDT" ColumnName="SDT" />
-                <ScalarProperty Name="Email" ColumnName="Email" />
-                <ScalarProperty Name="ThongTinThem" ColumnName="ThongTinThem" />
                 <ScalarProperty Name="NgayHopTac" ColumnName="NgayHopTac" />
+                <ScalarProperty Name="ThongTinThem" ColumnName="ThongTinThem" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="RoleTaiKhoans">
             <EntityTypeMapping TypeName="QuanLyKhoModel.RoleTaiKhoan">
               <MappingFragment StoreEntitySet="RoleTaiKhoan">
-                <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="TaiKhoans">
             <EntityTypeMapping TypeName="QuanLyKhoModel.TaiKhoan">
               <MappingFragment StoreEntitySet="TaiKhoan">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
-                <ScalarProperty Name="HoVaTen" ColumnName="HoVaTen" />
-                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
                 <ScalarProperty Name="IdRoleTaiKhoan" ColumnName="IdRoleTaiKhoan" />
+                <ScalarProperty Name="SDT" ColumnName="SDT" />
+                <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
+                <ScalarProperty Name="HoVaTen" ColumnName="HoVaTen" />
+                <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ThongTinBangNhaps">
             <EntityTypeMapping TypeName="QuanLyKhoModel.ThongTinBangNhap">
               <MappingFragment StoreEntitySet="ThongTinBangNhap">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdVatTu" ColumnName="IdVatTu" />
-                <ScalarProperty Name="IdBangNhap" ColumnName="IdBangNhap" />
-                <ScalarProperty Name="Count" ColumnName="Count" />
                 <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
-                <ScalarProperty Name="IDTaiKhoan" ColumnName="IDTaiKhoan" />
+                <ScalarProperty Name="GiaNhap" ColumnName="GiaNhap" />
+                <ScalarProperty Name="Count" ColumnName="Count" />
+                <ScalarProperty Name="IdBangNhap" ColumnName="IdBangNhap" />
+                <ScalarProperty Name="IdVatTu" ColumnName="IdVatTu" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="ThongTinBangXuats">
             <EntityTypeMapping TypeName="QuanLyKhoModel.ThongTinBangXuat">
               <MappingFragment StoreEntitySet="ThongTinBangXuat">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="IdVatTu" ColumnName="IdVatTu" />
-                <ScalarProperty Name="IdThongTinBangXuat" ColumnName="IdThongTinBangXuat" />
-                <ScalarProperty Name="IdKhachHang" ColumnName="IdKhachHang" />
+                <ScalarProperty Name="GiaXuat" ColumnName="GiaXuat" />
+                <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
                 <ScalarProperty Name="Count" ColumnName="Count" />
-                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="IdKhachHang" ColumnName="IdKhachHang" />
+                <ScalarProperty Name="IdThongTinBangXuat" ColumnName="IdThongTinBangXuat" />
+                <ScalarProperty Name="IdVatTu" ColumnName="IdVatTu" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -632,10 +673,10 @@
             <EntityTypeMapping TypeName="QuanLyKhoModel.VatTu">
               <MappingFragment StoreEntitySet="VatTu">
                 <ScalarProperty Name="QRCode" ColumnName="QRCode" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="Ten" ColumnName="Ten" />
-                <ScalarProperty Name="IdDonViDo" ColumnName="IdDonViDo" />
                 <ScalarProperty Name="IdNhaCungCap" ColumnName="IdNhaCungCap" />
+                <ScalarProperty Name="IdDonViDo" ColumnName="IdDonViDo" />
+                <ScalarProperty Name="Ten" ColumnName="Ten" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

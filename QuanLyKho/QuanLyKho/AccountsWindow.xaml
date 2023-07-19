@@ -27,6 +27,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
+            <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
         <uc:ControlBarUC  Tag="{Binding Title, ElementName=accountsWindow}"></uc:ControlBarUC>
         <Grid Grid.Row="1">
@@ -48,12 +49,6 @@
                         materialDesign:HintAssist.Hint="Mật khẩu" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     </TextBox>
-                    <Image
-                        Height="70"
-                       Source="{Binding AnhDaiDien}"
-                        Margin="5" 
-                        materialDesign:HintAssist.Hint="Ảnh đại diện">
-                    </Image>
 
                 </StackPanel>
             </materialDesign:Card>
@@ -90,8 +85,8 @@
                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
                     VerticalScrollBarVisibility="Auto">
                     <ListView HorizontalAlignment="Center"
-                        ItemsSource="{Binding List}"
-                        SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                        ItemsSource="{Binding ListAccounts}"
+                        SelectedItem="{Binding SelectedItem, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
@@ -101,6 +96,71 @@
                                 <GridViewColumn Header="Số điện thoại" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
                                 <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"></GridViewColumn> 
                                 <GridViewColumn Header="Ngày tạo" DisplayMemberBinding="{Binding NgayTao}"></GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </ScrollViewer>
+            </materialDesign:Card>
+        </Grid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MaxWidth="250"></ColumnDefinition>
+                <ColumnDefinition Width="115"></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <materialDesign:Card Grid.Column="0" Margin="5">
+                <StackPanel 
+                    Orientation="Vertical"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                    <TextBox 
+                        Text="{Binding Ten, UpdateSourceTrigger=PropertyChanged}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Loại tài khoản" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    </TextBox>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card Grid.Column="1">
+                <StackPanel 
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center">
+                    <Button 
+                        Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                        Command="{Binding AddCommand}" 
+                        Content="Thêm"
+                        Margin="2" 
+                        Height="30">
+                    </Button>
+                    <Button 
+                        Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                        Command="{Binding EditCommand}" 
+                        Content="Sửa"
+                        Margin="2" 
+                        Height="30">
+                    </Button>
+                    <Button 
+                        Style="{StaticResource MaterialDesignFlatDarkBgButton}"
+                        Command="{Binding DeleteCommand}" 
+                        Content="Xóa"
+                        Margin="2" 
+                        Height="30">
+                    </Button>
+                </StackPanel>
+            </materialDesign:Card>
+            <materialDesign:Card 
+                Grid.Column="2"
+                Margin="5" 
+                VerticalAlignment="Stretch">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                    VerticalScrollBarVisibility="Auto">
+                    <ListView HorizontalAlignment="Center"
+                        ItemsSource="{Binding ListRoleAccounts}"
+                        SelectedItem="{Binding SelectedItem, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+                                <GridViewColumn Header="Các cấp tài khoản" DisplayMemberBinding="{Binding Ten}"></GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>

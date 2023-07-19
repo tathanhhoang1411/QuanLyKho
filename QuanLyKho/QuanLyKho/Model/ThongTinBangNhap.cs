@@ -18,12 +18,10 @@ namespace QuanLyKho.Model
         public string IdVatTu { get; set; }
         public string IdBangNhap { get; set; }
         public Nullable<int> Count { get; set; }
-        public double GiaNhap { get; set; }
+        public Nullable<double> GiaNhap { get; set; }
         public string TrangThai { get; set; }
-        public int IDTaiKhoan { get; set; }
     
         public virtual BangNhap BangNhap { get; set; }
-        public virtual TaiKhoan TaiKhoan { get; set; }
         public virtual VatTu VatTu { get; set; }
     }
 }

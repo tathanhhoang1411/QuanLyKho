@@ -35,26 +35,32 @@ namespace QuanLyKho.ViewModel
 
         void Login(Window p)
         {
-            if (p == null)
-                return;
 
             //TaThanhHoang admin
             //NguyenVanAn staff
-
-            string passEncode = MD5Hash(Base64Encode(Password));
-            var accCount = DataProvider.Ins.DB.TaiKhoans.Where(x => x.TenTaiKhoan == UserName && x.MatKhau == passEncode).Count();
-
-            if (accCount > 0)
-            {
-                IsLogin = true;
-
-                p.Close();
-            }
-            else
+            if (UserName.Trim() == "" && Password.Trim() == "")
             {
                 IsLogin = false;
-                MessageBox.Show("Sai tài khoản hoặc mật khẩu!");
+                MessageBox.Show("Hãy nhập tài khoản và mật khẩu!");
             }
+            else// có điền thông tin
+            {
+                string passEncode = MD5Hash(Base64Encode(Password));
+                var accCount = DataProvider.Ins.DB.TaiKhoans.Where(x => x.TenTaiKhoan == UserName && x.MatKhau == passEncode).Count();
+
+                if (accCount > 0)
+                {
+                    IsLogin = true;
+
+                    p.Close();
+                }
+                else
+                {
+                    IsLogin = false;
+                    MessageBox.Show("Tài khoản hoặc mật khẩu chưa chính xác!");
+                }
+            }
+
         }
 
         public static string Base64Encode(string plainText)

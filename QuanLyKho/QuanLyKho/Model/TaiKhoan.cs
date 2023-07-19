@@ -17,7 +17,8 @@ namespace QuanLyKho.Model
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public TaiKhoan()
         {
-            this.ThongTinBangNhaps = new HashSet<ThongTinBangNhap>();
+            this.BangNhaps = new HashSet<BangNhap>();
+            this.BangXuats = new HashSet<BangXuat>();
         }
     
         public int Id { get; set; }
@@ -25,12 +26,12 @@ namespace QuanLyKho.Model
         public string HoVaTen { get; set; }
         public string MatKhau { get; set; }
         public string SDT { get; set; }
-        public string Email { get; set; }
-        public System.DateTime NgayTao { get; set; }
         public int IdRoleTaiKhoan { get; set; }
     
-        public virtual RoleTaiKhoan RoleTaiKhoan { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThongTinBangNhap> ThongTinBangNhaps { get; set; }
+        public virtual ICollection<BangNhap> BangNhaps { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<BangXuat> BangXuats { get; set; }
+        public virtual RoleTaiKhoan RoleTaiKhoan { get; set; }
     }
 }
