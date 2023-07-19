@@ -5,7 +5,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="NgayNhap" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NgayNhap" Type="DateTime" Precision="3" />
     <NavigationProperty Name="ThongTinBangNhaps" Relationship="Self.FK__ThongTinB__IdBan__36B12243" FromRole="BangNhap" ToRole="ThongTinBangNhap" />
   </EntityType>
   <EntityType Name="BangXuat">
@@ -13,7 +13,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="NgayXuat" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="NgayXuat" Type="DateTime" Precision="3" />
     <NavigationProperty Name="ThongTinBangXuats" Relationship="QuanLyKhoModel.FK__ThongTinB__IdTho__3E52440B" FromRole="BangXuat" ToRole="ThongTinBangXuat" />
   </EntityType>
   <EntityType Name="DonViDo">
@@ -29,11 +29,11 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="SDT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ThongTinThem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SDT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ThongTinThem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="ThongTinBangXuats" Relationship="Self.FK__ThongTinB__IdKha__3E52440B" FromRole="KhachHang" ToRole="ThongTinBangXuat" />
   </EntityType>
   <EntityType Name="NhaCungCap">
@@ -41,12 +41,12 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="SDT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="ThongTinThem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="NgayHopTac" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SDT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="ThongTinThem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NgayHopTac" Type="DateTime" Precision="3" />
     <NavigationProperty Name="VatTus" Relationship="Self.FK__VatTu__IdNhaCung__2B3F6F97" FromRole="NhaCungCap" ToRole="VatTu" />
   </EntityType>
   <EntityType Name="RoleTaiKhoan">
@@ -54,7 +54,7 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="TaiKhoans" Relationship="Self.FK__TaiKhoan__IdRole__300424B4" FromRole="RoleTaiKhoan" ToRole="TaiKhoan" />
   </EntityType>
   <EntityType Name="TaiKhoan">
@@ -62,9 +62,9 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="TenTaiKhoan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="HoVaTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="MatKhau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TenTaiKhoan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="HoVaTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="MatKhau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="SDT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="NgayTao" Type="DateTime" Nullable="false" Precision="3" />
@@ -81,7 +81,7 @@
     <Property Name="IdBangNhap" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Count" Type="Int32" />
     <Property Name="GiaNhap" Type="Double" Nullable="false" />
-    <Property Name="TrangThai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TrangThai" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IDTaiKhoan" Type="Int32" Nullable="false" />
     <NavigationProperty Name="BangNhap" Relationship="Self.FK__ThongTinB__IdBan__36B12243" FromRole="ThongTinBangNhap" ToRole="BangNhap" />
     <NavigationProperty Name="TaiKhoan" Relationship="Self.FK__ThongTinB__IDTai__37A5467C" FromRole="ThongTinBangNhap" ToRole="TaiKhoan" />
@@ -96,9 +96,8 @@
     <Property Name="IdThongTinBangXuat" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="IdKhachHang" Type="Int32" Nullable="false" />
     <Property Name="Count" Type="Int32" />
-    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <NavigationProperty Name="KhachHang" Relationship="Self.FK__ThongTinB__IdKha__3E52440B" FromRole="ThongTinBangXuat" ToRole="KhachHang" />
-    <NavigationProperty Name="ThongTinBangXuat1" Relationship="Self.FK__ThongTinB__IdTho__3D5E1FD2" FromRole="ThongTinBangXuat" ToRole="ThongTinBangXuat1" />
     <NavigationProperty Name="VatTu" Relationship="Self.FK__ThongTinB__Statu__3C69FB99" FromRole="ThongTinBangXuat" ToRole="VatTu" />
     <Property Name="GiaXuat" Type="Double" Nullable="false" />
     <NavigationProperty Name="BangXuat" Relationship="QuanLyKhoModel.FK__ThongTinB__IdTho__3E52440B" FromRole="ThongTinBangXuat" ToRole="BangXuat" />
@@ -108,12 +107,13 @@
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="IdDonViDo" Type="Int32" Nullable="false" />
     <Property Name="IdNhaCungCap" Type="Int32" Nullable="false" />
     <NavigationProperty Name="DonViDo" Relationship="Self.FK__VatTu__IdDonViDo__2A4B4B5E" FromRole="VatTu" ToRole="DonViDo" />
     <NavigationProperty Name="NhaCungCap" Relationship="Self.FK__VatTu__IdNhaCung__2B3F6F97" FromRole="VatTu" ToRole="NhaCungCap" />
     <NavigationProperty Name="ThongTinBangNhaps" Relationship="Self.FK__ThongTinB__IDTai__35BCFE0A" FromRole="VatTu" ToRole="ThongTinBangNhap" />
+    <Property Name="QRCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
   </EntityType>
   <Association Name="FK__ThongTinB__IdBan__36B12243">
     <End Role="BangNhap" Type="Self.BangNhap" Multiplicity="1" />
@@ -199,18 +199,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ThongTinB__IdTho__3D5E1FD2">
-    <End Role="ThongTinBangXuat" Type="Self.ThongTinBangXuat" Multiplicity="1" />
-    <End Role="ThongTinBangXuat1" Type="Self.ThongTinBangXuat" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="ThongTinBangXuat">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ThongTinBangXuat1">
-        <PropertyRef Name="IdThongTinBangXuat" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK__ThongTinB__Statu__3C69FB99">
     <End Role="VatTu" Type="Self.VatTu" Multiplicity="1" />
     <End Role="ThongTinBangXuat" Type="Self.ThongTinBangXuat" Multiplicity="*" />
@@ -261,10 +249,6 @@
     <AssociationSet Name="FK__ThongTinB__IDTai__35BCFE0A" Association="Self.FK__ThongTinB__IDTai__35BCFE0A">
       <End Role="VatTu" EntitySet="VatTus" />
       <End Role="ThongTinBangNhap" EntitySet="ThongTinBangNhaps" />
-    </AssociationSet>
-    <AssociationSet Name="FK__ThongTinB__IdTho__3D5E1FD2" Association="Self.FK__ThongTinB__IdTho__3D5E1FD2">
-      <End Role="ThongTinBangXuat" EntitySet="ThongTinBangXuats" />
-      <End Role="ThongTinBangXuat1" EntitySet="ThongTinBangXuats" />
     </AssociationSet>
     <AssociationSet Name="FK__ThongTinB__Statu__3C69FB99" Association="Self.FK__ThongTinB__Statu__3C69FB99">
       <End Role="VatTu" EntitySet="VatTus" />

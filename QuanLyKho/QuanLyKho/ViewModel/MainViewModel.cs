@@ -10,6 +10,9 @@ namespace QuanLyKho.ViewModel
 {
     public class MainViewModel : BaseViewModel
     {
+
+        public bool Isloaded = false;
+        public ICommand LoadedWindowCommand { get; set; }
         public ICommand UnitWindowCommand { get; set; }
         public ICommand AccountsWindowCommand { get; set; }
         public ICommand InputWindowCommand { get; set; }
@@ -17,9 +20,32 @@ namespace QuanLyKho.ViewModel
         public ICommand VattuWindowCommand { get; set; }
         public ICommand SupplierWindowCommand { get; set; }
         public ICommand CustomerWindowCommand { get; set; }
-        // mọi thứ xử lý sẽ nằm trong này
+        // mọi thứ xử lý sẽ nằm trong này 
         public MainViewModel()
         {
+            LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) => {
+                Isloaded = true;
+                if (p == null)
+                    return;
+                p.Hide();
+                LoginWindow loginWindow = new LoginWindow();
+                loginWindow.ShowDialog();
+
+                if (loginWindow.DataContext == null)
+                    return;
+                var loginVM = loginWindow.DataContext as LoginViewModel;
+
+                if (loginVM.IsLogin)
+                {
+                    p.Show();
+                }
+                else
+                {
+                    p.Close();
+                }
+            }
+              );
+
             UnitWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
                 UnitWindow wd = new UnitWindow();
                 wd.ShowDialog();

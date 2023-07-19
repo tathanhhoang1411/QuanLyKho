@@ -115,7 +115,7 @@ create table ThongTinBangXuat
 	Status nvarchar(max)
 
 	foreign key (IdVatTu) references VatTu(Id),
-	foreign key (IdThongTinBangXuat) references ThongTinBangXuat(Id),
+	foreign key (IdThongTinBangXuat) references BangXuat(Id),
 	foreign key (IdKhachHang) references KhachHang(Id)
 )
 go

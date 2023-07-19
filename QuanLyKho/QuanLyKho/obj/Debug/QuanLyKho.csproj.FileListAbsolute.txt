@@ -50,3 +50,7 @@ D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\Supplie
 D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\SupplierWindow.baml
 D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\CustomerWindow.g.cs
 D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\CustomerWindow.baml
+D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\bin\Debug\Microsoft.Expression.Interactions.dll
+D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\bin\Debug\System.Windows.Interactivity.dll
+D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\bin\Debug\Microsoft.Expression.Interactions.xml
+D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\bin\Debug\System.Windows.Interactivity.xml

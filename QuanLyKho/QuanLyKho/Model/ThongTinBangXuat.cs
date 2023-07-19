@@ -14,12 +14,6 @@ namespace QuanLyKho.Model
     
     public partial class ThongTinBangXuat
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ThongTinBangXuat()
-        {
-            this.ThongTinBangXuat1 = new HashSet<ThongTinBangXuat>();
-        }
-    
         public string Id { get; set; }
         public string IdVatTu { get; set; }
         public string IdThongTinBangXuat { get; set; }
@@ -29,8 +23,6 @@ namespace QuanLyKho.Model
         public double GiaXuat { get; set; }
     
         public virtual KhachHang KhachHang { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ThongTinBangXuat> ThongTinBangXuat1 { get; set; }
         public virtual VatTu VatTu { get; set; }
         public virtual BangXuat BangXuat { get; set; }
     }

@@ -24,6 +24,7 @@ namespace QuanLyKho.Model
         public string Ten { get; set; }
         public int IdDonViDo { get; set; }
         public int IdNhaCungCap { get; set; }
+        public string QRCode { get; set; }
     
         public virtual DonViDo DonViDo { get; set; }
         public virtual NhaCungCap NhaCungCap { get; set; }
