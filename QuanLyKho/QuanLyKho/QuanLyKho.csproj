@@ -96,6 +96,7 @@
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Accounts.cs" />
     <Compile Include="Model\BangNhap.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -127,6 +128,7 @@
     <Compile Include="Model\NhaCungCap.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\RoleAccounts.cs" />
     <Compile Include="Model\RoleTaiKhoan.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>

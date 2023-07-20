@@ -93,18 +93,17 @@ create table TaiKhoan
 	HoVaTen nvarchar(100),
 	MatKhau nvarchar(max),
     SDT nvarchar(20),
-	IdRoleTaiKhoan int not null
-
+	IdRoleTaiKhoan int not null,
+	Email nvarchar(200),
+	NgayTao DateTime
 	foreign key (IdRoleTaiKhoan) references RoleTaiKhoan(Id)
 )
 select * from TaiKhoan
-insert into TaiKhoan values(N'TaThanhHoang', N'Tạ Thanh Hoàng', N'db69fc039dcbd2962cb4d28f5891aae1','0325793505', 1)
-insert into TaiKhoan values(N'NguyenVanAn', N'Nguyễn Văn An', N'978aae9bb6bee8fb75de3e4830a1be46','0325793506', 2)
-insert into TaiKhoan values(N'NguyenThiHanh', N'Nguyễn Thị Hạnh', N'978aae9bb6bee8fb75de3e4830a1be46','0325798778', 2)
-insert into TaiKhoan values(N'TranThiKieu', N'Trần Thi Kiều', N'978aae9bb6bee8fb75de3e4830a1be46','0325790327', 2)
-insert into TaiKhoan values(N'LeVan', N'Lê Văn', N'978aae9bb6bee8fb75de3e4830a1be46','0325895897', 2)
-insert into TaiKhoan values(N'NgThiTuyet', N'Nguyễn Thị Tuyết', N'978aae9bb6bee8fb75de3e4830a1be46','0325792137', 2)
-insert into TaiKhoan values(N'NguyenThiBe', N'Nguyễn Thị Bé', N'978aae9bb6bee8fb75de3e4830a1be46','0325793539', 2)
+insert into TaiKhoan values(N'TaThanhHoang', N'Tạ Thanh Hoàng', N'db69fc039dcbd2962cb4d28f5891aae1','0325793505', 1,'tathanhhoang.work@gmail.com','7/20/2010')
+insert into TaiKhoan values(N'NguyenVanAn', N'Nguyễn Văn An', N'978aae9bb6bee8fb75de3e4830a1be46','0325793506', 2,'nguyenan@gmail.com','7/20/2023')
+insert into TaiKhoan values(N'NguyenThiHanh', N'Nguyễn Thị Hạnh', N'978aae9bb6bee8fb75de3e4830a1be46','0325798778', 2,'nguyenhanh@gmail.com','7/20/2023')
+insert into TaiKhoan values(N'TranThiKieu', N'Trần Thi Kiều', N'978aae9bb6bee8fb75de3e4830a1be46','0325790327', 2,'kieun@gmail.com','7/20/2023')
+insert into TaiKhoan values(N'LeVan', N'Lê Văn', N'978aae9bb6bee8fb75de3e4830a1be46','0325895897', 2,'lvan@gmail.com', '7/20/2023')
 
 create table BangNhap
 (
@@ -127,7 +126,6 @@ create table ThongTinBangNhap
 	Count int,
 	GiaNhap float default 0,
 	TrangThai int,
-	/*sẽ bổ sung id nhà cung cấp*/
 	foreign key (IdVatTu) references VatTu(Id),
 	foreign key (IdBangNhap) references BangNhap(Id),
 )

@@ -50,7 +50,7 @@ namespace QuanLyKho.ViewModel
                 }
             }
               );
-
+            
             UnitWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
                 UnitWindow wd = new UnitWindow();
@@ -87,10 +87,21 @@ namespace QuanLyKho.ViewModel
                 wd.ShowDialog();
             });
         }
+        public bool kiemTraCapTaiKhoan(TaiKhoan tk)
+        {
+            if(tk.IdRoleTaiKhoan==1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
         void LoadTonKho()
         {
             ListTonKho = new ObservableCollection<TonKho>();
-            var  ListVatTu = DataProvider.Ins.DB.VatTus;
+            List<VatTu>  ListVatTu = DataProvider.Ins.DB.VatTus.ToList();
             //Biến i sẽ là STT tăng dần
             int i = 1;
             foreach (VatTu item in ListVatTu)

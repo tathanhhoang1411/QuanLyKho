@@ -63,6 +63,8 @@
     <EntitySetMapping Name="TaiKhoans">
       <EntityTypeMapping TypeName="QuanLyKhoModel.TaiKhoan">
         <MappingFragment StoreEntitySet="TaiKhoan">
+          <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="IdRoleTaiKhoan" ColumnName="IdRoleTaiKhoan" />
           <ScalarProperty Name="SDT" ColumnName="SDT" />
           <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />

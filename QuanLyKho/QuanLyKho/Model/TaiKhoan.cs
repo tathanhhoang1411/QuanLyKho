@@ -27,6 +27,8 @@ namespace QuanLyKho.Model
         public string MatKhau { get; set; }
         public string SDT { get; set; }
         public int IdRoleTaiKhoan { get; set; }
+        public string Email { get; set; }
+        public Nullable<System.DateTime> NgayTao { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BangNhap> BangNhaps { get; set; }

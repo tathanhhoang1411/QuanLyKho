@@ -98,13 +98,13 @@
                         </ListView.Resources>
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
-                                <GridViewColumn Header="Họ và tên" DisplayMemberBinding="{Binding HoVaTen}"></GridViewColumn>
-                                <GridViewColumn Header="Tài khoản" DisplayMemberBinding="{Binding TenTaiKhoan}"></GridViewColumn>
-                                <GridViewColumn Header="Mật khẩu" DisplayMemberBinding="{Binding MatKhau}"></GridViewColumn>
-                                <GridViewColumn Header="Số điện thoại" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
-                                <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"></GridViewColumn> 
-                                <GridViewColumn Header="Ngày tạo" DisplayMemberBinding="{Binding NgayTao}"></GridViewColumn>
+                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
+                                <GridViewColumn Header="Họ và tên" DisplayMemberBinding="{Binding TaiKhoan.HoVaTen}"></GridViewColumn>
+                                <GridViewColumn Header="Tài khoản" DisplayMemberBinding="{Binding TaiKhoan.TenTaiKhoan}"></GridViewColumn>
+                                <GridViewColumn Header="Số điện thoại" DisplayMemberBinding="{Binding TaiKhoan.SDT}"></GridViewColumn>
+                                <GridViewColumn Header="Email" DisplayMemberBinding="{Binding TaiKhoan.Email}"></GridViewColumn>
+                                <GridViewColumn Header="Cấp bậc" DisplayMemberBinding="{Binding RoleTaiKhoan}"></GridViewColumn>
+                                <GridViewColumn Header="Ngày tạo" DisplayMemberBinding="{Binding TaiKhoan.NgayTao}"></GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
@@ -162,7 +162,7 @@
 
                 <ScrollViewer>
                     <ListView HorizontalAlignment="Center"
-                        ItemsSource="{Binding ListRoleAccount}"
+                        ItemsSource="{Binding ListRoleAccounts}"
                         SelectedItem="{Binding SelectedItem, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                         <ListView.Resources>
                             <Style TargetType="GridViewColumnHeader">
@@ -172,8 +172,8 @@
                         </ListView.Resources>
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="STT" ></GridViewColumn>
-                                <GridViewColumn Header="Các cấp tài khoản" DisplayMemberBinding="{Binding Ten}"></GridViewColumn>
+                                <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}" ></GridViewColumn>
+                                <GridViewColumn Header="Các cấp tài khoản" DisplayMemberBinding="{Binding RoleTK.Ten}"></GridViewColumn>
 
                             </GridView>
                         </ListView.View>

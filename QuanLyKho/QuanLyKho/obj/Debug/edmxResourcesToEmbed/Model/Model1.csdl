@@ -15,15 +15,15 @@
       <End Role="TaiKhoan" EntitySet="TaiKhoans" />
       <End Role="BangNhap" EntitySet="BangNhaps" />
     </AssociationSet>
-    <AssociationSet Name="FK__ThongTinB__IdBan__4316F928" Association="QuanLyKhoModel.FK__ThongTinB__IdBan__4316F928">
+    <AssociationSet Name="FK__ThongTinB__IdBan__37A5467C" Association="QuanLyKhoModel.FK__ThongTinB__IdBan__37A5467C">
       <End Role="BangNhap" EntitySet="BangNhaps" />
       <End Role="ThongTinBangNhap" EntitySet="ThongTinBangNhaps" />
     </AssociationSet>
-    <AssociationSet Name="FK__BangXuat__IdTaiK__45F365D3" Association="QuanLyKhoModel.FK__BangXuat__IdTaiK__45F365D3">
+    <AssociationSet Name="FK__BangXuat__IdTaiK__3A81B327" Association="QuanLyKhoModel.FK__BangXuat__IdTaiK__3A81B327">
       <End Role="TaiKhoan" EntitySet="TaiKhoans" />
       <End Role="BangXuat" EntitySet="BangXuats" />
     </AssociationSet>
-    <AssociationSet Name="FK__ThongTinB__IdTho__4AB81AF0" Association="QuanLyKhoModel.FK__ThongTinB__IdTho__4AB81AF0">
+    <AssociationSet Name="FK__ThongTinB__IdTho__3F466844" Association="QuanLyKhoModel.FK__ThongTinB__IdTho__3F466844">
       <End Role="BangXuat" EntitySet="BangXuats" />
       <End Role="ThongTinBangXuat" EntitySet="ThongTinBangXuats" />
     </AssociationSet>
@@ -31,7 +31,7 @@
       <End Role="DonViDo" EntitySet="DonViDoes" />
       <End Role="VatTu" EntitySet="VatTus" />
     </AssociationSet>
-    <AssociationSet Name="FK__ThongTinB__IdKha__4BAC3F29" Association="QuanLyKhoModel.FK__ThongTinB__IdKha__4BAC3F29">
+    <AssociationSet Name="FK__ThongTinB__IdKha__403A8C7D" Association="QuanLyKhoModel.FK__ThongTinB__IdKha__403A8C7D">
       <End Role="KhachHang" EntitySet="KhachHangs" />
       <End Role="ThongTinBangXuat" EntitySet="ThongTinBangXuats" />
     </AssociationSet>
@@ -39,15 +39,15 @@
       <End Role="NhaCungCap" EntitySet="NhaCungCaps" />
       <End Role="VatTu" EntitySet="VatTus" />
     </AssociationSet>
-    <AssociationSet Name="FK__TaiKhoan__IdRole__300424B4" Association="QuanLyKhoModel.FK__TaiKhoan__IdRole__300424B4">
+    <AssociationSet Name="FK__TaiKhoan__NgayTa__300424B4" Association="QuanLyKhoModel.FK__TaiKhoan__NgayTa__300424B4">
       <End Role="RoleTaiKhoan" EntitySet="RoleTaiKhoans" />
       <End Role="TaiKhoan" EntitySet="TaiKhoans" />
     </AssociationSet>
-    <AssociationSet Name="FK__ThongTinB__IdVat__4222D4EF" Association="QuanLyKhoModel.FK__ThongTinB__IdVat__4222D4EF">
+    <AssociationSet Name="FK__ThongTinB__IdVat__36B12243" Association="QuanLyKhoModel.FK__ThongTinB__IdVat__36B12243">
       <End Role="VatTu" EntitySet="VatTus" />
       <End Role="ThongTinBangNhap" EntitySet="ThongTinBangNhaps" />
     </AssociationSet>
-    <AssociationSet Name="FK__ThongTinB__IdVat__49C3F6B7" Association="QuanLyKhoModel.FK__ThongTinB__IdVat__49C3F6B7">
+    <AssociationSet Name="FK__ThongTinB__IdVat__3E52440B" Association="QuanLyKhoModel.FK__ThongTinB__IdVat__3E52440B">
       <End Role="VatTu" EntitySet="VatTus" />
       <End Role="ThongTinBangXuat" EntitySet="ThongTinBangXuats" />
     </AssociationSet>
@@ -60,7 +60,7 @@
     <Property Name="NgayNhap" Type="DateTime" Precision="3" />
     <Property Name="IdTaiKhoan" Type="Int32" Nullable="false" />
     <NavigationProperty Name="TaiKhoan" Relationship="QuanLyKhoModel.FK__BangNhap__IdTaiK__32E0915F" FromRole="BangNhap" ToRole="TaiKhoan" />
-    <NavigationProperty Name="ThongTinBangNhaps" Relationship="QuanLyKhoModel.FK__ThongTinB__IdBan__4316F928" FromRole="BangNhap" ToRole="ThongTinBangNhap" />
+    <NavigationProperty Name="ThongTinBangNhaps" Relationship="QuanLyKhoModel.FK__ThongTinB__IdBan__37A5467C" FromRole="BangNhap" ToRole="ThongTinBangNhap" />
   </EntityType>
   <EntityType Name="BangXuat">
     <Key>
@@ -69,8 +69,8 @@
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="NgayXuat" Type="DateTime" Precision="3" />
     <Property Name="IdTaiKhoan" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="TaiKhoan" Relationship="QuanLyKhoModel.FK__BangXuat__IdTaiK__45F365D3" FromRole="BangXuat" ToRole="TaiKhoan" />
-    <NavigationProperty Name="ThongTinBangXuats" Relationship="QuanLyKhoModel.FK__ThongTinB__IdTho__4AB81AF0" FromRole="BangXuat" ToRole="ThongTinBangXuat" />
+    <NavigationProperty Name="TaiKhoan" Relationship="QuanLyKhoModel.FK__BangXuat__IdTaiK__3A81B327" FromRole="BangXuat" ToRole="TaiKhoan" />
+    <NavigationProperty Name="ThongTinBangXuats" Relationship="QuanLyKhoModel.FK__ThongTinB__IdTho__3F466844" FromRole="BangXuat" ToRole="ThongTinBangXuat" />
   </EntityType>
   <EntityType Name="DonViDo">
     <Key>
@@ -90,7 +90,7 @@
     <Property Name="SDT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
     <Property Name="ThongTinThem" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="ThongTinBangXuats" Relationship="QuanLyKhoModel.FK__ThongTinB__IdKha__4BAC3F29" FromRole="KhachHang" ToRole="ThongTinBangXuat" />
+    <NavigationProperty Name="ThongTinBangXuats" Relationship="QuanLyKhoModel.FK__ThongTinB__IdKha__403A8C7D" FromRole="KhachHang" ToRole="ThongTinBangXuat" />
   </EntityType>
   <EntityType Name="NhaCungCap">
     <Key>
@@ -111,7 +111,7 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Ten" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-    <NavigationProperty Name="TaiKhoans" Relationship="QuanLyKhoModel.FK__TaiKhoan__IdRole__300424B4" FromRole="RoleTaiKhoan" ToRole="TaiKhoan" />
+    <NavigationProperty Name="TaiKhoans" Relationship="QuanLyKhoModel.FK__TaiKhoan__NgayTa__300424B4" FromRole="RoleTaiKhoan" ToRole="TaiKhoan" />
   </EntityType>
   <EntityType Name="TaiKhoan">
     <Key>
@@ -123,9 +123,11 @@
     <Property Name="MatKhau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="SDT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="IdRoleTaiKhoan" Type="Int32" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="NgayTao" Type="DateTime" Precision="3" />
     <NavigationProperty Name="BangNhaps" Relationship="QuanLyKhoModel.FK__BangNhap__IdTaiK__32E0915F" FromRole="TaiKhoan" ToRole="BangNhap" />
-    <NavigationProperty Name="BangXuats" Relationship="QuanLyKhoModel.FK__BangXuat__IdTaiK__45F365D3" FromRole="TaiKhoan" ToRole="BangXuat" />
-    <NavigationProperty Name="RoleTaiKhoan" Relationship="QuanLyKhoModel.FK__TaiKhoan__IdRole__300424B4" FromRole="TaiKhoan" ToRole="RoleTaiKhoan" />
+    <NavigationProperty Name="BangXuats" Relationship="QuanLyKhoModel.FK__BangXuat__IdTaiK__3A81B327" FromRole="TaiKhoan" ToRole="BangXuat" />
+    <NavigationProperty Name="RoleTaiKhoan" Relationship="QuanLyKhoModel.FK__TaiKhoan__NgayTa__300424B4" FromRole="TaiKhoan" ToRole="RoleTaiKhoan" />
   </EntityType>
   <EntityType Name="ThongTinBangNhap">
     <Key>
@@ -137,8 +139,8 @@
     <Property Name="Count" Type="Int32" />
     <Property Name="GiaNhap" Type="Double" />
     <Property Name="TrangThai" Type="Int32" />
-    <NavigationProperty Name="BangNhap" Relationship="QuanLyKhoModel.FK__ThongTinB__IdBan__4316F928" FromRole="ThongTinBangNhap" ToRole="BangNhap" />
-    <NavigationProperty Name="VatTu" Relationship="QuanLyKhoModel.FK__ThongTinB__IdVat__4222D4EF" FromRole="ThongTinBangNhap" ToRole="VatTu" />
+    <NavigationProperty Name="BangNhap" Relationship="QuanLyKhoModel.FK__ThongTinB__IdBan__37A5467C" FromRole="ThongTinBangNhap" ToRole="BangNhap" />
+    <NavigationProperty Name="VatTu" Relationship="QuanLyKhoModel.FK__ThongTinB__IdVat__36B12243" FromRole="ThongTinBangNhap" ToRole="VatTu" />
   </EntityType>
   <EntityType Name="ThongTinBangXuat">
     <Key>
@@ -151,9 +153,9 @@
     <Property Name="Count" Type="Int32" />
     <Property Name="GiaXuat" Type="Double" />
     <Property Name="TrangThai" Type="Int32" />
-    <NavigationProperty Name="BangXuat" Relationship="QuanLyKhoModel.FK__ThongTinB__IdTho__4AB81AF0" FromRole="ThongTinBangXuat" ToRole="BangXuat" />
-    <NavigationProperty Name="KhachHang" Relationship="QuanLyKhoModel.FK__ThongTinB__IdKha__4BAC3F29" FromRole="ThongTinBangXuat" ToRole="KhachHang" />
-    <NavigationProperty Name="VatTu" Relationship="QuanLyKhoModel.FK__ThongTinB__IdVat__49C3F6B7" FromRole="ThongTinBangXuat" ToRole="VatTu" />
+    <NavigationProperty Name="BangXuat" Relationship="QuanLyKhoModel.FK__ThongTinB__IdTho__3F466844" FromRole="ThongTinBangXuat" ToRole="BangXuat" />
+    <NavigationProperty Name="KhachHang" Relationship="QuanLyKhoModel.FK__ThongTinB__IdKha__403A8C7D" FromRole="ThongTinBangXuat" ToRole="KhachHang" />
+    <NavigationProperty Name="VatTu" Relationship="QuanLyKhoModel.FK__ThongTinB__IdVat__3E52440B" FromRole="ThongTinBangXuat" ToRole="VatTu" />
   </EntityType>
   <EntityType Name="VatTu">
     <Key>
@@ -165,8 +167,8 @@
     <Property Name="IdNhaCungCap" Type="Int32" Nullable="false" />
     <NavigationProperty Name="DonViDo" Relationship="QuanLyKhoModel.FK__VatTu__IdDonViDo__2A4B4B5E" FromRole="VatTu" ToRole="DonViDo" />
     <NavigationProperty Name="NhaCungCap" Relationship="QuanLyKhoModel.FK__VatTu__IdNhaCung__2B3F6F97" FromRole="VatTu" ToRole="NhaCungCap" />
-    <NavigationProperty Name="ThongTinBangNhaps" Relationship="QuanLyKhoModel.FK__ThongTinB__IdVat__4222D4EF" FromRole="VatTu" ToRole="ThongTinBangNhap" />
-    <NavigationProperty Name="ThongTinBangXuats" Relationship="QuanLyKhoModel.FK__ThongTinB__IdVat__49C3F6B7" FromRole="VatTu" ToRole="ThongTinBangXuat" />
+    <NavigationProperty Name="ThongTinBangNhaps" Relationship="QuanLyKhoModel.FK__ThongTinB__IdVat__36B12243" FromRole="VatTu" ToRole="ThongTinBangNhap" />
+    <NavigationProperty Name="ThongTinBangXuats" Relationship="QuanLyKhoModel.FK__ThongTinB__IdVat__3E52440B" FromRole="VatTu" ToRole="ThongTinBangXuat" />
   </EntityType>
   <Association Name="FK__BangNhap__IdTaiK__32E0915F">
     <End Type="QuanLyKhoModel.TaiKhoan" Role="TaiKhoan" Multiplicity="1" />
@@ -180,7 +182,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ThongTinB__IdBan__4316F928">
+  <Association Name="FK__ThongTinB__IdBan__37A5467C">
     <End Type="QuanLyKhoModel.BangNhap" Role="BangNhap" Multiplicity="1" />
     <End Type="QuanLyKhoModel.ThongTinBangNhap" Role="ThongTinBangNhap" Multiplicity="*" />
     <ReferentialConstraint>
@@ -192,7 +194,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__BangXuat__IdTaiK__45F365D3">
+  <Association Name="FK__BangXuat__IdTaiK__3A81B327">
     <End Type="QuanLyKhoModel.TaiKhoan" Role="TaiKhoan" Multiplicity="1" />
     <End Type="QuanLyKhoModel.BangXuat" Role="BangXuat" Multiplicity="*" />
     <ReferentialConstraint>
@@ -204,7 +206,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ThongTinB__IdTho__4AB81AF0">
+  <Association Name="FK__ThongTinB__IdTho__3F466844">
     <End Type="QuanLyKhoModel.BangXuat" Role="BangXuat" Multiplicity="1" />
     <End Type="QuanLyKhoModel.ThongTinBangXuat" Role="ThongTinBangXuat" Multiplicity="*" />
     <ReferentialConstraint>
@@ -228,7 +230,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ThongTinB__IdKha__4BAC3F29">
+  <Association Name="FK__ThongTinB__IdKha__403A8C7D">
     <End Type="QuanLyKhoModel.KhachHang" Role="KhachHang" Multiplicity="1" />
     <End Type="QuanLyKhoModel.ThongTinBangXuat" Role="ThongTinBangXuat" Multiplicity="*" />
     <ReferentialConstraint>
@@ -252,7 +254,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__TaiKhoan__IdRole__300424B4">
+  <Association Name="FK__TaiKhoan__NgayTa__300424B4">
     <End Type="QuanLyKhoModel.RoleTaiKhoan" Role="RoleTaiKhoan" Multiplicity="1" />
     <End Type="QuanLyKhoModel.TaiKhoan" Role="TaiKhoan" Multiplicity="*" />
     <ReferentialConstraint>
@@ -264,7 +266,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ThongTinB__IdVat__4222D4EF">
+  <Association Name="FK__ThongTinB__IdVat__36B12243">
     <End Type="QuanLyKhoModel.VatTu" Role="VatTu" Multiplicity="1" />
     <End Type="QuanLyKhoModel.ThongTinBangNhap" Role="ThongTinBangNhap" Multiplicity="*" />
     <ReferentialConstraint>
@@ -276,7 +278,7 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK__ThongTinB__IdVat__49C3F6B7">
+  <Association Name="FK__ThongTinB__IdVat__3E52440B">
     <End Type="QuanLyKhoModel.VatTu" Role="VatTu" Multiplicity="1" />
     <End Type="QuanLyKhoModel.ThongTinBangXuat" Role="ThongTinBangXuat" Multiplicity="*" />
     <ReferentialConstraint>
