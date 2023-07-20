@@ -18,10 +18,10 @@ namespace QuanLyKho.ViewModel
         public ObservableCollection<RoleAccounts> ListRoleAccounts { get => _ListRoleAccounts; set { _ListRoleAccounts = value; OnPropertyChanged(); } }
         public AcocuntsViewModel()
         {
-            LoadTaiKhoan();
+            LoadAccount();
             LoadRole();
         }
-        public void LoadTaiKhoan()
+        public void LoadAccount()
         {
             ListAccounts = new ObservableCollection<Accounts>();
             List<TaiKhoan> listTaiKhoan = DataProvider.Ins.DB.TaiKhoans.ToList();
@@ -37,7 +37,7 @@ namespace QuanLyKho.ViewModel
                 acc.STT = i;
                 //Đổ tai khoản
                 acc.TaiKhoan = item;
-                acc.RoleTaiKhoan = ListRole[0].Ten.ToString();
+                acc.RoleTaiKhoan = ListRole[0];
                 ListAccounts.Add(acc);
                 i++;
             }

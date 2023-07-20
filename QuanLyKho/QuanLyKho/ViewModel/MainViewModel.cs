@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace QuanLyKho.ViewModel
 {
@@ -26,6 +27,9 @@ namespace QuanLyKho.ViewModel
         // mọi thứ xử lý sẽ nằm trong này 
         public MainViewModel()
         {
+            LoginViewModel lg=new LoginViewModel();
+            var user =lg.UserName;
+            var pass = lg.Password;
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
                 Isloaded = true;
@@ -87,17 +91,7 @@ namespace QuanLyKho.ViewModel
                 wd.ShowDialog();
             });
         }
-        public bool kiemTraCapTaiKhoan(TaiKhoan tk)
-        {
-            if(tk.IdRoleTaiKhoan==1)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
+
         void LoadTonKho()
         {
             ListTonKho = new ObservableCollection<TonKho>();

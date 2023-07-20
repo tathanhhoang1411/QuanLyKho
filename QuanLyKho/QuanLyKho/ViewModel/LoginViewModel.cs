@@ -33,7 +33,7 @@ namespace QuanLyKho.ViewModel
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
         }
 
-        void Login(Window p)
+         void Login(Window p)
         {
 
             //TaThanhHoang admin
@@ -45,13 +45,11 @@ namespace QuanLyKho.ViewModel
             }
             else// có điền thông tin
             {
-                string passEncode = MD5Hash(Base64Encode(Password));
+                 string passEncode = MD5Hash(Base64Encode(Password));
                 var accCount = DataProvider.Ins.DB.TaiKhoans.Where(x => x.TenTaiKhoan == UserName && x.MatKhau == passEncode).Count();
-
                 if (accCount > 0)
                 {
                     IsLogin = true;
-
                     p.Close();
                 }
                 else

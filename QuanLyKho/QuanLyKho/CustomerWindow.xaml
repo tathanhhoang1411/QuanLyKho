@@ -97,7 +97,7 @@
                 <ScrollViewer 
                     VerticalScrollBarVisibility="Auto">
                     <ListView HorizontalAlignment="Center"
-                        ItemsSource="{Binding ListCustomer}"
+                        ItemsSource="{Binding ListCustomers}"
                         SelectedItem="{Binding SelectedItem, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                         <ListView.Resources>
                             <Style TargetType="GridViewColumnHeader">
@@ -107,11 +107,11 @@
                         </ListView.Resources>
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="STT"  DisplayMemberBinding="{Binding Id}"></GridViewColumn>
-                                <GridViewColumn Header="Tên khách hàng" DisplayMemberBinding="{Binding Ten}"></GridViewColumn>
-                                <GridViewColumn Header="Số điện thoại" DisplayMemberBinding="{Binding SDT}"></GridViewColumn>
-                                <GridViewColumn Header="Email" DisplayMemberBinding="{Binding Email}"></GridViewColumn>
-                                 <GridViewColumn Header="Thông tin thêm" DisplayMemberBinding="{Binding ThongTinThem}"></GridViewColumn>
+                                <GridViewColumn Header="STT"  DisplayMemberBinding="{Binding STT}"></GridViewColumn>
+                                <GridViewColumn Header="Tên khách hàng" DisplayMemberBinding="{Binding KhachHang.Ten}"></GridViewColumn>
+                                <GridViewColumn Header="Số điện thoại" DisplayMemberBinding="{Binding KhachHang.SDT}"></GridViewColumn>
+                                <GridViewColumn Header="Email" DisplayMemberBinding="{Binding KhachHang.Email}"></GridViewColumn>
+                                 <GridViewColumn Header="Thông tin thêm" DisplayMemberBinding="{Binding KhachHang.ThongTinThem}"></GridViewColumn>
                                 </GridView>
                             </ListView.View>
                         </ListView>
