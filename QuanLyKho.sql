@@ -9,7 +9,11 @@ create table DonViDo
 	Id int identity(1,1) primary key,
 	Ten nvarchar(max)
 )
-go
+insert into DonViDo values (N'Kg')
+insert into DonViDo values (N'Chai')
+insert into DonViDo values (N'Lít')
+insert into DonViDo values (N'Bao')
+
 
 create table NhaCungCap
 (
@@ -21,7 +25,19 @@ create table NhaCungCap
 	ThongTinThem nvarchar(max),
 	NgayHopTac DateTime
 )
-go
+
+select * from  NhaCungCap
+insert into NhaCungCap values(N'Công ty Cổ phân ACT',N'Tân Phú, Đồng Nai','0987545310','act@gmail.com',N'',N'1/1/2010')
+insert into NhaCungCap values('ABC Company','123 Main Street, Anytown USA','555-1234','abc@company.com','Specializing in widgets','2021-01-01')
+insert into NhaCungCap values('XYZ Corporation','456 High Street, Another Town USA','555-5678','xyz@corporation.com','Providing innovative solutions','2021-02-15')
+insert into NhaCungCap values('Smith & Sons','789 Low Street, Somewhere USA','555-9012','smithandsons@email.com','Family owned and operated','2021-03-31')
+insert into NhaCungCap values('Best Buy','1234 Tech Road, Anytown USA','555-4321','info@bestbuy.com','Electronics retailer','2021-04-15')
+insert into NhaCungCap values('Johnson & Johnson','5678 Health Lane, Anytown USA','555-8765','contact@jnj.com','Pharmaceutical company','2021-05-01')
+insert into NhaCungCap values('Acme Corporation','999 Industrial Drive, Anytown USA','555-1111','info@acme.com','Manufacturing and distribution','2021-06-15')
+insert into NhaCungCap values('Big Bank','111 Finance Avenue, Anytown USA','555-2222','customerservice@bigbank.com','Full-service bank','2021-07-01')
+insert into NhaCungCap values('XYZ Corporation','1234 Main Street, Anytown USA','555-5678','contact@xyzcorporation.com','Leaders in software development','2021-08-15')
+insert into NhaCungCap values('ABC Company','5678 Broadway, Anytown USA','555-1234','info@abccompany.com','Providing excellent customer service','2021-09-30')
+insert into NhaCungCap values('Smith & Sons','9012 Park Avenue, Anytown USA','555-9012','contact@smithandsons.com','Specializing in custom design','2021-10-15')
 
 create table KhachHang
 (
@@ -32,32 +48,43 @@ create table KhachHang
 	Email nvarchar(200),
 	ThongTinThem nvarchar(max)
 )
-go
+select * from KhachHang
 
+insert into KhachHang values(N'Nguyễn Thị Hương',N'TP.HCM','0987654321','huong.nguyen@email.com','')
+insert into KhachHang values(N'Trần Văn Nam',N'TP.HCM','0912345678','nam.tran@email.com','')
+insert into KhachHang values(N'Lê Thị Mai',N'TP.HCM','0965432109','mai.le@email.com','')
+insert into KhachHang values(N'Vũ Minh Tuấn',N'TP.HCM','0888888888','tuan.vu@email.com','')
+insert into KhachHang values(N'Ngô Thị Hạnh',N'TP.HCM','0899999999','hanh.ngo@email.com','')
+insert into KhachHang values(N'Phan Văn Đức',N'TP.HCM','0977777777','duc.phan@email.com','')
+insert into KhachHang values(N'Dương Thị Thúy',N'TP.HCM','0909090909','thuy.duong@email.com','')
+insert into KhachHang values(N'Nguyễn Hoàng Anh',N'TP.HCM','0911111111','anh.nguyen@email.com','')
+insert into KhachHang values(N'Phạm Thị Thu',N'TP.HCM','0922222222','thu.pham@email.com','')
+insert into KhachHang values(N'Lý Quang Minh',N'TP.HCM','0933333333','minh.ly@email.com','')
 create table VatTu
 (
-	Id nvarchar(128) primary key,
+	Id int  identity(1,1) primary key,
 	Ten nvarchar(max),
 	IdDonViDo int not null,
 	IdNhaCungCap int not null,
-	QRCode nvarchar(max),
 
 	foreign key(IdDonViDo) references DonViDo(Id),
 	foreign key(IdNhaCungCap) references NhaCungCap(Id),
 )
-go
-
+select *from VatTu
+insert into VatTu values(N'Dưa hấu',1,1)
+insert into VatTu values(N'volka',1,7)
+insert into VatTu values(N'Dầu ăn',3,4)
+insert into VatTu values(N'Gạo',4,6)
 create table RoleTaiKhoan
 (
 	Id int identity(1,1) primary key,
 	Ten nvarchar(max)
 )
-go
 
+select * from RoleTaiKhoan
 insert into RoleTaiKhoan(Ten) values(N'Admin')
-go
 insert into RoleTaiKhoan(Ten) values(N'Nhân viên')
-go
+insert into RoleTaiKhoan(Ten) values(N'Quản lý')
 
 create table TaiKhoan
 (
@@ -70,57 +97,81 @@ create table TaiKhoan
 
 	foreign key (IdRoleTaiKhoan) references RoleTaiKhoan(Id)
 )
-go
+select * from TaiKhoan
 insert into TaiKhoan values(N'TaThanhHoang', N'Tạ Thanh Hoàng', N'db69fc039dcbd2962cb4d28f5891aae1','0325793505', 1)
-go
 insert into TaiKhoan values(N'NguyenVanAn', N'Nguyễn Văn An', N'978aae9bb6bee8fb75de3e4830a1be46','0325793506', 2)
-go
+insert into TaiKhoan values(N'NguyenThiHanh', N'Nguyễn Thị Hạnh', N'978aae9bb6bee8fb75de3e4830a1be46','0325798778', 2)
+insert into TaiKhoan values(N'TranThiKieu', N'Trần Thi Kiều', N'978aae9bb6bee8fb75de3e4830a1be46','0325790327', 2)
+insert into TaiKhoan values(N'LeVan', N'Lê Văn', N'978aae9bb6bee8fb75de3e4830a1be46','0325895897', 2)
+insert into TaiKhoan values(N'NgThiTuyet', N'Nguyễn Thị Tuyết', N'978aae9bb6bee8fb75de3e4830a1be46','0325792137', 2)
+insert into TaiKhoan values(N'NguyenThiBe', N'Nguyễn Thị Bé', N'978aae9bb6bee8fb75de3e4830a1be46','0325793539', 2)
 
 create table BangNhap
 (
-	Id nvarchar(128) primary key,
+	Id int identity(1,1) primary key,
 	NgayNhap DateTime,
 	IdTaiKhoan int not null
 	foreign key (IdTaiKhoan) references TaiKhoan(Id),
 )
-go
-
+select * from BangNhap
+insert into BangNhap values ('7/7/2023',1)
+insert into BangNhap values ('7/7/2023',2)
+insert into BangNhap values ('7/7/2023',3)
+insert into BangNhap values ('7/7/2023',2)
+insert into BangNhap values ('7/7/2023',1)
 create table ThongTinBangNhap
 (
-	Id nvarchar(128) primary key,
-	IdVatTu nvarchar(128) not null,
-	IdBangNhap nvarchar(128) not null,
+	Id int identity(1,1) primary key,
+	IdVatTu int  not null,
+	IdBangNhap int  not null,
 	Count int,
 	GiaNhap float default 0,
-	TrangThai nvarchar(max),
-
+	TrangThai int,
+	/*sẽ bổ sung id nhà cung cấp*/
 	foreign key (IdVatTu) references VatTu(Id),
 	foreign key (IdBangNhap) references BangNhap(Id),
 )
-go
-
+select * from ThongTinBangNhap
+insert into ThongTinBangNhap values(1,1,40,10000,0)
+insert into ThongTinBangNhap values(2,2,50,200000,0)
+insert into ThongTinBangNhap values(3,1,20,100000,0)
+insert into ThongTinBangNhap values(4,1,50,15000,0)
 create table BangXuat
 (
-	Id nvarchar(128) primary key,
+	Id int identity(1,1) primary key,
 	NgayXuat DateTime,
 	IdTaiKhoan int not null
 
 	foreign key (IdTaiKhoan) references TaiKhoan(Id)
 )
-go
+select * from BangXuat
+insert into BangXuat values ('7/4/2023',4)
+insert into BangXuat values ('7/5/2020',2)
+insert into BangXuat values ('7/7/2023',4)
+insert into BangXuat values ('10/7/2022',2)
+insert into BangXuat values ('10/10/2021',4)
 
 create table ThongTinBangXuat
 (
-	Id nvarchar(128) primary key,
-	IdVatTu nvarchar(128) not null,
-	IdThongTinBangXuat nvarchar(128) not null,
+	Id int identity(1,1) primary key,
+	IdVatTu int  not null,
+	IdThongTinBangXuat int  not null,
 	IdKhachHang int not null,
 	Count int,	
-	TrangThai nvarchar(max),
 	GiaXuat float default 0,
-
+	TrangThai int ,
 	foreign key (IdVatTu) references VatTu(Id),
 	foreign key (IdThongTinBangXuat) references BangXuat(Id),
 	foreign key (IdKhachHang) references KhachHang(Id)
 )
-go
+delete From ThongTinBangNhap
+delete From ThongTinBangXuat
+insert into ThongTinBangXuat values(4,1,2,10,11000,0)
+insert into ThongTinBangXuat values(2,2,1,4,250000,0)
+insert into ThongTinBangXuat values(2,3,6,10,10000,0)
+insert into ThongTinBangXuat values(1,1,3,5,5000,0)
+
+
+
+select *from ThongTinBangNhap
+select *from ThongTinBangXuat

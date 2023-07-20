@@ -20,7 +20,7 @@ namespace QuanLyKho.Model
             this.ThongTinBangNhaps = new HashSet<ThongTinBangNhap>();
         }
     
-        public string Id { get; set; }
+        public int Id { get; set; }
         public Nullable<System.DateTime> NgayNhap { get; set; }
         public int IdTaiKhoan { get; set; }
     

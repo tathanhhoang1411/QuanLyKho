@@ -139,6 +139,7 @@
     <Compile Include="Model\ThongTinBangXuat.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Model\TonKho.cs" />
     <Compile Include="Model\VatTu.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -165,6 +166,7 @@
     <Compile Include="ViewModel\LoginViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\OutputViewModel.cs" />
+    <Compile Include="ViewModel\RoleAccount.cs" />
     <Compile Include="ViewModel\SupplierViewModel.cs" />
     <Compile Include="ViewModel\UnitViewModel.cs" />
     <Compile Include="ViewModel\VattuViewModel.cs" />

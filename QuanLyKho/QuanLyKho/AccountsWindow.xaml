@@ -27,7 +27,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
-            <RowDefinition Height="100"></RowDefinition>
         </Grid.RowDefinitions>
         <uc:ControlBarUC  Tag="{Binding Title, ElementName=accountsWindow}"></uc:ControlBarUC>
         <Grid Grid.Row="1">
@@ -36,8 +35,11 @@
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
-
-            <!--các element binding từ selected item-->
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+                <RowDefinition Height="120"></RowDefinition>
+            </Grid.RowDefinitions>
+<!--Manage tài khoản-->
             <materialDesign:Card Grid.Column="0" Margin="5">
                 <StackPanel 
                     Orientation="Vertical"
@@ -82,11 +84,18 @@
                 Grid.Column="2"
                 Margin="5" 
                 VerticalAlignment="Stretch">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto"
+                <ScrollViewer 
+                    HorizontalScrollBarVisibility="Auto"
                     VerticalScrollBarVisibility="Auto">
                     <ListView HorizontalAlignment="Center"
                         ItemsSource="{Binding ListAccounts}"
                         SelectedItem="{Binding SelectedItem, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                        <ListView.Resources>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="FontSize" Value="15"></Setter>
+                                <Setter Property="Foreground" Value="DarkSlateBlue"></Setter>
+                            </Style>
+                        </ListView.Resources>
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
@@ -101,14 +110,11 @@
                     </ListView>
                 </ScrollViewer>
             </materialDesign:Card>
-        </Grid>
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition MaxWidth="250"></ColumnDefinition>
-                <ColumnDefinition Width="115"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <materialDesign:Card Grid.Column="0" Margin="5">
+<!--Manage loại tài khoản-->
+            <materialDesign:Card 
+                Grid.Column="0" 
+                Margin="5"
+                Grid.Row="2">
                 <StackPanel 
                     Orientation="Vertical"
                     HorizontalAlignment="Center"
@@ -116,57 +122,66 @@
                     <TextBox 
                         Text="{Binding Ten, UpdateSourceTrigger=PropertyChanged}" 
                         Margin="5" 
-                        materialDesign:HintAssist.Hint="Loại tài khoản" 
+                        materialDesign:HintAssist.Hint="Cấp bậc" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     </TextBox>
                 </StackPanel>
             </materialDesign:Card>
-            <materialDesign:Card Grid.Column="1">
+            <materialDesign:Card 
+                Grid.Column="1" 
+                Margin="5"
+                Grid.Row="2">
                 <StackPanel 
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
                     <Button 
-                        Style="{StaticResource MaterialDesignFlatDarkBgButton}"
                         Command="{Binding AddCommand}" 
-                        Content="Thêm"
-                        Margin="2" 
-                        Height="30">
+                        Content="Thêm" 
+                        Margin="5" 
+                        Width="100">
                     </Button>
                     <Button 
-                        Style="{StaticResource MaterialDesignFlatDarkBgButton}"
                         Command="{Binding EditCommand}" 
-                        Content="Sửa"
-                        Margin="2" 
-                        Height="30">
+                        Content="Sửa" 
+                        Margin="5"
+                        Width="100">
                     </Button>
                     <Button 
-                        Style="{StaticResource MaterialDesignFlatDarkBgButton}"
                         Command="{Binding DeleteCommand}" 
                         Content="Xóa"
-                        Margin="2" 
-                        Height="30">
+                        Margin="5"
+                        Width="100">
                     </Button>
                 </StackPanel>
             </materialDesign:Card>
-            <materialDesign:Card 
-                Grid.Column="2"
+            <materialDesign:Card
+                 Grid.Column="2"
+                Grid.Row="2"
                 Margin="5" 
                 VerticalAlignment="Stretch">
-                <ScrollViewer HorizontalScrollBarVisibility="Auto"
-                    VerticalScrollBarVisibility="Auto">
+
+                <ScrollViewer>
                     <ListView HorizontalAlignment="Center"
-                        ItemsSource="{Binding ListRoleAccounts}"
+                        ItemsSource="{Binding ListRoleAccount}"
                         SelectedItem="{Binding SelectedItem, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                        <ListView.Resources>
+                            <Style TargetType="GridViewColumnHeader">
+                                <Setter Property="FontSize" Value="15"></Setter>
+                                <Setter Property="Foreground" Value="DarkSlateBlue"></Setter>
+                            </Style>
+                        </ListView.Resources>
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
+                                <GridViewColumn Header="STT" ></GridViewColumn>
                                 <GridViewColumn Header="Các cấp tài khoản" DisplayMemberBinding="{Binding Ten}"></GridViewColumn>
+
                             </GridView>
                         </ListView.View>
                     </ListView>
                 </ScrollViewer>
             </materialDesign:Card>
         </Grid>
+       
     </Grid>
     
 </Window>

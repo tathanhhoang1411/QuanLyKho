@@ -215,13 +215,21 @@
                         </Separator>
                         <materialDesign:Card Grid.Row="4" Grid.ColumnSpan="3">
                             <ScrollViewer VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
-                                <ListView>
+                                <ListView HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"
+                                          ItemsSource="{Binding ListTonKho}">
+                                    <ListView.Resources>
+                                        <Style TargetType="GridViewColumnHeader">
+                                            <Setter Property="FontSize" Value="15"></Setter>
+                                            <Setter Property="Foreground" Value="DarkSlateBlue"></Setter>
+                                        </Style>
+                                    </ListView.Resources>
                                     <ListView.View>
-                                        <GridView>
-                                            <GridViewColumn Header="STT" ></GridViewColumn>
-                                            <GridViewColumn Header="Tên vật tư" DisplayMemberBinding="{Binding Ten}"></GridViewColumn>
-                                            <GridViewColumn Header="Số lượng tồn" DisplayMemberBinding="{Binding SoLuong}"></GridViewColumn>
-                                            
+                                        <GridView >
+                                            <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
+                                            <GridViewColumn Header="Tên vật tư" DisplayMemberBinding="{Binding Vattu.Ten}"></GridViewColumn>
+                                              <GridViewColumn Header="Số lượng tồn" DisplayMemberBinding="{Binding Count}" ></GridViewColumn>
+                                            <GridViewColumn Header="Đơn vị tính" DisplayMemberBinding="{Binding DonViDo}" ></GridViewColumn>
                                         </GridView>
                                     </ListView.View>
                                 </ListView>

@@ -11,4 +11,5 @@
     <viewmodel:VattuViewModel x:Key="VattuVM"></viewmodel:VattuViewModel>
     <viewmodel:SupplierViewModel x:Key="SupplierVM"></viewmodel:SupplierViewModel>
     <viewmodel:CustomerViewModel x:Key="CustomerVM"></viewmodel:CustomerViewModel>
+    <viewmodel:RoleAccount x:Key="RoleaccountVM"></viewmodel:RoleAccount>
 </ResourceDictionary>

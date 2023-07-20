@@ -14,12 +14,12 @@ namespace QuanLyKho.Model
     
     public partial class ThongTinBangNhap
     {
-        public string Id { get; set; }
-        public string IdVatTu { get; set; }
-        public string IdBangNhap { get; set; }
+        public int Id { get; set; }
+        public int IdVatTu { get; set; }
+        public int IdBangNhap { get; set; }
         public Nullable<int> Count { get; set; }
         public Nullable<double> GiaNhap { get; set; }
-        public string TrangThai { get; set; }
+        public Nullable<int> TrangThai { get; set; }
     
         public virtual BangNhap BangNhap { get; set; }
         public virtual VatTu VatTu { get; set; }

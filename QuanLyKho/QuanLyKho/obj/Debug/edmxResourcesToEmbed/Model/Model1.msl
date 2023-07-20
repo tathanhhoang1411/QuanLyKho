@@ -87,8 +87,8 @@
     <EntitySetMapping Name="ThongTinBangXuats">
       <EntityTypeMapping TypeName="QuanLyKhoModel.ThongTinBangXuat">
         <MappingFragment StoreEntitySet="ThongTinBangXuat">
-          <ScalarProperty Name="GiaXuat" ColumnName="GiaXuat" />
           <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+          <ScalarProperty Name="GiaXuat" ColumnName="GiaXuat" />
           <ScalarProperty Name="Count" ColumnName="Count" />
           <ScalarProperty Name="IdKhachHang" ColumnName="IdKhachHang" />
           <ScalarProperty Name="IdThongTinBangXuat" ColumnName="IdThongTinBangXuat" />
@@ -100,7 +100,6 @@
     <EntitySetMapping Name="VatTus">
       <EntityTypeMapping TypeName="QuanLyKhoModel.VatTu">
         <MappingFragment StoreEntitySet="VatTu">
-          <ScalarProperty Name="QRCode" ColumnName="QRCode" />
           <ScalarProperty Name="IdNhaCungCap" ColumnName="IdNhaCungCap" />
           <ScalarProperty Name="IdDonViDo" ColumnName="IdDonViDo" />
           <ScalarProperty Name="Ten" ColumnName="Ten" />
