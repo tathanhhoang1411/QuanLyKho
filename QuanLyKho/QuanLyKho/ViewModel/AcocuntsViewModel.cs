@@ -37,7 +37,7 @@ namespace QuanLyKho.ViewModel
                 acc.STT = i;
                 //Đổ tai khoản
                 acc.TaiKhoan = item;
-                acc.RoleTaiKhoan = ListRole[0];
+                acc.TenRoleTaiKhoan = ListRole[0].Ten.ToString();
                 ListAccounts.Add(acc);
                 i++;
             }

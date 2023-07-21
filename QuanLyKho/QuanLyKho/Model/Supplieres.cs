@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace QuanLyKho.Model
 {
-    public class Accounts
+    public class Supplieres
     {
         public int STT { get; set; }
-        public TaiKhoan TaiKhoan { get; set; }
-        public string TenRoleTaiKhoan { get;set; }
+        public NhaCungCap NhaCungCap { get; set; }
     }
 
 }

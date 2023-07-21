@@ -83,7 +83,7 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="IdVatTu" Type="int" Nullable="false" />
-    <Property Name="IdThongTinBangXuat" Type="int" Nullable="false" />
+    <Property Name="IdBangXuat" Type="int" Nullable="false" />
     <Property Name="IdKhachHang" Type="int" Nullable="false" />
     <Property Name="Count" Type="int" />
     <Property Name="GiaXuat" Type="float" />
@@ -146,6 +146,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK__ThongTinB__IdBan__3F466844">
+    <End Role="BangXuat" Type="Self.BangXuat" Multiplicity="1" />
+    <End Role="ThongTinBangXuat" Type="Self.ThongTinBangXuat" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="BangXuat">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ThongTinBangXuat">
+        <PropertyRef Name="IdBangXuat" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK__ThongTinB__IdKha__403A8C7D">
     <End Role="KhachHang" Type="Self.KhachHang" Multiplicity="1" />
     <End Role="ThongTinBangXuat" Type="Self.ThongTinBangXuat" Multiplicity="*" />
@@ -155,18 +167,6 @@
       </Principal>
       <Dependent Role="ThongTinBangXuat">
         <PropertyRef Name="IdKhachHang" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK__ThongTinB__IdTho__3F466844">
-    <End Role="BangXuat" Type="Self.BangXuat" Multiplicity="1" />
-    <End Role="ThongTinBangXuat" Type="Self.ThongTinBangXuat" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="BangXuat">
-        <PropertyRef Name="Id" />
-      </Principal>
-      <Dependent Role="ThongTinBangXuat">
-        <PropertyRef Name="IdThongTinBangXuat" />
       </Dependent>
     </ReferentialConstraint>
   </Association>
@@ -245,12 +245,12 @@
       <End Role="BangNhap" EntitySet="BangNhap" />
       <End Role="ThongTinBangNhap" EntitySet="ThongTinBangNhap" />
     </AssociationSet>
-    <AssociationSet Name="FK__ThongTinB__IdKha__403A8C7D" Association="Self.FK__ThongTinB__IdKha__403A8C7D">
-      <End Role="KhachHang" EntitySet="KhachHang" />
+    <AssociationSet Name="FK__ThongTinB__IdBan__3F466844" Association="Self.FK__ThongTinB__IdBan__3F466844">
+      <End Role="BangXuat" EntitySet="BangXuat" />
       <End Role="ThongTinBangXuat" EntitySet="ThongTinBangXuat" />
     </AssociationSet>
-    <AssociationSet Name="FK__ThongTinB__IdTho__3F466844" Association="Self.FK__ThongTinB__IdTho__3F466844">
-      <End Role="BangXuat" EntitySet="BangXuat" />
+    <AssociationSet Name="FK__ThongTinB__IdKha__403A8C7D" Association="Self.FK__ThongTinB__IdKha__403A8C7D">
+      <End Role="KhachHang" EntitySet="KhachHang" />
       <End Role="ThongTinBangXuat" EntitySet="ThongTinBangXuat" />
     </AssociationSet>
     <AssociationSet Name="FK__ThongTinB__IdVat__36B12243" Association="Self.FK__ThongTinB__IdVat__36B12243">

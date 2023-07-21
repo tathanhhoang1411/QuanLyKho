@@ -88,7 +88,7 @@
                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
                     VerticalScrollBarVisibility="Auto">
                     <ListView HorizontalAlignment="Center"
-                        ItemsSource="{Binding List}"
+                        ItemsSource="{Binding ListOutputs}"
                         SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
                         <ListView.Resources>
                             <Style TargetType="GridViewColumnHeader">
@@ -98,13 +98,14 @@
                         </ListView.Resources>
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
-                                <GridViewColumn Header="Người xuất kho" DisplayMemberBinding="{Binding HoVaTen}"></GridViewColumn>
-                                <GridViewColumn Header="Tên vật tư" DisplayMemberBinding="{Binding Ten}"></GridViewColumn>
-                                <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding Count}"></GridViewColumn>
-                                <GridViewColumn Header="Giá xuất kho" DisplayMemberBinding="{Binding Gia}"></GridViewColumn>
+                                <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
+                                <GridViewColumn Header="SDT khách mua" DisplayMemberBinding="{Binding KhachHang.SDT}"></GridViewColumn>
+                                <GridViewColumn Header="Tên vật tư" DisplayMemberBinding="{Binding Vattu.Ten}"></GridViewColumn>
+                                <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding ThongTinBangXuat.Count}"></GridViewColumn>
+                                <GridViewColumn Header="Giá xuất kho" DisplayMemberBinding="{Binding ThongTinBangXuat.GiaXuat}"></GridViewColumn>
                                 <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TrangThai}"></GridViewColumn>
-                                <GridViewColumn Header="Ngày xuất" DisplayMemberBinding="{Binding NgayNhap}"></GridViewColumn>
+                                <GridViewColumn Header="Người xuất kho" DisplayMemberBinding="{Binding TaiKhoan.HoVaTen}"></GridViewColumn>
+                                <GridViewColumn Header="Ngày xuất" DisplayMemberBinding="{Binding BangXuat.NgayXuat}"></GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>

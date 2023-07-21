@@ -16,7 +16,7 @@ namespace QuanLyKho.Model
     {
         public int Id { get; set; }
         public int IdVatTu { get; set; }
-        public int IdThongTinBangXuat { get; set; }
+        public int IdBangXuat { get; set; }
         public int IdKhachHang { get; set; }
         public Nullable<int> Count { get; set; }
         public Nullable<double> GiaXuat { get; set; }

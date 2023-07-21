@@ -9,10 +9,10 @@ create table DonViDo
 	Id int identity(1,1) primary key,
 	Ten nvarchar(max)
 )
-insert into DonViDo values (N'Kg')
-insert into DonViDo values (N'Chai')
-insert into DonViDo values (N'Lít')
-insert into DonViDo values (N'Bao')
+insert into DonViDo values (N'Tấm(0,3m * 0.3m)')
+insert into DonViDo values (N'Bao( 50KG)')
+insert into DonViDo values (N'Trụ sắt( 3m)')
+insert into DonViDo values (N'Tấm( 2m * 5m')
 
 
 create table NhaCungCap
@@ -71,10 +71,13 @@ create table VatTu
 	foreign key(IdNhaCungCap) references NhaCungCap(Id),
 )
 select *from VatTu
-insert into VatTu values(N'Dưa hấu',1,1)
-insert into VatTu values(N'volka',1,7)
-insert into VatTu values(N'Dầu ăn',3,4)
-insert into VatTu values(N'Gạo',4,6)
+insert into VatTu values(N'Gạch ốp tường 111',1,1)
+insert into VatTu values(N'Xi Măng Siêu hút nước',1,7)
+insert into VatTu values(N'Xi Măng Supper 1',1,3)
+insert into VatTu values(N'Trụ sắt tròn  ',3,4)
+insert into VatTu values(N'Trụ sắt V lỗ 3* 5cm ',3,4)
+insert into VatTu values(N'Tôn Đông Á',4,6)
+insert into VatTu values(N'Tôn Đại Thành',4,3)
 create table RoleTaiKhoan
 (
 	Id int identity(1,1) primary key,
@@ -130,10 +133,17 @@ create table ThongTinBangNhap
 	foreign key (IdBangNhap) references BangNhap(Id),
 )
 select * from ThongTinBangNhap
-insert into ThongTinBangNhap values(1,1,40,10000,0)
-insert into ThongTinBangNhap values(2,2,50,200000,0)
-insert into ThongTinBangNhap values(3,1,20,100000,0)
-insert into ThongTinBangNhap values(4,1,50,15000,0)
+insert into ThongTinBangNhap values(1,1,30,10000,0)
+insert into ThongTinBangNhap values(2,2,100,200000,0)
+insert into ThongTinBangNhap values(3,1,30,100000,0)
+insert into ThongTinBangNhap values(1,2,50,15000,0)
+insert into ThongTinBangNhap values(1,3,20,15000,0)
+insert into ThongTinBangNhap values(3,5,70,100000,0)
+insert into ThongTinBangNhap values(4,2,50,50000,0)
+insert into ThongTinBangNhap values(5,2,100,50000,0)
+insert into ThongTinBangNhap values(6,2,100,100000,0)
+insert into ThongTinBangNhap values(7,2,100,100000,0)
+
 create table BangXuat
 (
 	Id int identity(1,1) primary key,
@@ -153,23 +163,24 @@ create table ThongTinBangXuat
 (
 	Id int identity(1,1) primary key,
 	IdVatTu int  not null,
-	IdThongTinBangXuat int  not null,
+	IdBangXuat int  not null,
 	IdKhachHang int not null,
 	Count int,	
 	GiaXuat float default 0,
 	TrangThai int ,
 	foreign key (IdVatTu) references VatTu(Id),
-	foreign key (IdThongTinBangXuat) references BangXuat(Id),
+	foreign key (IdBangXuat) references BangXuat(Id),
 	foreign key (IdKhachHang) references KhachHang(Id)
 )
-delete From ThongTinBangNhap
-delete From ThongTinBangXuat
+
 insert into ThongTinBangXuat values(4,1,2,10,11000,0)
 insert into ThongTinBangXuat values(2,2,1,4,250000,0)
 insert into ThongTinBangXuat values(2,3,6,10,10000,0)
 insert into ThongTinBangXuat values(1,1,3,5,5000,0)
+insert into ThongTinBangXuat values(1,4,3,5,5000,0)
+insert into ThongTinBangXuat values(1,5,3,5,5000,0)
 
 
+select *from BangNhap
+select *from BangXuat
 
-select *from ThongTinBangNhap
-select *from ThongTinBangXuat

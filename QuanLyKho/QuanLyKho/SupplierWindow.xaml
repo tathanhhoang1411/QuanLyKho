@@ -103,7 +103,7 @@
                 <ScrollViewer 
                     VerticalScrollBarVisibility="Auto">
                     <ListView HorizontalAlignment="Center"
-                        ItemsSource="{Binding List}"
+                        ItemsSource="{Binding ListSuppls}"
                         SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
                         <ListView.Resources>
                             <Style TargetType="GridViewColumnHeader">
@@ -113,9 +113,13 @@
                         </ListView.Resources>
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}">
-                                </GridViewColumn>
-                                <GridViewColumn Header="Tên đơn vị đo" DisplayMemberBinding="{Binding DisplayName}"></GridViewColumn>
+                                <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
+                                <GridViewColumn Header="Tên đơn vị cung ứng" DisplayMemberBinding="{Binding NhaCungCap.Ten}"></GridViewColumn>
+                                <GridViewColumn Header="Email " DisplayMemberBinding="{Binding NhaCungCap.Email}"></GridViewColumn> 
+                                <GridViewColumn Header="SDT" DisplayMemberBinding="{Binding NhaCungCap.SDT}"></GridViewColumn>
+                                <GridViewColumn Header="Địa chỉ" DisplayMemberBinding="{Binding NhaCungCap.Address}"></GridViewColumn>
+                                <GridViewColumn Header="Ngày hợp tác" DisplayMemberBinding="{Binding NhaCungCap.NgayHopTac}"></GridViewColumn>
+                                <GridViewColumn Header="Thông tin thêm" DisplayMemberBinding="{Binding NhaCungCap.ThongTinThem}"></GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>

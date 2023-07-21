@@ -93,7 +93,7 @@
           <ScalarProperty Name="GiaXuat" ColumnName="GiaXuat" />
           <ScalarProperty Name="Count" ColumnName="Count" />
           <ScalarProperty Name="IdKhachHang" ColumnName="IdKhachHang" />
-          <ScalarProperty Name="IdThongTinBangXuat" ColumnName="IdThongTinBangXuat" />
+          <ScalarProperty Name="IdBangXuat" ColumnName="IdBangXuat" />
           <ScalarProperty Name="IdVatTu" ColumnName="IdVatTu" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>

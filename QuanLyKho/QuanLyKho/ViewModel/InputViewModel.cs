@@ -19,29 +19,45 @@ namespace QuanLyKho.ViewModel
         }
         public void LoadInput()
         {
-            ListInputs = new ObservableCollection<Inputs>();
-            List<BangNhap> listInput = DataProvider.Ins.DB.BangNhaps.ToList();
             //Biến i sẽ là STT tăng dần
             int i = 1;
-            foreach (BangNhap itemInp in listInput)
-
+            ListInputs = new ObservableCollection<Inputs>();
+            var  listInput = (
+                from inp in DataProvider.Ins.DB.BangNhaps
+                join acc in DataProvider.Ins.DB.TaiKhoans on inp.IdTaiKhoan equals acc.Id
+                join inpinf in DataProvider.Ins.DB.ThongTinBangNhaps on inp.Id equals inpinf.IdBangNhap
+                join vattu in DataProvider.Ins.DB.VatTus on inpinf.IdVatTu equals vattu.Id
+                join suppl in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals suppl.Id
+                select new  { inp,acc,inpinf,vattu,suppl}).ToList();
+            foreach(var  item in listInput )
             {
-                List<ThongTinBangNhap> ListThongTinBangNhap = DataProvider.Ins.DB.ThongTinBangNhaps.Where(p => p.IdBangNhap == itemInp.Id).ToList();
-                List<TaiKhoan> ListTaiKhoan = DataProvider.Ins.DB.TaiKhoans.Where(p => p.Id == itemInp.IdTaiKhoan).ToList();
-                List<NhaCungCap> ListNhaCungCap = DataProvider.Ins.DB.NhaCungCaps.Where(p => p.Id == itemInp.IdTaiKhoan).ToList();
-                foreach (ThongTinBangNhap itemInpInf in ListThongTinBangNhap)
+                Inputs inps = new Inputs();
+                inps.STT = i;
+                //Đổ bangnhap
+                inps.BangNhap = item.inp;
+                inps.TaiKhoan = item.acc;
+                inps.ThongTinBangNhap= item.inpinf;
+                inps.Vattu = item.vattu;
+                inps.NhaCungCap = item.suppl;
+                string trangThai="";
+                switch ((int)item.inpinf.TrangThai)
                 {
-                    List<VatTu> ListVatTu = DataProvider.Ins.DB.VatTus.Where(p => p.Id == itemInpInf.IdVatTu).ToList();
+                    case 0:
+                        trangThai = "Hoàn thành";
+                        break;
+                    case 1:
+                        trangThai = "Đang thực hiện";
+                        break;
+                    default:
+                        break;
                 }
-                Inputs inp = new Inputs();
-                //Đổ số thứ tự tài khoản
-                inp.STT = i;
-                //Đổ tai khoản
-                //inp.BangNhap = item;
-                //inp.Vattu= ;
-               // ListAccounts.Add(acc);
+
+                inps.TrangThai = trangThai.ToString();
+                ListInputs.Add(inps);
                 i++;
             }
+
+
         }
     }
 }

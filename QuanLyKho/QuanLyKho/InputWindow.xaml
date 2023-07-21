@@ -98,13 +98,13 @@
                         </ListView.Resources>
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
-                                <GridViewColumn Header="Người nhập kho" DisplayMemberBinding="{Binding }"></GridViewColumn>
-                                <GridViewColumn Header="Tên vật tư" DisplayMemberBinding="{Binding Ten}"></GridViewColumn>
-                                <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding Count}"></GridViewColumn>
-                                <GridViewColumn Header="Giá nhập kho" DisplayMemberBinding="{Binding Gia}"></GridViewColumn>
+                                <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
+                                <GridViewColumn Header="Người nhập kho" DisplayMemberBinding="{Binding TaiKhoan.HoVaTen}"></GridViewColumn>
+                                <GridViewColumn Header="Tên vật tư" DisplayMemberBinding="{Binding Vattu.Ten}"></GridViewColumn>
+                                <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding ThongTinBangNhap.Count}"></GridViewColumn>
+                                <GridViewColumn Header="Giá nhập kho" DisplayMemberBinding="{Binding ThongTinBangNhap.GiaNhap}"></GridViewColumn>
                                 <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TrangThai}"></GridViewColumn>
-                                <GridViewColumn Header="Ngày nhập" DisplayMemberBinding="{Binding NgayNhap}"></GridViewColumn>
+                                <GridViewColumn Header="Ngày nhập" DisplayMemberBinding="{Binding BangNhap.NgayNhap}"></GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>

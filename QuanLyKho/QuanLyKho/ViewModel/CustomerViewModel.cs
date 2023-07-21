@@ -29,7 +29,7 @@ namespace QuanLyKho.ViewModel
                 Customers cus = new Customers();
                 //Đổ số thứ tự Khách hàng
                 cus.STT = i;
-                //Đổ tai khoản
+                //Đổ 
                 cus.KhachHang = item;
                 ListCustomers.Add(cus);
                 i++;

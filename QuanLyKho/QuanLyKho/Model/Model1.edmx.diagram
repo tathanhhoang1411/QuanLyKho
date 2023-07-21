@@ -4,11 +4,11 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="6e44a5b7ee1d4a66a1f5354d542e0486" Name="Diagram1" ZoomLevel="62">
+      <Diagram DiagramId="6e44a5b7ee1d4a66a1f5354d542e0486" Name="Diagram1" ZoomLevel="81">
         <EntityTypeShape EntityType="QuanLyKhoModel.BangNhap" Width="1.5" PointX="3" PointY="8.25" />
-        <EntityTypeShape EntityType="QuanLyKhoModel.BangXuat" Width="1.5" PointX="6" PointY="7.875" />
+        <EntityTypeShape EntityType="QuanLyKhoModel.BangXuat" Width="1.5" PointX="6" PointY="0.75" />
         <EntityTypeShape EntityType="QuanLyKhoModel.DonViDo" Width="1.5" PointX="0.75" PointY="4.5" />
-        <EntityTypeShape EntityType="QuanLyKhoModel.KhachHang" Width="1.5" PointX="6" PointY="0.75" />
+        <EntityTypeShape EntityType="QuanLyKhoModel.KhachHang" Width="1.5" PointX="6" PointY="7.5" />
         <EntityTypeShape EntityType="QuanLyKhoModel.NhaCungCap" Width="1.5" PointX="0.75" PointY="1" />
         <EntityTypeShape EntityType="QuanLyKhoModel.RoleTaiKhoan" Width="1.5" PointX="1.5" PointY="12.5" />
         <EntityTypeShape EntityType="QuanLyKhoModel.TaiKhoan" Width="1.5" PointX="0.75" PointY="7.75" />
@@ -18,7 +18,7 @@
         <AssociationConnector Association="QuanLyKhoModel.FK__BangNhap__IdTaiK__32E0915F" />
         <AssociationConnector Association="QuanLyKhoModel.FK__ThongTinB__IdBan__37A5467C" />
         <AssociationConnector Association="QuanLyKhoModel.FK__BangXuat__IdTaiK__3A81B327" />
-        <AssociationConnector Association="QuanLyKhoModel.FK__ThongTinB__IdTho__3F466844" />
+        <AssociationConnector Association="QuanLyKhoModel.FK__ThongTinB__IdBan__3F466844" />
         <AssociationConnector Association="QuanLyKhoModel.FK__VatTu__IdDonViDo__2A4B4B5E" />
         <AssociationConnector Association="QuanLyKhoModel.FK__ThongTinB__IdKha__403A8C7D" />
         <AssociationConnector Association="QuanLyKhoModel.FK__VatTu__IdNhaCung__2B3F6F97" />
