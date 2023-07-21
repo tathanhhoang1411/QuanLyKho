@@ -16,9 +16,9 @@ namespace QuanLyKho.ViewModel
     {
         public bool IsLogin { get; set; }
         private string _UserName;
-        public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }
+        public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }//onpropertyChanged để nhận sự thay đổi từ UserName
         private string _Password;
-        public string Password { get => _Password; set { _Password = value; OnPropertyChanged(); } }
+        public string Password { get => _Password; set { _Password = value; OnPropertyChanged(); } } 
 
 
         public ICommand CloseCommand { get; set; }
@@ -31,11 +31,21 @@ namespace QuanLyKho.ViewModel
             IsLogin = false;
             Password = "";
             UserName = "";
-            LoginCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { Login(p); });
+            LoginCommand = new RelayCommand<Window>((p) => { return isField(); }, (p) => { Login(p); });
             CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { p.Close(); });
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
         }
-
+        bool isField()
+        {
+            if (Password != "" &&  UserName!="" )
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
          void Login(Window p)
         {
 

@@ -61,21 +61,16 @@ namespace QuanLyKho.ViewModel
             }
               );
             
-            UnitWindowCommand = new RelayCommand<object>((p) => {
-                if(loginVM.IsAdmin())
-                    return true; 
-                else
-                    return false;
+            UnitWindowCommand = new RelayCommand<object>((p) => { 
+                return loginVM.IsAdmin();
             }, (p) =>
             {
                 UnitWindow wd = new UnitWindow();
                 wd.ShowDialog();
+                
             });
             AccountsWindowCommand = new RelayCommand<object>((p) => {
-                if (loginVM.IsAdmin())
-                    return true;
-                else
-                    return false;
+                return loginVM.IsAdmin();
             }, (p) =>
             {
                 AccountsWindow wd = new AccountsWindow();
@@ -92,20 +87,14 @@ namespace QuanLyKho.ViewModel
                 wd.ShowDialog();
             });
             VattuWindowCommand = new RelayCommand<object>((p) => {
-                if (loginVM.IsAdmin())
-                    return true;
-                else
-                    return false;
+                return loginVM.IsAdmin();
             }, (p) =>
             {
                 VattuWindow wd = new VattuWindow();
                 wd.ShowDialog();
             });
             SupplierWindowCommand = new RelayCommand<object>((p) => {
-                if (loginVM.IsAdmin())
-                    return true;
-                else
-                    return false;
+                return loginVM.IsAdmin();
             }, (p) =>
             {
                 SupplierWindow wd = new SupplierWindow();
