@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO.Packaging;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,7 +17,11 @@ namespace QuanLyKho.ViewModel
     {
         private ObservableCollection<TonKho> _ListTonKho;
         public ObservableCollection<TonKho> ListTonKho { get => _ListTonKho; set { _ListTonKho = value; OnPropertyChanged(); } }
-        public bool Isloaded = false;
+
+        private ObservableCollection<Accounts> _ListAccInfo1;
+        public ObservableCollection<Accounts> ListAccInfo1 { get => _ListAccInfo1; set { _ListAccInfo1 = value; OnPropertyChanged(); } }
+
+        private  bool Isloaded = false;
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand UnitWindowCommand { get; set; }
         public ICommand AccountsWindowCommand { get; set; }
@@ -27,26 +33,26 @@ namespace QuanLyKho.ViewModel
         // mọi thứ xử lý sẽ nằm trong này 
         public MainViewModel()
         {
-            LoginViewModel lg=new LoginViewModel();
-            var user =lg.UserName;
-            var pass = lg.Password;
+
+            LoginWindow loginWindow = new LoginWindow();
+            var loginVM = loginWindow.DataContext as LoginViewModel;
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
+
                 Isloaded = true;
                 if (p == null)
                     return;
                 p.Hide();
-                LoginWindow loginWindow = new LoginWindow();
-                loginWindow.ShowDialog();
 
+                loginWindow.ShowDialog();
                 if (loginWindow.DataContext == null)
                     return;
-                var loginVM = loginWindow.DataContext as LoginViewModel;
-
+              
                 if (loginVM.IsLogin)//Đăng nhâp thành công thì
                 {
                     p.Show();
                     LoadTonKho();
+                  
                 }
                 else
                 {
@@ -55,12 +61,22 @@ namespace QuanLyKho.ViewModel
             }
               );
             
-            UnitWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            UnitWindowCommand = new RelayCommand<object>((p) => {
+                if(loginVM.IsAdmin())
+                    return true; 
+                else
+                    return false;
+            }, (p) =>
             {
                 UnitWindow wd = new UnitWindow();
                 wd.ShowDialog();
             });
-            AccountsWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            AccountsWindowCommand = new RelayCommand<object>((p) => {
+                if (loginVM.IsAdmin())
+                    return true;
+                else
+                    return false;
+            }, (p) =>
             {
                 AccountsWindow wd = new AccountsWindow();
                 wd.ShowDialog();
@@ -75,12 +91,22 @@ namespace QuanLyKho.ViewModel
                 OutputWindow wd = new OutputWindow();
                 wd.ShowDialog();
             });
-            VattuWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            VattuWindowCommand = new RelayCommand<object>((p) => {
+                if (loginVM.IsAdmin())
+                    return true;
+                else
+                    return false;
+            }, (p) =>
             {
                 VattuWindow wd = new VattuWindow();
                 wd.ShowDialog();
             });
-            SupplierWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            SupplierWindowCommand = new RelayCommand<object>((p) => {
+                if (loginVM.IsAdmin())
+                    return true;
+                else
+                    return false;
+            }, (p) =>
             {
                 SupplierWindow wd = new SupplierWindow();
                 wd.ShowDialog();

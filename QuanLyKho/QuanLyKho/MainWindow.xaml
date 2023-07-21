@@ -228,7 +228,7 @@
                                         <GridView >
                                             <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
                                             <GridViewColumn Header="Tên vật tư" DisplayMemberBinding="{Binding Vattu.Ten}"></GridViewColumn>
-                                              <GridViewColumn Header="Số lượng tồn" DisplayMemberBinding="{Binding Count}" ></GridViewColumn>
+                                            <GridViewColumn Header="Số lượng tồn" DisplayMemberBinding="{Binding Count}" ></GridViewColumn>
                                             <GridViewColumn Header="Đơn vị tính" DisplayMemberBinding="{Binding DonViDo}" ></GridViewColumn>
                                         </GridView>
                                     </ListView.View>

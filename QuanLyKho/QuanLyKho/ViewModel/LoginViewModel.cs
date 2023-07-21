@@ -1,6 +1,7 @@
 ﻿using QuanLyKho.Model;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -19,12 +20,14 @@ namespace QuanLyKho.ViewModel
         private string _Password;
         public string Password { get => _Password; set { _Password = value; OnPropertyChanged(); } }
 
+
         public ICommand CloseCommand { get; set; }
         public ICommand LoginCommand { get; set; }
         public ICommand PasswordChangedCommand { get; set; }
         // mọi thứ xử lý sẽ nằm trong này
         public LoginViewModel()
         {
+
             IsLogin = false;
             Password = "";
             UserName = "";
@@ -60,6 +63,28 @@ namespace QuanLyKho.ViewModel
             }
 
         }
+        public List<TaiKhoan> AccInfo()
+        {
+            string passEncode = MD5Hash(Base64Encode(Password));
+            List<TaiKhoan> accInfo = DataProvider.Ins.DB.TaiKhoans.Where(x => x.TenTaiKhoan == UserName && x.MatKhau == passEncode).ToList();
+            return accInfo;
+        }
+        public  bool IsAdmin()
+        {
+
+            if (AccInfo()[0].IdRoleTaiKhoan == 1)
+            {
+
+                return true;
+               
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+         
 
         public static string Base64Encode(string plainText)
         {

@@ -80,7 +80,7 @@
                 <ScrollViewer 
                     VerticalScrollBarVisibility="Auto">
                     <ListView HorizontalAlignment="Center"
-                        ItemsSource="{Binding List}"
+                        ItemsSource="{Binding ListVattus}"
                         SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
                         <ListView.Resources>
                             <Style TargetType="GridViewColumnHeader">
@@ -90,9 +90,10 @@
                         </ListView.Resources>
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="Tên vật tư" DisplayMemberBinding="{Binding Ten}"></GridViewColumn>
-                                <GridViewColumn Header="Tên nhà cung cấp" DisplayMemberBinding="{Binding DisplayName}"></GridViewColumn>
-                                <GridViewColumn Header="Đơn vị tính" DisplayMemberBinding="{Binding DisplayName}"></GridViewColumn>
+                                <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
+                                <GridViewColumn Header="Vật tư" DisplayMemberBinding="{Binding VatTu.Ten}"></GridViewColumn>
+                                <GridViewColumn Header="Đơn vị tính" DisplayMemberBinding="{Binding TenDonViDo}"></GridViewColumn>
+                                <GridViewColumn Header="Đơn vị cung cấp" DisplayMemberBinding="{Binding TenNhaCungCap}"></GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
