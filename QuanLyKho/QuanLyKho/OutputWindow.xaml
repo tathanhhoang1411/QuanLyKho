@@ -16,7 +16,7 @@
      TextOptions.TextRenderingMode="Auto"
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Name="outputWindow"

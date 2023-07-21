@@ -19,7 +19,8 @@ namespace QuanLyKho.ViewModel
         public AcocuntsViewModel()
         {
             LoadAccount();
-            LoadRole();
+            RoleAccountViewModel role = new RoleAccountViewModel();
+            ListRoleAccounts=role.LoadRole();
         }
         public void LoadAccount()
         {
@@ -42,22 +43,6 @@ namespace QuanLyKho.ViewModel
                 i++;
             }
         }
-        public void LoadRole()
-        {
-            ListRoleAccounts = new ObservableCollection<RoleAccounts>();
-            List<RoleTaiKhoan> listRoleTaiKhoan = DataProvider.Ins.DB.RoleTaiKhoans.ToList();
-            int i = 1;
-            foreach (RoleTaiKhoan item in listRoleTaiKhoan)
 
-            {
-                RoleAccounts rolacc = new RoleAccounts();
-                //Đổ số thứ tự Role
-                rolacc.STT = i;
-                //Đổ role
-                rolacc.RoleTK = item;
-                ListRoleAccounts.Add(rolacc);
-                i++;
-            }
-        }
     }
 }

@@ -16,7 +16,7 @@ namespace QuanLyKho.ViewModel
         {
 
         }
-        public void LoadRole()
+        public ObservableCollection<RoleAccounts> LoadRole()
         {
             ListRoleAccounts = new ObservableCollection<RoleAccounts>();
             List<RoleTaiKhoan> listRoleTaiKhoan = DataProvider.Ins.DB.RoleTaiKhoans.ToList();
@@ -32,6 +32,7 @@ namespace QuanLyKho.ViewModel
                 ListRoleAccounts.Add(rolacc);
                 i++;
             }
+            return ListRoleAccounts;
         }
     }
 }

@@ -16,12 +16,12 @@
      TextOptions.TextRenderingMode="Auto"
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Name="accountsWindow"
         DataContext="{StaticResource AccountsVM}"
-        Title="Tài khoản"  Height="450" Width="800">
+        Title="Tài khoản và các loại tài khoản"  Height="450" Width="800">
 
     <Grid>
         <Grid.RowDefinitions>

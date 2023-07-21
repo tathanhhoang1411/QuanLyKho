@@ -12,4 +12,5 @@
     <viewmodel:SupplierViewModel x:Key="SupplierVM"></viewmodel:SupplierViewModel>
     <viewmodel:CustomerViewModel x:Key="CustomerVM"></viewmodel:CustomerViewModel>
     <viewmodel:RoleAccountViewModel x:Key="RoleaccountVM"></viewmodel:RoleAccountViewModel>
+    <viewmodel:ControlBarViewModel x:Key="ControlVM"></viewmodel:ControlBarViewModel>
 </ResourceDictionary>

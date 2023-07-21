@@ -19,30 +19,43 @@ namespace QuanLyKho.ViewModel
             }
             public void LoadVattu()
             {
+            ListVattus = new ObservableCollection<VatTus>();
+            List<VatTu> ListVatTu = DataProvider.Ins.DB.VatTus.ToList();
             //Biến i sẽ là STT tăng dần
             int i = 1;
-            ListVattus = new ObservableCollection<VatTus>();
-                var  listVattu = (
-                from vt in DataProvider.Ins.DB.VatTus
-                join suppli in DataProvider.Ins.DB.NhaCungCaps on vt.IdNhaCungCap equals suppli.Id
-                join unit in DataProvider.Ins.DB.DonViDoes on vt.IdDonViDo equals unit.Id
-                select new {vt, suppli ,unit}).ToList();
-
-            foreach (var item in listVattu)
-
+            foreach (VatTu item in ListVatTu)
+            {
+                List<ThongTinBangNhap> ListInputInfo = DataProvider.Ins.DB.ThongTinBangNhaps.Where(p => p.IdVatTu == item.Id).ToList();
+                List<ThongTinBangXuat> ListOutputInfo = DataProvider.Ins.DB.ThongTinBangXuats.Where(p => p.IdVatTu == item.Id).ToList();
+                List<DonViDo> DonViDo = DataProvider.Ins.DB.DonViDoes.Where(p => p.Id == item.IdDonViDo).ToList();
+                int sumInput = 0;
+                int sumOutput = 0;
+                int a = ListVatTu.Count();
+                if (ListInputInfo != null)
                 {
-
-                    VatTus vattu = new VatTus();
-                //Đổ số thứ tự Khách hàng
-                vattu.STT = i;
-                //Đổ tai khoản
-                vattu.VatTu = item.vt;
-                vattu.TenDonViDo = item.unit.Ten;
-                vattu.TenNhaCungCap=item.suppli.Ten;
-                    ListVattus.Add(vattu);
-                    i++;
+                    sumInput = (int)ListInputInfo.Sum(p => p.Count);
+                    //tổng số lượng của tất cả Danh sách inputinfo thỏa điều kiện: IdVatTu==Id của vật tư 
                 }
+                if (ListOutputInfo != null)
+                {
+                    sumOutput = (int)ListOutputInfo.Sum(p => p.Count);
+                    //tổng số lượng của tất cả Danh sách outputinfo thỏa điều kiện: IdVatTu==Id của vật tư 
+                }
+
+               VatTus vtu = new VatTus();
+                //Đổ số thứ tự vật tư 
+                vtu.STT = i;
+                //Đổ số lượng vật tư  
+                vtu.Count = sumInput - sumOutput;
+                //Đổ vật tư 
+                vtu.VatTu = item;
+                vtu.TenNhaCungCap = item.NhaCungCap.Ten;
+                vtu.TenDonViDo = DonViDo[0].Ten.ToString();
+                ListVattus.Add(vtu);
+
+                i++;
             }
+        }
         }
     }
 

@@ -4,16 +4,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Collections.ObjectModel;
 
 namespace QuanLyKho.ViewModel
 {
     public class UnitViewModel : BaseViewModel
     {
-        private List<DonViDo> _ListDonViDoes;
-        public List<DonViDo> ListDonViDoes { get => _ListDonViDoes; set { _ListDonViDoes = value; OnPropertyChanged(); } }
+        private ObservableCollection<DonViDo> _ListDonViDoes;
+        public ObservableCollection<DonViDo> ListDonViDoes { get => _ListDonViDoes; set { _ListDonViDoes = value; OnPropertyChanged(); } }
         public UnitViewModel()
         {
-            ListDonViDoes = DataProvider.Ins.DB.DonViDoes.ToList();
+            ListDonViDoes = new ObservableCollection<DonViDo>(DataProvider.Ins.DB.DonViDoes);
         }
     }
 }

@@ -18,26 +18,30 @@ namespace QuanLyKho.ViewModel
         private string _UserName;
         public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }//onpropertyChanged để nhận sự thay đổi từ UserName
         private string _Password;
-        public string Password { get => _Password; set { _Password = value; OnPropertyChanged(); } } 
+        public string Password { get => _Password; set { _Password = value; OnPropertyChanged(); } }
 
+        private ObservableCollection<Accounts> _ListAccInfo;
+        public ObservableCollection<Accounts> ListAccInfo { get => _ListAccInfo; set { _ListAccInfo = value; OnPropertyChanged(); } }
 
         public ICommand CloseCommand { get; set; }
         public ICommand LoginCommand { get; set; }
+        public ICommand ShowPassCommand { get; set; }
         public ICommand PasswordChangedCommand { get; set; }
         // mọi thứ xử lý sẽ nằm trong này
         public LoginViewModel()
         {
-
+            
             IsLogin = false;
             Password = "";
-            UserName = "";
+            UserName = "TaThanhHoang";
+            ShowPassCommand = new RelayCommand<Window>((p) => { return isField(); }, (p) => { });
             LoginCommand = new RelayCommand<Window>((p) => { return isField(); }, (p) => { Login(p); });
             CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { p.Close(); });
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
         }
         bool isField()
         {
-            if (Password != "" &&  UserName!="" )
+            if (Password != "" )
             {
                 return true;
             }
@@ -73,13 +77,24 @@ namespace QuanLyKho.ViewModel
             }
 
         }
-        public List<TaiKhoan> AccInfo()
+        public List<TaiKhoan> AccInfo()//Lấy List tài khoản đã đăng  nhập để làm các hành động khác
         {
             string passEncode = MD5Hash(Base64Encode(Password));
             List<TaiKhoan> accInfo = DataProvider.Ins.DB.TaiKhoans.Where(x => x.TenTaiKhoan == UserName && x.MatKhau == passEncode).ToList();
             return accInfo;
         }
-        public  bool IsAdmin()
+        public ObservableCollection<Accounts> AccLogins()//Lấy thông tin tài khoản đã đăng  nhập để làm các hành động khác
+        {
+            ListAccInfo=new ObservableCollection<Accounts>();
+            var listAcc = AccInfo()[0];
+            Accounts acc = new Accounts();
+            acc.STT = 1;
+            acc.TaiKhoan = listAcc;
+            acc.TenRoleTaiKhoan = listAcc.RoleTaiKhoan.Ten;
+            ListAccInfo.Add(acc);
+            return ListAccInfo;
+        }
+        public  bool IsAdmin()//kiểu tra nếu là admin thì sẽ hiện hết các chức năng (sẽ gọi nên mainVM)
         {
 
             if (AccInfo()[0].IdRoleTaiKhoan == 1)

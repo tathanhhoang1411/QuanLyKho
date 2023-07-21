@@ -15,7 +15,7 @@
      TextOptions.TextRenderingMode="Auto"
      Background="{DynamicResource MaterialDesignPaper}"
      FontFamily="{DynamicResource MaterialDesignFont}"
-        ResizeMode="NoResize"
+        ResizeMode="CanResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Name="mainWindow"
@@ -96,7 +96,7 @@
                                     <Label Grid.Row="0" Content="Đơn vị đo"></Label>
                                     <materialDesign:PackIcon Width="24" Height="24"  HorizontalAlignment="Center"  Kind="Dna">
                                     </materialDesign:PackIcon>
-                                    
+
                                 </StackPanel>
                             </Button>
                             <Button ToolTip="Nhà cung cấp"
@@ -142,6 +142,7 @@
                         </Grid.ColumnDefinitions>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="auto" ></RowDefinition>
+                            <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition Height="auto"></RowDefinition>
                             <RowDefinition Height="auto"></RowDefinition>
@@ -228,12 +229,44 @@
                                         <GridView >
                                             <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
                                             <GridViewColumn Header="Tên vật tư" DisplayMemberBinding="{Binding Vattu.Ten}"></GridViewColumn>
-                                            <GridViewColumn Header="Số lượng tồn" DisplayMemberBinding="{Binding Count}" ></GridViewColumn>
+                                            <GridViewColumn Header="Hiện có" DisplayMemberBinding="{Binding Count}" ></GridViewColumn>
                                             <GridViewColumn Header="Đơn vị tính" DisplayMemberBinding="{Binding DonViDo}" ></GridViewColumn>
+                                            <GridViewColumn Header="Đơn vị cung cấp" DisplayMemberBinding="{Binding Vattu.NhaCungCap.Ten}" ></GridViewColumn>
                                         </GridView>
                                     </ListView.View>
                                 </ListView>
                             </ScrollViewer>
+                        </materialDesign:Card>
+                        <materialDesign:Card 
+                            Grid.Row="5" 
+                            Grid.ColumnSpan="3"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Right">
+                            <StackPanel Orientation="Vertical">
+                                <StackPanel.Resources>
+                                    <Style TargetType="Label">
+                                            <Setter Property="FontSize" Value="15"></Setter>
+                                            <Setter Property="Foreground" Value="REd"></Setter>
+                                        </Style>
+                                </StackPanel.Resources>
+                                <Label Content="Thông tin tài khoản đang đăng nhập"></Label>
+                                <ListView 
+                                ItemsSource="{Binding ListAccInfo}">
+                                    <ListView.View>
+                                        <GridView ScrollViewer.CanContentScroll="False">
+                                            <GridViewColumn 
+                                            DisplayMemberBinding="{Binding TaiKhoan.HoVaTen}">
+                                            </GridViewColumn>
+                                            <GridViewColumn 
+                                            DisplayMemberBinding="{Binding TaiKhoan.SDT}">
+                                            </GridViewColumn>
+                                            <GridViewColumn 
+                                            DisplayMemberBinding="{Binding TenRoleTaiKhoan}">
+                                            </GridViewColumn>
+                                        </GridView>
+                                    </ListView.View>
+                                </ListView>
+                            </StackPanel>
                         </materialDesign:Card>
                     </Grid>
             </Grid>

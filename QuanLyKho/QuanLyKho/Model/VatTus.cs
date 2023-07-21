@@ -12,6 +12,7 @@ namespace QuanLyKho.Model
         public VatTu VatTu { get; set; }
         public string  TenNhaCungCap { get; set; }
         public string TenDonViDo { get; set; }
+        public int Count { get; set; }
     }
 
 }

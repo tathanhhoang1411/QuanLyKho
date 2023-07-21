@@ -67,7 +67,8 @@
                     <CheckBox x:Name="FloatingCheck"
                                  materialDesign:HintAssist.Hint="Mật khẩu"
                               Content="Hiện mật khẩu"
-                              HorizontalAlignment="Right">
+                              HorizontalAlignment="Right"
+                              Command="{Binding ShowPassCommand}">
                     </CheckBox>
                 </Grid>
                 <Grid Grid.Row="3">
@@ -88,8 +89,10 @@
                             Style="{StaticResource MaterialDesignRaisedButton}"    
                             Width="110"    
                             Background="OrangeRed"
-                            ToolTip="Resource name: MaterialDesignRaisedButton" Content="Thoát"
-                            Command="{Binding CloseCommand}">
+                            ToolTip="Resource name: MaterialDesignRaisedButton" 
+                            Content="Thoát"
+                            Command="{Binding CloseCommand}"
+                            CommandParameter="{Binding ElementName=loginWindow}">
                     </Button>
                 </Grid>
                 <Grid Grid.Row="4">

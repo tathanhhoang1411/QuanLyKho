@@ -18,8 +18,8 @@ namespace QuanLyKho.ViewModel
         private ObservableCollection<TonKho> _ListTonKho;
         public ObservableCollection<TonKho> ListTonKho { get => _ListTonKho; set { _ListTonKho = value; OnPropertyChanged(); } }
 
-        private ObservableCollection<Accounts> _ListAccInfo1;
-        public ObservableCollection<Accounts> ListAccInfo1 { get => _ListAccInfo1; set { _ListAccInfo1 = value; OnPropertyChanged(); } }
+        private ObservableCollection<Accounts> _ListAccInfo;
+        public ObservableCollection<Accounts> ListAccInfo { get => _ListAccInfo; set { _ListAccInfo = value; OnPropertyChanged(); } }
 
         private  bool Isloaded = false;
         public ICommand LoadedWindowCommand { get; set; }
@@ -52,7 +52,7 @@ namespace QuanLyKho.ViewModel
                 {
                     p.Show();
                     LoadTonKho();
-                  
+                    ListAccInfo = loginVM.AccLogins();
                 }
                 else
                 {
@@ -65,24 +65,34 @@ namespace QuanLyKho.ViewModel
                 return loginVM.IsAdmin();
             }, (p) =>
             {
+
+                MainWindow mainVM = new MainWindow();
+                mainVM.Hide();
                 UnitWindow wd = new UnitWindow();
                 wd.ShowDialog();
+
                 
             });
             AccountsWindowCommand = new RelayCommand<object>((p) => {
                 return loginVM.IsAdmin();
             }, (p) =>
             {
+                MainWindow mainVM = new MainWindow();
+                mainVM.Hide();
                 AccountsWindow wd = new AccountsWindow();
                 wd.ShowDialog();
             });
             InputWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
+                MainWindow mainVM = new MainWindow();
+                mainVM.Hide();
                 InputWindow wd = new InputWindow();
                 wd.ShowDialog();
             });
             OutputWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
+                MainWindow mainVM = new MainWindow();
+                mainVM.Hide();
                 OutputWindow wd = new OutputWindow();
                 wd.ShowDialog();
             });
@@ -90,6 +100,8 @@ namespace QuanLyKho.ViewModel
                 return loginVM.IsAdmin();
             }, (p) =>
             {
+                MainWindow mainVM = new MainWindow();
+                mainVM.Hide();
                 VattuWindow wd = new VattuWindow();
                 wd.ShowDialog();
             });
@@ -97,11 +109,15 @@ namespace QuanLyKho.ViewModel
                 return loginVM.IsAdmin();
             }, (p) =>
             {
+                MainWindow mainVM = new MainWindow();
+                mainVM.Hide();
                 SupplierWindow wd = new SupplierWindow();
                 wd.ShowDialog();
             });
             CustomerWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
+                MainWindow mainVM = new MainWindow();
+                mainVM.Hide();
                 CustomerWindow wd = new CustomerWindow();
                 wd.ShowDialog();
             });
