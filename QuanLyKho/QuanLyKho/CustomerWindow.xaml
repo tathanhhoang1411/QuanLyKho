@@ -40,25 +40,25 @@
             <materialDesign:Card Grid.Column="0" Margin="5">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBox 
-                        Text="{Binding Ten, UpdateSourceTrigger=PropertyChanged}" 
+                        Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Tên khách hàng" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     </TextBox>
                     <TextBox 
-                        Text="{Binding SDT, UpdateSourceTrigger=PropertyChanged}" 
+                        Text="{Binding SDT, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Số điện thoại" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     </TextBox>
                     <TextBox 
-                        Text="{Binding Email, UpdateSourceTrigger=PropertyChanged}" 
+                        Text="{Binding Email, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Email" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     </TextBox>
                     <TextBox 
-                        Text="{Binding ThongTinThem, UpdateSourceTrigger=PropertyChanged}" 
+                        Text="{Binding ThongTinThem, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Thông tin thêm" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">

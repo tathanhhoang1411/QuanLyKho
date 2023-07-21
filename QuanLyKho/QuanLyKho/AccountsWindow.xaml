@@ -33,26 +33,60 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MaxWidth="250"></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
-                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition ></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition></RowDefinition>
-                <RowDefinition Height="120"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
             </Grid.RowDefinitions>
 <!--Manage tài khoản-->
             <materialDesign:Card Grid.Column="0" Margin="5">
-                <StackPanel 
+                <ScrollViewer
+                    HorizontalScrollBarVisibility="Auto"
+                    VerticalScrollBarVisibility="Auto">
+                    <StackPanel 
                     Orientation="Vertical"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
-                    <TextBox 
-                        Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" 
+                        <TextBox 
+                        Text="{Binding HoVaTen, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Mật khẩu" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                    </TextBox>
-
-                </StackPanel>
+                        </TextBox>
+                        <TextBox 
+                        Text="{Binding TaiKhoan, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Tài khoản" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        </TextBox>
+                        <TextBox 
+                        Text="{Binding SDT, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="SDT" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        </TextBox>
+                        <TextBox 
+                        Text="{Binding Email, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Email" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        </TextBox>
+                        <ComboBox
+                        materialDesign:HintAssist.Hint="Cấp bậc" 
+                            SelectedIndex="{Binding SelectedItem.TaiKhoan.IdRoleTaiKhoan}"
+                            ItemsSource="{Binding ListSelectRoleAccounts}">
+                        </ComboBox>
+                        
+                        
+                        <TextBox 
+                        Text="{Binding NgayTao, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Ngày tạo tài khoản" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        </TextBox>
+                    </StackPanel>
+                </ScrollViewer>
             </materialDesign:Card>
             
             <materialDesign:Card Grid.Column="1" Margin="5">
@@ -121,7 +155,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
                     <TextBox 
-                        Text="{Binding Ten, UpdateSourceTrigger=PropertyChanged}" 
+                        Text="{Binding TenRoleTaiKhoan2, UpdateSourceTrigger=PropertyChanged}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Cấp bậc" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
@@ -164,7 +198,7 @@
                 <ScrollViewer>
                     <ListView HorizontalAlignment="Center"
                         ItemsSource="{Binding ListRoleAccounts}"
-                        SelectedItem="{Binding SelectedItem, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                        SelectedItem="{Binding SelectedItemRole, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                         <ListView.Resources>
                             <Style TargetType="GridViewColumnHeader">
                                 <Setter Property="FontSize" Value="15"></Setter>

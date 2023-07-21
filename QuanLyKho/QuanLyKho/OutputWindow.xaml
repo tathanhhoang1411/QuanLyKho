@@ -43,43 +43,43 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
                     <TextBox 
-                        Text="{Binding SDT, UpdateSourceTrigger=PropertyChanged}" 
+                        Text="{Binding SDT, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="SDT" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     </TextBox>
                     <TextBox 
-                        Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}" 
+                        Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Tên khách hàng" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     </TextBox>
                     <TextBox 
-                        Text="{Binding TenVatTu, UpdateSourceTrigger=PropertyChanged}" 
+                        Text="{Binding TenVatTu, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Tên vật tư" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     </TextBox>
                     <TextBox 
-                        Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" 
+                        Text="{Binding Count, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Số lượng" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     </TextBox>
                     <TextBox 
-                        Text="{Binding GiaXuat, UpdateSourceTrigger=PropertyChanged}" 
+                        Text="{Binding GiaXuat, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Giá xuất" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     </TextBox>
                     <TextBox 
-                        Text="{Binding TrangThai, UpdateSourceTrigger=PropertyChanged}" 
+                        Text="{Binding TrangThai, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Trạng thái" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     </TextBox>
                     <DatePicker
-                          Text="{Binding NgayXuat, UpdateSourceTrigger=PropertyChanged}" 
+                          Text="{Binding NgayXuat, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                            Width="100"
                            IsEnabled="true"
                           materialDesign:HintAssist.Hint="Ngày xuất vật tư" >

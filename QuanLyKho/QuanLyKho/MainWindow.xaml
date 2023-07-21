@@ -87,7 +87,7 @@
                                     </materialDesign:PackIcon>
                                 </StackPanel>
                             </Button>
-                            <Button ToolTip="Đơn vị đo"
+                            <Button ToolTip="Đơn vị"
                                      Height="80"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     Margin="5"
