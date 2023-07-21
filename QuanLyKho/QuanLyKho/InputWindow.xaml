@@ -43,14 +43,51 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
                     <TextBox 
-                        Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" 
+                        Text="{Binding HoVaTen, UpdateSourceTrigger=PropertyChanged}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Nhân viên nhập kho" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    </TextBox>
+                    <TextBox 
+                        Text="{Binding SDT, UpdateSourceTrigger=PropertyChanged}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="SDT nhân viên" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    </TextBox>
+                    <TextBox 
+                        Text="{Binding TenVatTu, UpdateSourceTrigger=PropertyChanged}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Tên vật tư" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    </TextBox>
+                    <TextBox 
+                        Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Số lượng nhập" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    </TextBox>
+                    <TextBox 
+                        Text="{Binding TenNhaCungCap, UpdateSourceTrigger=PropertyChanged}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Tên đơn vị cung cấp" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    </TextBox>
+                    <TextBox 
+                        Text="{Binding GiaNhap, UpdateSourceTrigger=PropertyChanged}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Giá nhập" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     </TextBox>
+                    <TextBox 
+                        Text="{Binding TrangThai, UpdateSourceTrigger=PropertyChanged}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Trạng thái" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    </TextBox>
                     <DatePicker
+                          Text="{Binding NgayNhap, UpdateSourceTrigger=PropertyChanged}" 
                            Width="100"
-                           IsEnabled="False"
+                           IsEnabled="true"
                           materialDesign:HintAssist.Hint="Ngày nhập vật tư" >
                     </DatePicker>
                 </StackPanel>
@@ -99,9 +136,11 @@
                         <ListView.View>
                             <GridView>
                                 <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
-                                <GridViewColumn Header="Người nhập kho" DisplayMemberBinding="{Binding TaiKhoan.HoVaTen}"></GridViewColumn>
+                                <GridViewColumn Header="Nhân viên nhập kho" DisplayMemberBinding="{Binding TaiKhoan.HoVaTen}"></GridViewColumn>
+                                <GridViewColumn Header="SDT nhân viên " DisplayMemberBinding="{Binding TaiKhoan.SDT}"></GridViewColumn>
                                 <GridViewColumn Header="Tên vật tư" DisplayMemberBinding="{Binding Vattu.Ten}"></GridViewColumn>
                                 <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding ThongTinBangNhap.Count}"></GridViewColumn>
+                                <GridViewColumn Header="Tên đơn vị cung ứng" DisplayMemberBinding="{Binding Vattu.NhaCungCap.Ten}"></GridViewColumn>
                                 <GridViewColumn Header="Giá nhập kho" DisplayMemberBinding="{Binding ThongTinBangNhap.GiaNhap}"></GridViewColumn>
                                 <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TrangThai}"></GridViewColumn>
                                 <GridViewColumn Header="Ngày nhập" DisplayMemberBinding="{Binding BangNhap.NgayNhap}"></GridViewColumn>

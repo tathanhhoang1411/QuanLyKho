@@ -12,6 +12,38 @@ namespace QuanLyKho.ViewModel
     {
         private ObservableCollection<Supplieres> _ListSuppls;
         public ObservableCollection<Supplieres> ListSuppls { get => _ListSuppls; set { _ListSuppls = value; OnPropertyChanged(); } }
+        //các trường sẽ binding qua view
+        private string _TenNhaCungCap;
+        public string TenNhaCungCap { get => _TenNhaCungCap; set { _TenNhaCungCap = value; OnPropertyChanged(); } }
+
+        private string _SDT;
+        public string  SDT { get => _SDT; set { _SDT = value; OnPropertyChanged(); } }
+
+        private string _Email;
+        public string Email { get => _Email; set { _Email = value; OnPropertyChanged(); } }
+
+        private string _ThongTinThem;
+        public string  ThongTinThem { get => _ThongTinThem; set { _ThongTinThem = value; OnPropertyChanged(); } }
+
+        private DateTime _NgayHopTac;
+        public DateTime NgayHopTac { get => _NgayHopTac; set { _NgayHopTac = value; OnPropertyChanged(); } }
+
+        private Supplieres _SelectedItem;
+        public Supplieres SelectedItem { 
+            get=> _SelectedItem; 
+            set { _SelectedItem = value;
+                OnPropertyChanged();
+                if (SelectedItem!=null)
+                {
+                    TenNhaCungCap = SelectedItem.NhaCungCap.Ten;
+                    SDT = SelectedItem.NhaCungCap.SDT;
+                    Email = SelectedItem.NhaCungCap.Email;
+                    ThongTinThem = SelectedItem.NhaCungCap.ThongTinThem;
+                    NgayHopTac = (DateTime)SelectedItem.NhaCungCap.NgayHopTac;
+                }
+            } }
+
+
         public SupplierViewModel()
         {
             LoadSuppl();

@@ -13,7 +13,34 @@ namespace QuanLyKho.ViewModel
         {
             private ObservableCollection<VatTus> _ListVattus;
             public ObservableCollection<VatTus> ListVattus { get => _ListVattus; set { _ListVattus = value; OnPropertyChanged(); } }
-            public VattuViewModel()
+        //các trường sẽ binding qua view
+        private string _TenVatTu;
+        public string TenVatTu { get => _TenVatTu; set { _TenVatTu = value; OnPropertyChanged(); } }
+
+        private string _TenDonViDo;
+        public string TenDonViDo { get => _TenDonViDo; set { _TenDonViDo = value; OnPropertyChanged(); } }
+
+
+        private string _TenNhaCungCap;
+        public string TenNhaCungCap { get => _TenNhaCungCap; set { _TenNhaCungCap = value; OnPropertyChanged(); } }
+
+        private VatTus _SelectedItem;
+        public VatTus SelectedItem
+        {
+            get => _SelectedItem;
+            set
+            {
+                _SelectedItem = value;
+                OnPropertyChanged();
+                if (SelectedItem != null)
+                {
+                    TenVatTu = SelectedItem.VatTu.Ten;
+                    TenDonViDo = SelectedItem.TenDonViDo;
+                    TenNhaCungCap = SelectedItem.TenNhaCungCap;
+                }
+            }
+        }
+        public VattuViewModel()
             {
                 LoadVattu();
             }

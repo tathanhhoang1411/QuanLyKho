@@ -43,14 +43,45 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
                     <TextBox 
-                        Text="{Binding DisplayName, UpdateSourceTrigger=PropertyChanged}" 
+                        Text="{Binding SDT, UpdateSourceTrigger=PropertyChanged}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="SDT" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    </TextBox>
+                    <TextBox 
+                        Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Tên khách hàng" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    </TextBox>
+                    <TextBox 
+                        Text="{Binding TenVatTu, UpdateSourceTrigger=PropertyChanged}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Tên vật tư" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    </TextBox>
+                    <TextBox 
+                        Text="{Binding Count, UpdateSourceTrigger=PropertyChanged}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Số lượng" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    </TextBox>
+                    <TextBox 
+                        Text="{Binding GiaXuat, UpdateSourceTrigger=PropertyChanged}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Giá xuất" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     </TextBox>
+                    <TextBox 
+                        Text="{Binding TrangThai, UpdateSourceTrigger=PropertyChanged}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Trạng thái" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    </TextBox>
                     <DatePicker
+                          Text="{Binding NgayXuat, UpdateSourceTrigger=PropertyChanged}" 
                            Width="100"
-                           IsEnabled="False"
+                           IsEnabled="true"
                           materialDesign:HintAssist.Hint="Ngày xuất vật tư" >
                     </DatePicker>
                 </StackPanel>
@@ -104,7 +135,7 @@
                                 <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding ThongTinBangXuat.Count}"></GridViewColumn>
                                 <GridViewColumn Header="Giá xuất kho" DisplayMemberBinding="{Binding ThongTinBangXuat.GiaXuat}"></GridViewColumn>
                                 <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TrangThai}"></GridViewColumn>
-                                <GridViewColumn Header="Người xuất kho" DisplayMemberBinding="{Binding TaiKhoan.HoVaTen}"></GridViewColumn>
+                                <GridViewColumn Header="Nhân viên xuất kho" DisplayMemberBinding="{Binding TaiKhoan.HoVaTen}"></GridViewColumn>
                                 <GridViewColumn Header="Ngày xuất" DisplayMemberBinding="{Binding BangXuat.NgayXuat}"></GridViewColumn>
                             </GridView>
                         </ListView.View>

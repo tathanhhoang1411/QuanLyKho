@@ -40,12 +40,23 @@
             <materialDesign:Card Grid.Column="0" Margin="5">
                 <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBox 
-                        Text="{Binding Ten, UpdateSourceTrigger=PropertyChanged}" 
+                        Text="{Binding TenVatTu, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Tên vật tư" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     </TextBox>
-
+                    <TextBox 
+                        Text="{Binding TenDonViDo, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Đơn vị" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    </TextBox>
+                    <TextBox 
+                        Text="{Binding TenNhaCungCap, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Tên nhà cung cấp" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    </TextBox>
                 </StackPanel>
             </materialDesign:Card>
             <materialDesign:Card Grid.Column="1" Margin="5">

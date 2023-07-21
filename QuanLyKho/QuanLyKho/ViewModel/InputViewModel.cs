@@ -12,7 +12,61 @@ namespace QuanLyKho.ViewModel
     {
         private ObservableCollection<Inputs> _ListInputs;
         public ObservableCollection<Inputs> ListInputs { get => _ListInputs; set { _ListInputs = value; OnPropertyChanged(); } }
+        //Các trường này sẽ binding qua view 
+        private string _HoVaTen;
+        public string HoVaTen { get => _HoVaTen; set { _HoVaTen = value; OnPropertyChanged(); } }
 
+        private string _SDT;
+        public string SDT { get => _SDT; set { _SDT = value; OnPropertyChanged(); } }
+
+        private string _TenVatTu;
+        public string TenVatTu { get => _TenVatTu; set { _TenVatTu = value; OnPropertyChanged(); } }
+
+        private int _Count;
+        public int Count { get => _Count; set { _Count = value; OnPropertyChanged(); } }
+
+        private double _GiaNhap;
+        public double GiaNhap { get => _GiaNhap; set { _GiaNhap = value; OnPropertyChanged(); } }
+
+        private string _TenNhaCungCap;
+        public string TenNhaCungCap { get => _TenNhaCungCap; set { _TenNhaCungCap = value; OnPropertyChanged(); } }
+
+        private string _TrangThai;
+        public string TrangThai { get => _TrangThai; set { _TrangThai = value; OnPropertyChanged(); } }
+
+        private DateTime _NgayNhap;
+        public DateTime NgayNhap { get => _NgayNhap; set { _NgayNhap = value; OnPropertyChanged(); } }
+
+        private Inputs _SelectedItem;
+        public Inputs SelectedItem
+        {
+            get => _SelectedItem; set
+            {
+                _SelectedItem = value; OnPropertyChanged();
+                if (SelectedItem != null)
+                {
+                    HoVaTen = SelectedItem.TaiKhoan.HoVaTen;
+                    SDT = SelectedItem.TaiKhoan.SDT;
+                    TenVatTu = SelectedItem.Vattu.Ten;
+                    Count = (int)SelectedItem.ThongTinBangNhap.Count;
+                    TenNhaCungCap = SelectedItem.NhaCungCap.Ten;
+                    GiaNhap = (double)SelectedItem.ThongTinBangNhap.GiaNhap;
+
+                    switch ((int)SelectedItem.ThongTinBangNhap.TrangThai)
+                    {
+                        case 0:
+                            TrangThai = "Hoàn thành";
+                            break;
+                        case 1:
+                            TrangThai = "Đang trong quá trình";
+                            break;
+                        default:
+                            break;
+                    }
+                    NgayNhap = (DateTime)SelectedItem.BangNhap.NgayNhap;
+                }
+            }
+        }
         public InputViewModel()
         {
             LoadInput();
