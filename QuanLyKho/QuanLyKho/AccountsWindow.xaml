@@ -73,6 +73,7 @@
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                         </TextBox>
                         <ComboBox
+                            Text="{Binding TenRoleTaiKhoan}"
                         materialDesign:HintAssist.Hint="Cấp bậc" 
                             DisplayMemberPath="RoleTK.Ten"
 
