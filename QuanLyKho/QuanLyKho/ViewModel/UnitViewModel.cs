@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace QuanLyKho.ViewModel
 {
@@ -16,6 +17,11 @@ namespace QuanLyKho.ViewModel
         private string _TenDonViDo;
         public string TenDonViDo { get => _TenDonViDo; set { _TenDonViDo = value; OnPropertyChanged(); } }
 
+
+        //command cho các nút chức năng thêm xóa sửa
+        public ICommand AddCommand { get; set; }
+        public ICommand EditCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
 
         private Unites _SelectedItem;
         public Unites SelectedItem
@@ -34,6 +40,13 @@ namespace QuanLyKho.ViewModel
         {
 
             LoadUnit();
+            AddCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
+            {
+                MainWindow mainVM = new MainWindow();
+                mainVM.Hide();
+                CustomerWindow wd = new CustomerWindow();
+                wd.ShowDialog();
+            });
         }
         public void LoadUnit()
         {
