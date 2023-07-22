@@ -90,7 +90,7 @@ namespace QuanLyKho.ViewModel
             Accounts acc = new Accounts();
             acc.STT = 1;
             acc.TaiKhoan = listAcc;
-            acc.TenRoleTaiKhoan = listAcc.RoleTaiKhoan.Ten;
+            acc.RoleTaiKhoan = listAcc.RoleTaiKhoan;
             ListAccInfo.Add(acc);
             return ListAccInfo;
         }

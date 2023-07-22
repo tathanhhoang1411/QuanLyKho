@@ -46,7 +46,7 @@ namespace QuanLyKho.ViewModel
                     TaiKhoan = SelectedItem.TaiKhoan.TenTaiKhoan;
                     SDT = SelectedItem.TaiKhoan.SDT;
                     Email=SelectedItem.TaiKhoan.Email;
-                    TenRoleTaiKhoan = SelectedItem.TenRoleTaiKhoan;
+                    TenRoleTaiKhoan = SelectedItem.RoleTaiKhoan.Ten;
                     NgayTao =(DateTime)SelectedItem.TaiKhoan.NgayTao;
 
                 }
@@ -74,12 +74,16 @@ namespace QuanLyKho.ViewModel
         public AcocuntsViewModel()
         {
           
-            LoadAccount();
+            LoadAccount();//đổ danh sách tài khoản vào 
+            LoadRole();//đổ danh sách role
+
+
+
+        }
+        public void LoadRole()
+        {
             RoleAccountViewModel role = new RoleAccountViewModel();
-            ListRoleAccounts=role.LoadRole();
-            //ListSelectRoleAccounts = ListRoleAccounts[0].RoleTK.Ten;
-
-
+            ListRoleAccounts = role.LoadRole();
         }
         public void LoadAccount()
         {
@@ -97,7 +101,7 @@ namespace QuanLyKho.ViewModel
                 acc.STT = i;
                 //Đổ tai khoản
                 acc.TaiKhoan = item;
-                acc.TenRoleTaiKhoan = ListRole[0].Ten.ToString();
+                acc.RoleTaiKhoan = ListRole[0];
                 ListAccounts.Add(acc);
                 i++;
             }

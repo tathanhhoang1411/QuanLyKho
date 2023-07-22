@@ -74,8 +74,9 @@
                         </TextBox>
                         <ComboBox
                         materialDesign:HintAssist.Hint="Cấp bậc" 
-                            SelectedIndex="{Binding SelectedItem.TaiKhoan.IdRoleTaiKhoan}"
-                            ItemsSource="{Binding ListSelectRoleAccounts}">
+                            DisplayMemberPath="RoleTK.Ten"
+
+                            ItemsSource="{Binding ListRoleAccounts}">
                         </ComboBox>
                         
                         
@@ -138,7 +139,7 @@
                                 <GridViewColumn Header="Tài khoản" DisplayMemberBinding="{Binding TaiKhoan.TenTaiKhoan}"></GridViewColumn>
                                 <GridViewColumn Header="Số điện thoại" DisplayMemberBinding="{Binding TaiKhoan.SDT}"></GridViewColumn>
                                 <GridViewColumn Header="Email" DisplayMemberBinding="{Binding TaiKhoan.Email}"></GridViewColumn>
-                                <GridViewColumn Header="Cấp bậc" DisplayMemberBinding="{Binding TenRoleTaiKhoan}"></GridViewColumn>
+                                <GridViewColumn Header="Cấp bậc" DisplayMemberBinding="{Binding RoleTaiKhoan.Ten}"></GridViewColumn>
                                 <GridViewColumn Header="Ngày tạo" DisplayMemberBinding="{Binding TaiKhoan.NgayTao}"></GridViewColumn>
                             </GridView>
                         </ListView.View>
