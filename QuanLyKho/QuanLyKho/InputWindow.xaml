@@ -42,18 +42,20 @@
                     Orientation="Vertical"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
-                    <TextBox 
-                        Text="{Binding HoVaTen, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                    <ComboBox 
+                        Text="{Binding TenNhaCungCap, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
-                        materialDesign:HintAssist.Hint="Nhân viên nhập kho" 
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                    </TextBox>
-                    <TextBox 
-                        Text="{Binding SDT, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
-                        Margin="5" 
-                        materialDesign:HintAssist.Hint="SDT nhân viên" 
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                    </TextBox>
+                        materialDesign:HintAssist.Hint="Tên đơn vị cung cấp" 
+                        Style="{StaticResource MaterialDesignComboBox}"
+                        DisplayMemberPath="NhaCungCap.Ten"
+                            ItemsSource="{Binding ListSupp}"
+                            SelectedItem="{Binding SelectedItemSupp}">
+                    </ComboBox>
+                    <Label
+                            Content="{Binding SDTNhaCungCap}"
+                              materialDesign:HintAssist.Hint="SDT Đơn vị cung cấp">
+
+                    </Label>
                     <TextBox 
                         Text="{Binding TenVatTu, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
@@ -67,17 +69,27 @@
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     </TextBox>
                     <TextBox 
-                        Text="{Binding TenNhaCungCap, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
-                        Margin="5" 
-                        materialDesign:HintAssist.Hint="Tên đơn vị cung cấp" 
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                    </TextBox>
-                    <TextBox 
                         Text="{Binding GiaNhap, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Giá nhập" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     </TextBox>
+                    <ComboBox
+                       Text="{Binding HoVaTenNhanVienNhapKho,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Nhân viên nhập kho" 
+                        Style="{StaticResource MaterialDesignComboBox}"
+                            DisplayMemberPath="TaiKhoan.HoVaTen"
+                            ItemsSource="{Binding ListAcc}"
+                            SelectedItem="{Binding SelectedItemAcc}">
+
+                    </ComboBox>
+                    <Label
+                            Content="{Binding SDTNhanVienNhapKho}"
+                              materialDesign:HintAssist.Hint="SDT Nhân viên nhập kho">
+
+                    </Label>
+
                     <TextBox 
                         Text="{Binding TrangThai, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
@@ -126,7 +138,7 @@
                     VerticalScrollBarVisibility="Auto">
                     <ListView HorizontalAlignment="Center"
                         ItemsSource="{Binding ListInputs}"
-                        SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                        SelectedItem="{Binding SelectedItemInput, Mode=OneWayToSource}">
                         <ListView.Resources>
                             <Style TargetType="GridViewColumnHeader">
                                 <Setter Property="FontSize" Value="15"></Setter>

@@ -45,18 +45,26 @@
                         materialDesign:HintAssist.Hint="Tên vật tư" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     </TextBox>
-                    <TextBox 
-                        Text="{Binding TenDonViDo, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
-                        Margin="5" 
+                    <ComboBox
+                        Text="{Binding TenDonViDo, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                         Margin="5" 
                         materialDesign:HintAssist.Hint="Đơn vị" 
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                    </TextBox>
-                    <TextBox 
-                        Text="{Binding TenNhaCungCap, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
-                        Margin="5" 
-                        materialDesign:HintAssist.Hint="Tên nhà cung cấp" 
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                    </TextBox>
+                        Style="{StaticResource MaterialDesignComboBox}"
+                        DisplayMemberPath="DonViDo.Ten"
+                        ItemsSource="{Binding ListUnit}">
+                        
+                    </ComboBox>
+
+                    <ComboBox
+                        Text="{Binding TenNhaCungCap, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                         Margin="5" 
+                        materialDesign:HintAssist.Hint="Khách Hàng" 
+                        Style="{StaticResource MaterialDesignComboBox}"
+                        DisplayMemberPath="NhaCungCap.Ten"
+                        ItemsSource="{Binding ListSupp}">
+
+                    </ComboBox>
+                    
                 </StackPanel>
             </materialDesign:Card>
             <materialDesign:Card Grid.Column="1" Margin="5">
@@ -103,9 +111,9 @@
                             <GridView>
                                 <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
                                 <GridViewColumn Header="Vật tư" DisplayMemberBinding="{Binding VatTu.Ten}"></GridViewColumn>
-                                <GridViewColumn Header="Đơn vị tính" DisplayMemberBinding="{Binding TenDonViDo}"></GridViewColumn>
+                                <GridViewColumn Header="Đơn vị tính" DisplayMemberBinding="{Binding DonViDo.Ten}"></GridViewColumn>
                                 <GridViewColumn Header="Hiện có" DisplayMemberBinding="{Binding Count}"></GridViewColumn>
-                                <GridViewColumn Header="Đơn vị cung cấp" DisplayMemberBinding="{Binding TenNhaCungCap}"></GridViewColumn>
+                                <GridViewColumn Header="Đơn vị cung cấp" DisplayMemberBinding="{Binding NhaCungCap.Ten}"></GridViewColumn>
                                 <GridViewColumn Header="Địa chỉ" DisplayMemberBinding="{Binding VatTu.NhaCungCap.Address}"></GridViewColumn>
                                 
                             </GridView>

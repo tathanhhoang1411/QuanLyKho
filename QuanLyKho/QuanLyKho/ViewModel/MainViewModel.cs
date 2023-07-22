@@ -155,7 +155,7 @@ namespace QuanLyKho.ViewModel
                 tonkho.Count = sumInput - sumOutput;
                 //Đổ vật tư 
                 tonkho.Vattu = item;
-                tonkho.DonViDo = DonViDo[0].Ten.ToString();
+                tonkho.DonViDo = DonViDo[0];
                 ListTonKho.Add(tonkho);
 
                 i++;

@@ -10,7 +10,7 @@ using System.Windows.Input;
 
 namespace QuanLyKho.ViewModel
 {
-   public class AcocuntsViewModel:BaseViewModel
+    public class AcocuntsViewModel : BaseViewModel
     {
         private ObservableCollection<Accounts> _ListAccounts;
         public ObservableCollection<Accounts> ListAccounts { get => _ListAccounts; set { _ListAccounts = value; OnPropertyChanged(); } }
@@ -36,21 +36,21 @@ namespace QuanLyKho.ViewModel
         public DateTime NgayTao { get => _NgayTao; set { _NgayTao = value; OnPropertyChanged(); } }
 
         private Accounts _SelectedItem;
-        public Accounts SelectedItem { 
-            get => _SelectedItem; 
-            set { _SelectedItem = value; 
+        public Accounts SelectedItem {
+            get => _SelectedItem;
+            set { _SelectedItem = value;
                 OnPropertyChanged();
-                if (SelectedItem !=null) 
+                if (SelectedItem != null)
                 {
                     HoVaTen = SelectedItem.TaiKhoan.HoVaTen;
                     TaiKhoan = SelectedItem.TaiKhoan.TenTaiKhoan;
                     SDT = SelectedItem.TaiKhoan.SDT;
-                    Email=SelectedItem.TaiKhoan.Email;
+                    Email = SelectedItem.TaiKhoan.Email;
                     TenRoleTaiKhoan = SelectedItem.RoleTaiKhoan.Ten;
-                    NgayTao =(DateTime)SelectedItem.TaiKhoan.NgayTao;
+                    NgayTao = (DateTime)SelectedItem.TaiKhoan.NgayTao;
 
                 }
-            } 
+            }
         }
 
         private string _TenRoleTaiKhoan2;
@@ -65,7 +65,6 @@ namespace QuanLyKho.ViewModel
                 OnPropertyChanged();
                 if (SelectedItemRole != null)
                 {
-                    RoleAccountViewModel rlVM = new RoleAccountViewModel();
                     TenRoleTaiKhoan2 = SelectedItemRole.RoleTK.Ten;
 
                 }
@@ -73,14 +72,19 @@ namespace QuanLyKho.ViewModel
         }
         public AcocuntsViewModel()
         {
-          
+
             LoadAccount();//đổ danh sách tài khoản vào 
-            LoadRole();//đổ danh sách role
+            LoadComboBoxRole();//đổ danh sách role
 
 
 
         }
-        public void LoadRole()
+        public ObservableCollection<Accounts> LoadComboBoxAcc()
+        {
+            var a = this.ListAccounts;
+            return a;
+        }
+        public void LoadComboBoxRole()
         {
             RoleAccountViewModel role = new RoleAccountViewModel();
             ListRoleAccounts = role.LoadRole();

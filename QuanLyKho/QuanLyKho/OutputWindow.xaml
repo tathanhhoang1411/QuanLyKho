@@ -37,55 +37,75 @@
             </Grid.ColumnDefinitions>
 
             <!--các element binding từ selected item-->
-            <materialDesign:Card Grid.Column="0" Margin="5">
-                <StackPanel 
+
+                <ScrollViewer Grid.Column="0" Margin="5" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto">
+                <materialDesign:Card >
+                    <StackPanel 
                     Orientation="Vertical"
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
-                    <TextBox 
-                        Text="{Binding SDT, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
-                        Margin="5" 
-                        materialDesign:HintAssist.Hint="SDT" 
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                    </TextBox>
-                    <TextBox 
+
+                        <TextBox 
                         Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Tên khách hàng" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                    </TextBox>
-                    <TextBox 
+                        </TextBox>
+                        <TextBox 
+                        Text="{Binding SDT, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="SDT" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        </TextBox>
+                        <TextBox 
                         Text="{Binding TenVatTu, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Tên vật tư" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                    </TextBox>
-                    <TextBox 
+                        </TextBox>
+                        <TextBox 
                         Text="{Binding Count, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Số lượng" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                    </TextBox>
-                    <TextBox 
+                        </TextBox>
+                        <TextBox 
                         Text="{Binding GiaXuat, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Giá xuất" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                    </TextBox>
-                    <TextBox 
+                        </TextBox> 
+                        <ComboBox
+                       Text="{Binding HoVaTenNhanVienXuatKho,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Nhân viên xuất kho" 
+                        Style="{StaticResource MaterialDesignComboBox}"
+                            DisplayMemberPath="TaiKhoan.HoVaTen"
+                            ItemsSource="{Binding ListAcc}"
+                            SelectedItem="{Binding SelectedItemAcc}">
+
+                        </ComboBox>
+                        <Label
+                            Content="{Binding SDTNhanVienXuatKho}"
+                              materialDesign:HintAssist.Hint="SDT Nhân viên xuất kho">
+                            
+                        </Label>
+                        <TextBox 
                         Text="{Binding TrangThai, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Trạng thái" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                    </TextBox>
-                    <DatePicker
+                        </TextBox>
+                        <DatePicker
                           Text="{Binding NgayXuat, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                            Width="100"
                            IsEnabled="true"
                           materialDesign:HintAssist.Hint="Ngày xuất vật tư" >
-                    </DatePicker>
-                </StackPanel>
-            </materialDesign:Card>
+                        </DatePicker>
+                    </StackPanel>
+                </materialDesign:Card>
+            </ScrollViewer>
+
 
             <materialDesign:Card Grid.Column="1" Margin="5">
                 <StackPanel 
@@ -120,7 +140,7 @@
                     VerticalScrollBarVisibility="Auto">
                     <ListView HorizontalAlignment="Center"
                         ItemsSource="{Binding ListOutputs}"
-                        SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                        SelectedItem="{Binding SelectedItemOutPut, Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}">
                         <ListView.Resources>
                             <Style TargetType="GridViewColumnHeader">
                                 <Setter Property="FontSize" Value="15"></Setter>

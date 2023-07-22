@@ -41,6 +41,7 @@ namespace QuanLyKho.ViewModel
         {
             LoadCustomer();
         }
+
        public void LoadCustomer()
         {
             ListCustomers = new ObservableCollection<Customers>();

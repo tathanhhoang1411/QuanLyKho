@@ -48,6 +48,12 @@ namespace QuanLyKho.ViewModel
         {
             LoadSuppl();
         }
+        public ObservableCollection<Supplieres> LoadComboboxSuppl()
+        {
+      SupplierViewModel supplVM= new SupplierViewModel();
+            var a = supplVM.ListSuppls;
+            return a;
+        }
         public void LoadSuppl()
         {
             ListSuppls = new ObservableCollection<Supplieres>();

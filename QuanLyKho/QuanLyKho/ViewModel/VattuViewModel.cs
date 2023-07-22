@@ -35,16 +35,67 @@ namespace QuanLyKho.ViewModel
                 if (SelectedItem != null)
                 {
                     TenVatTu = SelectedItem.VatTu.Ten;
-                    TenDonViDo = SelectedItem.TenDonViDo;
-                    TenNhaCungCap = SelectedItem.TenNhaCungCap;
+                    TenDonViDo = SelectedItem.DonViDo.Ten;
+                    TenNhaCungCap = SelectedItem.NhaCungCap.Ten;
+                   // SelectedItemUnit ;
                 }
             }
         }
+        //List combobox đơn vị đo
+        private ObservableCollection<Unites> _ListUnit;
+        public ObservableCollection<Unites> ListUnit { get => _ListUnit; set { _ListUnit = value; OnPropertyChanged(); } }
+
+        private Unites _SelectedItemUnit;
+        public Unites SelectedItemUnit
+        {
+            get => _SelectedItemUnit;
+            set
+            {
+                _SelectedItemUnit = value;
+                OnPropertyChanged();
+                if (SelectedItemUnit  != null)
+                {
+
+                }
+            }
+        }
+        //List combobox Nhà cung cấp
+        private ObservableCollection<Supplieres> _ListSupp;
+        public ObservableCollection<Supplieres> ListSupp { get => _ListSupp; set { _ListSupp = value; OnPropertyChanged(); } }
+
+        private Customers _SelectedItemSupp;
+        public Customers SelectedItemSupp
+        {
+            get => _SelectedItemSupp;
+            set
+            {
+                _SelectedItemSupp = value;
+                OnPropertyChanged();
+                if (_SelectedItemSupp != null)
+                {
+
+                }
+            }
+        }
+
         public VattuViewModel()
             {
                 LoadVattu();
+            LoadComBoBoxUnit();//đổ unit vào combobox
+            LoadComBoBoxCus();//đổ cus vào combobox
+
             }
-            public void LoadVattu()
+        public void LoadComBoBoxUnit()
+        {
+            UnitViewModel unit =new UnitViewModel();
+            ListUnit = unit.LoadComboboxUnit();
+        }
+        public void LoadComBoBoxCus()
+        {
+SupplierViewModel sup=new SupplierViewModel();
+            ListSupp= sup.LoadComboboxSuppl();
+        }
+        public void LoadVattu()
             {
             ListVattus = new ObservableCollection<VatTus>();
             List<VatTu> ListVatTu = DataProvider.Ins.DB.VatTus.ToList();
@@ -76,8 +127,8 @@ namespace QuanLyKho.ViewModel
                 vtu.Count = sumInput - sumOutput;
                 //Đổ vật tư 
                 vtu.VatTu = item;
-                vtu.TenNhaCungCap = item.NhaCungCap.Ten;
-                vtu.TenDonViDo = DonViDo[0].Ten.ToString();
+                vtu.NhaCungCap = item.NhaCungCap;
+                vtu.DonViDo = DonViDo[0];
                 ListVattus.Add(vtu);
 
                 i++;

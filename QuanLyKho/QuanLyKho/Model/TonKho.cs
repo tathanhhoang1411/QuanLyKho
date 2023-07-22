@@ -11,6 +11,6 @@ namespace QuanLyKho.Model
         public int STT { get; set; }
         public VatTu Vattu { get; set;}
         public int Count { get; set; }
-        public string  DonViDo { get; set; }
+        public DonViDo  DonViDo { get; set; }
     }
 }

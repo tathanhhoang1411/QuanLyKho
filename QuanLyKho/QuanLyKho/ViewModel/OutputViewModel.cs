@@ -12,6 +12,9 @@ namespace QuanLyKho.ViewModel
     {
         private ObservableCollection<Outputs> _ListOutputs;
         public ObservableCollection<Outputs> ListOutputs { get => _ListOutputs; set { _ListOutputs = value; OnPropertyChanged(); } }
+
+        private ObservableCollection<Accounts> _ListAcc;
+        public ObservableCollection<Accounts> ListAcc { get => _ListAcc; set { _ListAcc = value; OnPropertyChanged(); } }
         //Các trường này sẽ binding qua view 
         private string _SDT;
         public string  SDT { get => _SDT; set { _SDT = value; OnPropertyChanged(); } }
@@ -25,6 +28,12 @@ namespace QuanLyKho.ViewModel
         private int _Count;
         public int Count { get => _Count; set { _Count = value; OnPropertyChanged(); } }
 
+        private string _HoVaTenNhanVienXuatKho;
+        public string HoVaTenNhanVienXuatKho { get => _HoVaTenNhanVienXuatKho; set { _HoVaTenNhanVienXuatKho = value; OnPropertyChanged(); } }
+
+        private string _SDTNhanVienXuatKho;
+        public string SDTNhanVienXuatKho { get => _SDTNhanVienXuatKho; set { _SDTNhanVienXuatKho = value; OnPropertyChanged(); } }
+
         private double _GiaXuat;
         public double GiaXuat { get => _GiaXuat; set { _GiaXuat = value; OnPropertyChanged(); } }
 
@@ -34,16 +43,21 @@ namespace QuanLyKho.ViewModel
         private DateTime _NgayXuat;
         public DateTime NgayXuat { get => _NgayXuat; set { _NgayXuat = value; OnPropertyChanged(); } }
 
-        private Outputs _SelectedItem;
-        public Outputs SelectedItem { get=> _SelectedItem; set { _SelectedItem = value;OnPropertyChanged();
-                if (SelectedItem != null)
+        private Outputs _SelectedItemOutPut;
+        public Outputs SelectedItemOutPut { 
+            get=> _SelectedItemOutPut; 
+            set { _SelectedItemOutPut = value;
+                OnPropertyChanged();
+                if (SelectedItemOutPut != null)
                 {
-                    SDT = SelectedItem.KhachHang.SDT;
-                    TenKhachHang = SelectedItem.KhachHang.Ten;
-                    TenVatTu = SelectedItem.Vattu.Ten;
-                    Count = (int)SelectedItem.ThongTinBangXuat.Count;
-                    GiaXuat =(double)SelectedItem.ThongTinBangXuat.GiaXuat;
-                    switch ((int)SelectedItem.ThongTinBangXuat.TrangThai)
+                    SDT = SelectedItemOutPut.KhachHang.SDT;
+                    TenKhachHang = SelectedItemOutPut.KhachHang.Ten;
+                    TenVatTu = SelectedItemOutPut.Vattu.Ten;
+                    Count = (int)SelectedItemOutPut.ThongTinBangXuat.Count;
+                    GiaXuat =(double)SelectedItemOutPut.ThongTinBangXuat.GiaXuat;
+                    HoVaTenNhanVienXuatKho = SelectedItemOutPut.TaiKhoan.HoVaTen;
+                    SDTNhanVienXuatKho = SelectedItemOutPut.TaiKhoan.SDT;
+                    switch ((int)SelectedItemOutPut.ThongTinBangXuat.TrangThai)
                     {
                         case 0:
                             TrangThai = "Hoàn thành";
@@ -54,14 +68,28 @@ namespace QuanLyKho.ViewModel
                         default:
                             break;
                     }
-                    NgayXuat =(DateTime) SelectedItem.BangXuat.NgayXuat;
+                    NgayXuat =(DateTime)SelectedItemOutPut.BangXuat.NgayXuat;
                 } 
             }
         }
-
+        //
+        private Accounts _SelectedItemAcc;
+       public Accounts SelectedItemAcc { get => _SelectedItemAcc; set { _SelectedItemAcc = value; OnPropertyChanged();
+                if (SelectedItemAcc != null) 
+                {
+                    SDTNhanVienXuatKho = SelectedItemAcc.TaiKhoan.SDT;
+                }
+            } 
+        }
         public OutputViewModel()
         {
             LoadOutput();
+            LoadComBoBoxAcc();
+        }
+        public void LoadComBoBoxAcc() 
+        {
+            AcocuntsViewModel accVM=new AcocuntsViewModel();
+            ListAcc = accVM.LoadComboBoxAcc();
         }
         public void LoadOutput()
         {

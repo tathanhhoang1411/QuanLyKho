@@ -54,5 +54,25 @@ namespace QuanLyKho.ViewModel
                 i++;
             }
         }
+        public ObservableCollection<Unites> LoadComboboxUnit()
+        {
+            ListDonViDoes = new ObservableCollection<Unites>();
+            List<DonViDo> listDonViDo = DataProvider.Ins.DB.DonViDoes.ToList();
+            //Biến i sẽ là STT tăng dần
+            int i = 1;
+            foreach (DonViDo item in listDonViDo)
+
+            {
+
+                Unites unit = new Unites();
+                //Đổ số thứ tự Khách hàng
+                unit.STT = i;
+                //Đổ tai khoản
+                unit.DonViDo = item;
+                ListDonViDoes.Add(unit);
+                i++;
+            }
+            return ListDonViDoes;
+        }
     }
 }

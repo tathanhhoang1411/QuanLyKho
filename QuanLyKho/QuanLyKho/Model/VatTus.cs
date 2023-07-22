@@ -10,8 +10,8 @@ namespace QuanLyKho.Model
     {
         public int STT { get; set; }
         public VatTu VatTu { get; set; }
-        public string  TenNhaCungCap { get; set; }
-        public string TenDonViDo { get; set; }
+        public NhaCungCap   NhaCungCap { get; set; }
+        public DonViDo DonViDo { get; set; }
         public int Count { get; set; }
     }
 

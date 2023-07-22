@@ -32,7 +32,7 @@ namespace QuanLyKho.ViewModel
         {
             
             IsLogin = false;
-            Password = "";
+            Password = "admin";
             UserName = "TaThanhHoang";
             ShowPassCommand = new RelayCommand<Window>((p) => { return isField(); }, (p) => { });
             LoginCommand = new RelayCommand<Window>((p) => { return isField(); }, (p) => { Login(p); });
