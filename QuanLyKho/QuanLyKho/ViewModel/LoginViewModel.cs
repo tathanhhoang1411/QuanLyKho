@@ -23,6 +23,7 @@ namespace QuanLyKho.ViewModel
         private ObservableCollection<Accounts> _ListAccInfo;
         public ObservableCollection<Accounts> ListAccInfo { get => _ListAccInfo; set { _ListAccInfo = value; OnPropertyChanged(); } }
 
+        
         public ICommand CloseCommand { get; set; }
         public ICommand LoginCommand { get; set; }
         public ICommand ShowPassCommand { get; set; }
@@ -34,14 +35,14 @@ namespace QuanLyKho.ViewModel
             IsLogin = false;
             Password = "admin";
             UserName = "TaThanhHoang";
-            ShowPassCommand = new RelayCommand<Window>((p) => { return isField(); }, (p) => { });
+            ShowPassCommand = new RelayCommand<Window>((p) => { return isField(); }, (p) => { MessageBox.Show("Chức năng đang xây dựng, vui lòng chờ bảng nâng cấp"); });
             LoginCommand = new RelayCommand<Window>((p) => { return isField(); }, (p) => { Login(p); });
             CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { p.Close(); });
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
         }
-        bool isField()
+        bool isField()// kt để quyết định có hiện chức năng đăng nhập không
         {
-            if (Password != "" )
+            if (Password != "" && UserName !="" )
             {
                 return true;
             }
@@ -58,12 +59,12 @@ namespace QuanLyKho.ViewModel
             if (UserName.Trim() == "" && Password.Trim() == "")
             {
                 IsLogin = false;
-                MessageBox.Show("Hãy nhập tài khoản và mật khẩu!");
+                MessageBox.Show("Hãy nhập tài khoản và mật khẩu!","Thông báo",MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else// có điền thông tin
             {
                  string passEncode = MD5Hash(Base64Encode(Password));
-                var accCount = DataProvider.Ins.DB.TaiKhoans.Where(x => x.TenTaiKhoan == UserName && x.MatKhau == passEncode).Count();
+                 var accCount = DataProvider.Ins.DB.TaiKhoans.Where(x => x.TenTaiKhoan == UserName && x.MatKhau == passEncode).Count();
                 if (accCount > 0)
                 {
                     IsLogin = true;
@@ -72,12 +73,12 @@ namespace QuanLyKho.ViewModel
                 else
                 {
                     IsLogin = false;
-                    MessageBox.Show("Tài khoản hoặc mật khẩu chưa chính xác!");
+                    MessageBox.Show("Tài khoản hoặc mật khẩu chưa chính xác!","Cảnh báo", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
 
         }
-        public List<TaiKhoan> AccInfo()//Lấy List tài khoản đã đăng  nhập để làm các hành động khác
+        private List<TaiKhoan> AccInfo()//Lấy List tài khoản đã đăng  nhập để làm các hành động khác
         {
             string passEncode = MD5Hash(Base64Encode(Password));
             List<TaiKhoan> accInfo = DataProvider.Ins.DB.TaiKhoans.Where(x => x.TenTaiKhoan == UserName && x.MatKhau == passEncode).ToList();
@@ -111,7 +112,7 @@ namespace QuanLyKho.ViewModel
 
          
 
-        public static string Base64Encode(string plainText)
+        private  string Base64Encode(string plainText)
         {
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
             return System.Convert.ToBase64String(plainTextBytes);
@@ -119,7 +120,7 @@ namespace QuanLyKho.ViewModel
 
 
 
-        public static string MD5Hash(string input)
+        private  string MD5Hash(string input)
         {
             StringBuilder hash = new StringBuilder();
             MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider();

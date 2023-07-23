@@ -8,6 +8,8 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Forms.VisualStyles;
 using System.Data.Entity.Core.Objects;
+using System.Windows.Forms;
+using System.Runtime.InteropServices;
 
 namespace QuanLyKho.ViewModel
 {
@@ -46,20 +48,31 @@ namespace QuanLyKho.ViewModel
         }
         private void ExcutedAddCommand()
         {
-            DonViDo unit = new DonViDo();
-            unit.Ten= TenDonViDo;
+            try
+            {
+                DonViDo unit = new DonViDo();
+                unit.Ten = TenDonViDo.Trim();
                 DataProvider.Ins.DB.DonViDoes.Add(unit);
                 DataProvider.Ins.DB.SaveChanges();
 
-            //phương án 1: bỏ unit vào vị trí cuối của ListDonViDoes vì ListDonViDoes có OnPropertyChanged()
-            //kết quả: không load lại ListDonViDoes
-            //int countItem=ListDonViDoes.Count();
-            //ListDonViDoes[countItem - 1].STT= 100;
-            //ListDonViDoes[countItem - 1].DonViDo = unit;
-            
-            //phương án 2: gọi lại hàm LoadUnit() chắc chắc sẽ load lại ListDonViDoes vì trong hàm này có ListDonViDoes
-            //Kết quả: thành công nhưng vì mất thời gian gọi nên sẽ lâu hơn với dữ liệu lớn 
-            LoadUnit();
+                //phương án 1: bỏ unit vào vị trí cuối của ListDonViDoes vì ListDonViDoes có OnPropertyChanged()
+                //kết quả: không load lại ListDonViDoes
+                //int countItem=ListDonViDoes.Count();
+                //ListDonViDoes[countItem - 1].STT= 100;
+                //ListDonViDoes[countItem - 1].DonViDo = unit;
+
+                //phương án 2: gọi lại hàm LoadUnit() chắc chắc sẽ load lại ListDonViDoes vì trong hàm này có ListDonViDoes
+                //Kết quả: thành công nhưng vì mất thời gian gọi nên sẽ lâu hơn với dữ liệu lớn 
+                LoadUnit();
+               
+
+                MessageBox.Show("Thêm đơn vị "+TenDonViDo.Trim()+ " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show("Tiến trình lỗi", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
         private bool CanAddCommand()

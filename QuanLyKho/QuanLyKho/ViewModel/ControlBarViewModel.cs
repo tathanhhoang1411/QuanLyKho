@@ -13,12 +13,11 @@ namespace QuanLyKho.ViewModel
 {
     public class ControlBarViewModel : BaseViewModel
     {
-        #region commands
         public ICommand CloseWindowCommand { get; set; }
         public ICommand MaximizeWindowCommand { get; set; }
         public ICommand MinimizeWindowCommand { get; set; }
         public ICommand MouseMoveWindowCommand { get; set; }
-        #endregion
+        public ICommand OptionCommand { get; set; }
 
         public ControlBarViewModel()
         {
@@ -68,9 +67,14 @@ namespace QuanLyKho.ViewModel
                 }
             }
            );
+            OptionCommand =new  RelayCommand<object>((p) => { return CanExcuteOption(); }, (p) => { });
         }
-
-        FrameworkElement GetWindowParent(UserControl p)
+         bool CanExcuteOption()
+        {
+            LoginViewModel lgVM = new LoginViewModel();
+            return lgVM.IsLogin;
+        }
+        private FrameworkElement GetWindowParent(UserControl p)
         {
             FrameworkElement parent = p;
 

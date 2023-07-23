@@ -57,7 +57,8 @@
                                  Style="{StaticResource MaterialDesignFloatingHintPasswordBox}">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="PasswordChanged">
-                                <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" 
+                                <i:InvokeCommandAction 
+                                    Command="{Binding PasswordChangedCommand}" 
                                    CommandParameter="{Binding ElementName=FloatingPasswordBox}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>

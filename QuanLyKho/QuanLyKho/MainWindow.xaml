@@ -250,9 +250,9 @@
                                         </Style>
                                 </StackPanel.Resources>
                                 <Label Content="Thông tin tài khoản đang đăng nhập"></Label>
-                                <ListView 
+                                <ListView Margin="0 -40 0 0" 
                                 ItemsSource="{Binding ListAccInfo}">
-                                    <ListView.View>
+                                    <ListView.View >
                                         <GridView ScrollViewer.CanContentScroll="False">
                                             <GridViewColumn 
                                             DisplayMemberBinding="{Binding TaiKhoan.HoVaTen}">
@@ -261,7 +261,7 @@
                                             DisplayMemberBinding="{Binding TaiKhoan.SDT}">
                                             </GridViewColumn>
                                             <GridViewColumn 
-                                            DisplayMemberBinding="{Binding TenRoleTaiKhoan}">
+                                            DisplayMemberBinding="{Binding RoleTaiKhoan.Ten}">
                                             </GridViewColumn>
                                         </GridView>
                                     </ListView.View>
