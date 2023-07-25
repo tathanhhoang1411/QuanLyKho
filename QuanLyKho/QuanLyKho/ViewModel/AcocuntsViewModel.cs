@@ -1,7 +1,9 @@
-﻿using QuanLyKho.Model;
+﻿using GalaSoft.MvvmLight.CommandWpf;
+using QuanLyKho.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -70,15 +72,55 @@ namespace QuanLyKho.ViewModel
                 }
             }
         }
+        public ICommand OpenFolderCommand { get; private set; }
+        public ICommand AddCommand { get;set ; }
+        public ICommand EditCommand { get;set ; }
+        public ICommand DeleteCommand { get;set ; }
+        public ICommand UnDeleteCommand { get;set ; }
+        private string _imagePath;
+        public string ImagePath
+        {
+            get { return _imagePath; }
+            set
+            {
+                _imagePath = value;
+                OnPropertyChanged("ImagePath");
+            }
+        }
+        private void LoadImage()
+        {
+            ImagePath = @"C:\Users\cahoi\Downloads\anhdaidien.jpg"; // thay đổi đường dẫn tới tệp ảnh của bạn tại đây
+        }
         public AcocuntsViewModel()
         {
 
             LoadAccount();//đổ danh sách tài khoản vào 
             LoadComboBoxRole();//đổ danh sách role
-
-
+            AddCommand = new RelayCommand<object>((p) => { return true; }, (p) => {  });
+            EditCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
+            DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => {  });
+            UnDeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
+            OpenFolderCommand = new RelayCommand(OpenFolder);
 
         }
+        private void OpenFolder()
+        {
+            Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
+            dlg.DefaultExt = ".jpg";
+            dlg.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png";
+
+            bool? result = dlg.ShowDialog();
+
+            if (result == true)
+            {
+                string selectedFilePath = dlg.FileName;
+                ImagePath= selectedFilePath;
+                // do something with the selected file path
+            }
+        }
+
+
+
         public ObservableCollection<Accounts> LoadComboBoxAcc()
         {
             var a = this.ListAccounts;

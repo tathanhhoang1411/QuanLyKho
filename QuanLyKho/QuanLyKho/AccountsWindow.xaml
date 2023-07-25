@@ -60,6 +60,9 @@
                         materialDesign:HintAssist.Hint="Tài khoản" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                         </TextBox>
+                        <Image Source="{Binding ImagePath, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill" Width="150" Height="150">
+                            
+                        </Image>
                         <TextBox 
                         Text="{Binding SDT, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
@@ -110,6 +113,12 @@
                     <Button 
                         Command="{Binding DeleteCommand}" 
                         Content="Xóa"
+                        Margin="5"
+                        Width="100">
+                    </Button> 
+                    <Button 
+                        Command="{Binding OpenFolderCommand}" 
+                        Content="Mở thư mục"
                         Margin="5"
                         Width="100">
                     </Button>
