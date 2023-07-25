@@ -10,6 +10,8 @@ using System.Windows.Forms.VisualStyles;
 using System.Data.Entity.Core.Objects;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace QuanLyKho.ViewModel
 {
@@ -17,6 +19,7 @@ namespace QuanLyKho.ViewModel
     {
         private ObservableCollection<Unites> _ListDonViDoes;
         public ObservableCollection<Unites> ListDonViDoes { get => _ListDonViDoes; set { _ListDonViDoes = value; OnPropertyChanged(); } }
+
 
         private string _TenDonViDo;
         public string TenDonViDo { get => _TenDonViDo; set { _TenDonViDo = value; OnPropertyChanged(); } }
@@ -26,6 +29,8 @@ namespace QuanLyKho.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand UnDeleteCommand { get; set; }
+
 
         private Unites _SelectedItem;
         public Unites SelectedItem
@@ -45,13 +50,91 @@ namespace QuanLyKho.ViewModel
 
             LoadUnit();
             AddCommand = new RelayCommand<object>((p) => { return CanAddCommand(); }, (p) => { ExcutedAddCommand(); });
+            EditCommand = new RelayCommand<object>((p) => { return false; }, (p) => { ExcutedEditCommand(); });
+            DeleteCommand = new RelayCommand<object>((p) => { return CanDelCommand(); }, (p) => { ExcutedDelCommand(); });
+            UnDeleteCommand = new RelayCommand<object>((p) => { return CanDelCommand(); }, (p) => { ExcutedUnDelCommand(); });
         }
+        private void LoadUnit()
+        {
+            ListDonViDoes = new ObservableCollection<Unites>();
+            List<DonViDo> listDonViDo = DataProvider.Ins.DB.DonViDoes.ToList();
+            //Biến i sẽ là STT tăng dần
+            int i = 1;
+            foreach (DonViDo item in listDonViDo)
+
+            {
+
+                Unites unit = new Unites();
+                //Đổ số thứ tự Khách hàng
+                unit.STT = i;
+                unit.DonViDo= item;
+                //Đổ tai khoản
+                switch (item.TrangThai)
+                {
+                    case 1:
+                        unit.TrangThai = "Kích hoạt";
+                        break;
+                    case 0:
+                        unit.TrangThai = "Tắt";
+                        break;
+                    default:
+                        break;
+                }
+                ListDonViDoes.Add(unit);
+                i++;
+            }
+        }
+        public ObservableCollection<Unites> LoadComboboxUnit()
+        {
+
+            ListDonViDoes=new ObservableCollection<Unites>();
+            List<DonViDo> listDonViDo = DataProvider.Ins.DB.DonViDoes.Where(x=>x.TrangThai==1).ToList();//Combobox unit chỉ hiện những donvido có trang thai =1
+            //Biến i sẽ là STT tăng dần
+            int i = 1;
+            foreach (DonViDo item in listDonViDo)
+
+            {
+
+                Unites unit = new Unites();
+                //Đổ số thứ tự Khách hàng
+                unit.STT = i;
+                //Đổ tai khoản
+                unit.DonViDo = item;
+                ListDonViDoes.Add(unit);
+                i++;
+            }
+            return ListDonViDoes;
+        }
+
+        protected bool CanAddCommand()
+        {
+            if (string.IsNullOrWhiteSpace(TenDonViDo))//Nếu TenDonViDo rỗng(nó là 1 textbox được binding từ unitVM)
+            {
+                return false;
+            }
+            //nếu tên đơn vị đo có kí tự thì ....
+            var list = DataProvider.Ins.DB.DonViDoes.Where(x => x.Ten == TenDonViDo);//Lấy ra List đơn vị đo có Tên == giá trị từ TenDonViDo 
+            if (list.Count() == 0  )//Nếu List đơn vị đo chưa từng tồn tại DonViDo.Ten có giá trị TenDonViDo và không selectedItem
+            {
+                foreach(Unites item in ListDonViDoes)
+                {
+                    if(item.DonViDo.Ten != TenDonViDo)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
         private void ExcutedAddCommand()
         {
             try
             {
                 DonViDo unit = new DonViDo();
                 unit.Ten = TenDonViDo.Trim();
+                unit.TrangThai = 1;
                 DataProvider.Ins.DB.DonViDoes.Add(unit);
                 DataProvider.Ins.DB.SaveChanges();
 
@@ -71,63 +154,90 @@ namespace QuanLyKho.ViewModel
             }
             catch(Exception ex)
             {
+                MessageBox.Show("Lỗi", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+
+
+        protected bool CanEditCommand()
+        {
+            if (SelectedItem ==null && string.IsNullOrWhiteSpace(TenDonViDo))//Nếu không chọn item nào và tendonvido rỗng
+            {
+                return false;
+            }
+            else 
+            { 
+
+            return true;
+            }
+           
+        }
+        private void ExcutedEditCommand()
+        {
+            try
+            {
+                var donvido = DataProvider.Ins.DB.DonViDoes.Where(x => x.Id == SelectedItem.DonViDo.Id).SingleOrDefault();
+                donvido.Ten = TenDonViDo.Trim();
+                DataProvider.Ins.DB.SaveChanges();
+                LoadUnit();
+                MessageBox.Show("Sửa đơn vị " + TenDonViDo.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch (Exception ex)
+            {
                 MessageBox.Show("Tiến trình lỗi", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
-        private bool CanAddCommand()
+
+        protected bool CanDelCommand()
         {
-            if (string.IsNullOrEmpty(TenDonViDo))//Nếu TenDonViDo rỗng(nó là 1 textbox được binding từ unitVM)
+            if (SelectedItem == null)//Nếu không chọn item nào
             {
                 return false;
             }
-            //nếu tên đơn vị đo có kí tự thì ....
-            var list = DataProvider.Ins.DB.DonViDoes.Where(x => x.Ten == TenDonViDo);//Lấy ra List đơn vị đo có Tên == giá trị từ TenDonViDo 
-            if ( list.Count() == 0)//Nếu List đơn vị đo chưa từng tồn tại DonViDo.Ten có giá trị TenDonViDo
+            else
             {
+
                 return true;
             }
 
-            return false;
         }
-        public void LoadUnit()
+        private void ExcutedDelCommand()
         {
-            ListDonViDoes = new ObservableCollection<Unites>();
-            List<DonViDo> listDonViDo = DataProvider.Ins.DB.DonViDoes.ToList();
-            //Biến i sẽ là STT tăng dần
-            int i = 1;
-            foreach (DonViDo item in listDonViDo)
-
+            try
             {
+                var donvido = DataProvider.Ins.DB.DonViDoes.Where(x => x.Id == SelectedItem.DonViDo.Id).SingleOrDefault();
+                donvido.TrangThai = 0;//khong dùng
+                DataProvider.Ins.DB.SaveChanges();
+                SelectedItem.DonViDo.Ten = TenDonViDo.Trim();
+                LoadUnit();
+                MessageBox.Show("Tắt dùng đơn vị " + TenDonViDo.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                Unites unit = new Unites();
-                //Đổ số thứ tự Khách hàng
-                unit.STT = i;
-                //Đổ tai khoản
-                unit.DonViDo = item;
-                ListDonViDoes.Add(unit);
-                i++;
             }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Tiến trình lỗi", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
-        public ObservableCollection<Unites> LoadComboboxUnit()
+        private void ExcutedUnDelCommand()
         {
-            ListDonViDoes = new ObservableCollection<Unites>();
-            List<DonViDo> listDonViDo = DataProvider.Ins.DB.DonViDoes.ToList();
-            //Biến i sẽ là STT tăng dần
-            int i = 1;
-            foreach (DonViDo item in listDonViDo)
-
+            try
             {
+                var donvido = DataProvider.Ins.DB.DonViDoes.Where(x => x.Id == SelectedItem.DonViDo.Id).SingleOrDefault();
+                donvido.TrangThai =1;// dùng
+                DataProvider.Ins.DB.SaveChanges();
+                SelectedItem.DonViDo.Ten = TenDonViDo.Trim();
+                LoadUnit();
+                MessageBox.Show("Bật dùng đơn vị " + TenDonViDo.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                Unites unit = new Unites();
-                //Đổ số thứ tự Khách hàng
-                unit.STT = i;
-                //Đổ tai khoản
-                unit.DonViDo = item;
-                ListDonViDoes.Add(unit);
-                i++;
             }
-            return ListDonViDoes;
+            catch (Exception ex)
+            {
+                MessageBox.Show("Tiến trình lỗi", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

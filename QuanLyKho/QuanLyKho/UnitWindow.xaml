@@ -57,15 +57,22 @@
                         Margin="5" 
                         Width="100">
                     </Button>
-                    <Button 
+                   
+                    <!--<Button 
                         Command="{Binding EditCommand}" 
                         Content="Sửa" 
                         Margin="5"
                         Width="100">
-                    </Button>
+                    </Button>-->
                     <Button 
                         Command="{Binding DeleteCommand}" 
-                        Content="Xóa"
+                        Content="Tắt"
+                        Margin="5"
+                        Width="100">
+                    </Button>
+                    <Button 
+                        Command="{Binding UnDeleteCommand}" 
+                        Content="Kích hoạt"
                         Margin="5"
                         Width="100">
                     </Button>
@@ -89,9 +96,9 @@
                         </ListView.Resources>
                         <ListView.View>
                             <GridView>
-                                <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}">
-                                </GridViewColumn>
+                                <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
                                 <GridViewColumn Header="Tên đơn vị đo" DisplayMemberBinding="{Binding DonViDo.Ten}"></GridViewColumn>
+                                <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TrangThai}"></GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>

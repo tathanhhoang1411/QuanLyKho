@@ -51,17 +51,19 @@
                         materialDesign:HintAssist.Hint="Đơn vị" 
                         Style="{StaticResource MaterialDesignComboBox}"
                         DisplayMemberPath="DonViDo.Ten"
-                        ItemsSource="{Binding ListUnit}">
-                        
+                        ItemsSource="{Binding ListUnit, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedItemUnit, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+
                     </ComboBox>
 
                     <ComboBox
                         Text="{Binding TenNhaCungCap, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                          Margin="5" 
-                        materialDesign:HintAssist.Hint="Khách Hàng" 
+                        materialDesign:HintAssist.Hint="Nhà cung cấp" 
                         Style="{StaticResource MaterialDesignComboBox}"
                         DisplayMemberPath="NhaCungCap.Ten"
-                        ItemsSource="{Binding ListSupp}">
+                        ItemsSource="{Binding ListSupp, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedItemSupp, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
 
                     </ComboBox>
                     
@@ -72,20 +74,26 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
                     <Button 
-                        Command="{Binding AddCommand}" 
+                        Command="{Binding AddCommand,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
                         Content="Thêm" 
                         Margin="5" 
                         Width="100">
                     </Button>
                     <Button 
-                        Command="{Binding EditCommand}" 
-                        Content="Sửa" 
+                        Command="{Binding EditCommand,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        Content="Sửa" 
                         Margin="5"
                         Width="100">
                     </Button>
                     <Button 
-                        Command="{Binding DeleteCommand}" 
-                        Content="Xóa"
+                        Command="{Binding DeleteCommand,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        Content="Tắt" 
+                        Margin="5"
+                        Width="100">
+                    </Button>
+                    <Button 
+                        Command="{Binding UnDeleteCommand,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        Content="Kích hoạt"
                         Margin="5"
                         Width="100">
                     </Button>
@@ -99,8 +107,8 @@
                 <ScrollViewer 
                     VerticalScrollBarVisibility="Auto">
                     <ListView HorizontalAlignment="Center"
-                        ItemsSource="{Binding ListVattus}"
-                        SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                        ItemsSource="{Binding ListVattus, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <ListView.Resources>
                             <Style TargetType="GridViewColumnHeader">
                                 <Setter Property="FontSize" Value="15"></Setter>
@@ -112,6 +120,8 @@
                                 <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
                                 <GridViewColumn Header="Vật tư" DisplayMemberBinding="{Binding VatTu.Ten}"></GridViewColumn>
                                 <GridViewColumn Header="Đơn vị tính" DisplayMemberBinding="{Binding DonViDo.Ten}"></GridViewColumn>
+                                <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TrangThai}"></GridViewColumn>
+                                
                                 <GridViewColumn Header="Hiện có" DisplayMemberBinding="{Binding Count}"></GridViewColumn>
                                 <GridViewColumn Header="Đơn vị cung cấp" DisplayMemberBinding="{Binding NhaCungCap.Ten}"></GridViewColumn>
                                 <GridViewColumn Header="Địa chỉ" DisplayMemberBinding="{Binding VatTu.NhaCungCap.Address}"></GridViewColumn>

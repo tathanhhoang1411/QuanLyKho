@@ -25,6 +25,7 @@ namespace QuanLyKho.Model
         public string Ten { get; set; }
         public int IdDonViDo { get; set; }
         public int IdNhaCungCap { get; set; }
+        public Nullable<int> TrangThai { get; set; }
     
         public virtual DonViDo DonViDo { get; set; }
         public virtual NhaCungCap NhaCungCap { get; set; }

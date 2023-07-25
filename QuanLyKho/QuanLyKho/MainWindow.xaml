@@ -54,6 +54,7 @@
                     </Grid.Resources>
                     <ScrollViewer Grid.Column="0" VerticalScrollBarVisibility="Auto">
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Center" >
+
                             <Button ToolTip="Nhập"
                                     Height="80"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
@@ -80,7 +81,7 @@
                                      Height="80"
                                     Style="{StaticResource MaterialDesignRaisedButton}"
                                     Margin="5"
-                                     Command="{Binding VattuWindowCommand}">
+                                     Command="{Binding VattuWindowCommand,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                                 <StackPanel Orientation="Vertical">
                                     <Label Grid.Row="0" Content="Vật tư"></Label>
                                     <materialDesign:PackIcon Width="24" Height="24"  HorizontalAlignment="Center"  Kind="Dns">
@@ -251,7 +252,7 @@
                                 </StackPanel.Resources>
                                 <Label Content="Thông tin tài khoản đang đăng nhập"></Label>
                                 <ListView Margin="0 -40 0 0" 
-                                ItemsSource="{Binding ListAccInfo}">
+                                ItemsSource="{Binding ListAccInfo,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}">
                                     <ListView.View >
                                         <GridView ScrollViewer.CanContentScroll="False">
                                             <GridViewColumn 

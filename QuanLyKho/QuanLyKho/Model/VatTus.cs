@@ -13,6 +13,7 @@ namespace QuanLyKho.Model
         public NhaCungCap   NhaCungCap { get; set; }
         public DonViDo DonViDo { get; set; }
         public int Count { get; set; }
+        public string TrangThai { get; set; }
     }
 
 }

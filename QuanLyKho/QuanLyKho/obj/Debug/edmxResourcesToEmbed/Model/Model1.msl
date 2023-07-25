@@ -22,6 +22,7 @@
     <EntitySetMapping Name="DonViDoes">
       <EntityTypeMapping TypeName="QuanLyKhoModel.DonViDo">
         <MappingFragment StoreEntitySet="DonViDo">
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
           <ScalarProperty Name="Ten" ColumnName="Ten" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
@@ -42,6 +43,7 @@
     <EntitySetMapping Name="NhaCungCaps">
       <EntityTypeMapping TypeName="QuanLyKhoModel.NhaCungCap">
         <MappingFragment StoreEntitySet="NhaCungCap">
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
           <ScalarProperty Name="NgayHopTac" ColumnName="NgayHopTac" />
           <ScalarProperty Name="ThongTinThem" ColumnName="ThongTinThem" />
           <ScalarProperty Name="Email" ColumnName="Email" />
@@ -63,6 +65,7 @@
     <EntitySetMapping Name="TaiKhoans">
       <EntityTypeMapping TypeName="QuanLyKhoModel.TaiKhoan">
         <MappingFragment StoreEntitySet="TaiKhoan">
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
           <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="IdRoleTaiKhoan" ColumnName="IdRoleTaiKhoan" />
@@ -102,6 +105,7 @@
     <EntitySetMapping Name="VatTus">
       <EntityTypeMapping TypeName="QuanLyKhoModel.VatTu">
         <MappingFragment StoreEntitySet="VatTu">
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
           <ScalarProperty Name="IdNhaCungCap" ColumnName="IdNhaCungCap" />
           <ScalarProperty Name="IdDonViDo" ColumnName="IdDonViDo" />
           <ScalarProperty Name="Ten" ColumnName="Ten" />

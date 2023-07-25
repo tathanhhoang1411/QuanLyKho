@@ -58,6 +58,12 @@
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     </TextBox>
                     <TextBox 
+                        Text="{Binding DiaChi, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Địa chỉ" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    </TextBox>
+                    <TextBox 
                         Text="{Binding ThongTinThem, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Thông tin thêm" 
@@ -88,8 +94,14 @@
                         Width="100">
                     </Button>
                     <Button 
+                        Command="{Binding UnDeleteCommand}" 
+                        Content="Kích hoạt"
+                        Margin="5"
+                        Width="100">
+                    </Button>
+                    <Button 
                         Command="{Binding DeleteCommand}" 
-                        Content="Xóa"
+                        Content="Tắt"
                         Margin="5"
                         Width="100">
                     </Button>
@@ -103,8 +115,8 @@
                 <ScrollViewer 
                     VerticalScrollBarVisibility="Auto">
                     <ListView HorizontalAlignment="Center"
-                        ItemsSource="{Binding ListSuppls}"
-                        SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}">
+                        ItemsSource="{Binding ListSuppls, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedItem, Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}">
                         <ListView.Resources>
                             <Style TargetType="GridViewColumnHeader">
                                 <Setter Property="FontSize" Value="15"></Setter>
@@ -117,6 +129,7 @@
                                 <GridViewColumn Header="Tên đơn vị cung ứng" DisplayMemberBinding="{Binding NhaCungCap.Ten}"></GridViewColumn>
                                 <GridViewColumn Header="Email " DisplayMemberBinding="{Binding NhaCungCap.Email}"></GridViewColumn> 
                                 <GridViewColumn Header="SDT" DisplayMemberBinding="{Binding NhaCungCap.SDT}"></GridViewColumn>
+                                <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TrangThai}"></GridViewColumn>
                                 <GridViewColumn Header="Địa chỉ" DisplayMemberBinding="{Binding NhaCungCap.Address}"></GridViewColumn>
                                 <GridViewColumn Header="Ngày hợp tác" DisplayMemberBinding="{Binding NhaCungCap.NgayHopTac}"></GridViewColumn>
                                 <GridViewColumn Header="Thông tin thêm" DisplayMemberBinding="{Binding NhaCungCap.ThongTinThem}"></GridViewColumn>

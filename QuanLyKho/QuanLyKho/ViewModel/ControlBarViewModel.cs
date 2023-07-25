@@ -21,17 +21,19 @@ namespace QuanLyKho.ViewModel
 
         public ControlBarViewModel()
         {
-            CloseWindowCommand = new RelayCommand<UserControl>((p) => { return p == null ? false : true; }, (p) => {
+            
+
+           CloseWindowCommand = new RelayCommand<UserControl>((p) => { return true; }, (p) => {
                 //p == null ? false : true command luôn đúng để active nút close
                 FrameworkElement window = GetWindowParent(p);
                 var w = window as Window;
-                if (w != null)
+              if (w != null)
                 {
                     w.Close();
                 }
             }
             );
-            MaximizeWindowCommand = new RelayCommand<UserControl>((p) => { return p == null ? false : true; }, (p) =>
+            MaximizeWindowCommand = new RelayCommand<UserControl>((p) => { return  true; }, (p) =>
             {
                 FrameworkElement window = GetWindowParent(p);
                 var w = window as Window;
@@ -44,7 +46,7 @@ namespace QuanLyKho.ViewModel
                 }
             }
             );
-            MinimizeWindowCommand = new RelayCommand<UserControl>((p) => { return p == null ? false : true; }, (p) =>
+            MinimizeWindowCommand = new RelayCommand<UserControl>((p) => { return true; }, (p) =>
             {
                 FrameworkElement window = GetWindowParent(p);
                 var w = window as Window;
@@ -67,12 +69,22 @@ namespace QuanLyKho.ViewModel
                 }
             }
            );
-            OptionCommand =new  RelayCommand<object>((p) => { return CanExcuteOption(); }, (p) => { });
+           OptionCommand =new  RelayCommand<Window>((p) => { return CanExcuteOption(); }, (p) => {
+        
+               LoginWindow loginWindow = new LoginWindow();
+               loginWindow.ShowDialog();
+               MainWindow m=new MainWindow();
+               m.Close();
+
+
+
+           });
         }
-         bool CanExcuteOption()
+
+        public bool CanExcuteOption()
         {
-            LoginViewModel lgVM = new LoginViewModel();
-            return lgVM.IsLogin;
+           
+            return true;
         }
         private FrameworkElement GetWindowParent(UserControl p)
         {

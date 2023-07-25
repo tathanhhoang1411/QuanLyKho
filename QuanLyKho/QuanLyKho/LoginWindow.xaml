@@ -95,6 +95,7 @@
                             Command="{Binding CloseCommand}"
                             CommandParameter="{Binding ElementName=loginWindow}">
                     </Button>
+
                 </Grid>
                 <Grid Grid.Row="4">
                     <TextBlock>
@@ -102,9 +103,7 @@
                                  NavigateUri="http://google.com" 
                                  Foreground="Red"
                                  IsEnabled="True" 
-                                 RequestNavigate="Hyperlink_RequestNavigate"
-                                      Command="{Binding CloseCommand}"
-                            CommandParameter="{Binding ElementName=loginWindow}">
+                                 RequestNavigate="Hyperlink_RequestNavigate">
                                  Quên mật khẩu
                               </Hyperlink>
                     </TextBlock>

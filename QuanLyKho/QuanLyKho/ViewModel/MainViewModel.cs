@@ -33,7 +33,6 @@ namespace QuanLyKho.ViewModel
         // mọi thứ xử lý sẽ nằm trong này 
         public MainViewModel()
         {
-
             LoginWindow loginWindow = new LoginWindow();
             var loginVM = loginWindow.DataContext as LoginViewModel;
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
@@ -70,8 +69,10 @@ namespace QuanLyKho.ViewModel
                 mainVM.Hide();
                 UnitWindow wd = new UnitWindow();
                 wd.ShowDialog();
-
                 
+
+
+
             });
             AccountsWindowCommand = new RelayCommand<object>((p) => {
                 return loginVM.IsAdmin();
@@ -104,6 +105,7 @@ namespace QuanLyKho.ViewModel
                 mainVM.Hide();
                 VattuWindow wd = new VattuWindow();
                 wd.ShowDialog();
+
             });
             SupplierWindowCommand = new RelayCommand<object>((p) => {
                 return loginVM.IsAdmin();

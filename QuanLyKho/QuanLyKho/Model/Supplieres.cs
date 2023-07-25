@@ -10,6 +10,7 @@ namespace QuanLyKho.Model
     {
         public int STT { get; set; }
         public NhaCungCap NhaCungCap { get; set; }
+        public string TrangThai { get; set; }
     }
 
 }
