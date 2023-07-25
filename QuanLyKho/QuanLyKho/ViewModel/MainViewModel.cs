@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Data.Entity.ModelConfiguration.Configuration;
 using System.IO.Packaging;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -20,7 +21,7 @@ namespace QuanLyKho.ViewModel
 
         private ObservableCollection<Accounts> _ListAccInfo;
         public ObservableCollection<Accounts> ListAccInfo { get => _ListAccInfo; set { _ListAccInfo = value; OnPropertyChanged(); } }
-
+        
         private  bool Isloaded = false;
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand UnitWindowCommand { get; set; }
@@ -33,6 +34,7 @@ namespace QuanLyKho.ViewModel
         // mọi thứ xử lý sẽ nằm trong này 
         public MainViewModel()
         {
+
             LoginWindow loginWindow = new LoginWindow();
             var loginVM = loginWindow.DataContext as LoginViewModel;
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>

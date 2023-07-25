@@ -4,11 +4,15 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
+using System.Windows.Media.Imaging;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace QuanLyKho.ViewModel
 {
@@ -72,11 +76,14 @@ namespace QuanLyKho.ViewModel
                 }
             }
         }
-        public ICommand OpenFolderCommand { get; private set; }
         public ICommand AddCommand { get;set ; }
         public ICommand EditCommand { get;set ; }
         public ICommand DeleteCommand { get;set ; }
         public ICommand UnDeleteCommand { get;set ; }
+        public ICommand OpenFolderCommand { get;set ; }
+        public ICommand SaveFileCommand { get;set ; }
+
+
         private string _imagePath;
         public string ImagePath
         {
@@ -87,10 +94,7 @@ namespace QuanLyKho.ViewModel
                 OnPropertyChanged("ImagePath");
             }
         }
-        private void LoadImage()
-        {
-            ImagePath = @"C:\Users\cahoi\Downloads\anhdaidien.jpg"; // thay đổi đường dẫn tới tệp ảnh của bạn tại đây
-        }
+
         public AcocuntsViewModel()
         {
 
@@ -100,28 +104,57 @@ namespace QuanLyKho.ViewModel
             EditCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
             DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => {  });
             UnDeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
-            OpenFolderCommand = new RelayCommand(OpenFolder);
-
+            OpenFolderCommand = new RelayCommand(OpenImage);
+            SaveFileCommand = new RelayCommand(SaveImage);
         }
-        private void OpenFolder()
+
+        private void OpenImage()
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
             dlg.DefaultExt = ".jpg";
             dlg.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png";
-
+            dlg.InitialDirectory = @"D:\WORK\";
             bool? result = dlg.ShowDialog();
 
             if (result == true)
             {
-                string selectedFilePath = dlg.FileName;
-                ImagePath= selectedFilePath;
-                // do something with the selected file path
+                ImagePath = dlg.FileName;
+                
             }
         }
+        private void SaveImage()
+        {
+            // Mở hộp thoại chọn nơi lưu và đặt tên tệp
+            var dialog = new Microsoft.Win32.SaveFileDialog();
+            dialog.Filter = "JPEG Files (*.jpg)|*.jpg|PNG Files (*.png)|*.png";
+            dialog.FileName = ImagePath; // Tên tệp mặc định
 
+            if (dialog.ShowDialog() == true)
+            {
+                dialog.InitialDirectory = @"D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\Images\Accounts";
+                // Tạo một BitmapSource từ tệp ảnh được chọn
+                BitmapImage bitmap = new BitmapImage(new Uri(ImagePath));
+                // Tạo một BitmapEncoder để mã hóa ảnh
+                BitmapEncoder encoder;
+                switch (Path.GetExtension(dialog.FileName).ToLower())
+                {
+                    case ".jpg":
+                    case ".jpeg":
+                        encoder = new JpegBitmapEncoder();
+                        break;
+                    case ".png":
+                    default:
+                        encoder = new PngBitmapEncoder();
+                        break;
+                }
+                encoder.Frames.Add(BitmapFrame.Create(bitmap));
+                // Lưu ảnh vào đường dẫn được chỉ định bởi người dùng
+               
 
-
-        public ObservableCollection<Accounts> LoadComboBoxAcc()
+                
+            }
+        }
+            public ObservableCollection<Accounts> LoadComboBoxAcc()
         {
             var a = this.ListAccounts;
             return a;
