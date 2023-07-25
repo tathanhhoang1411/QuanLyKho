@@ -21,7 +21,7 @@
         WindowStartupLocation="CenterScreen"
         Name="accountsWindow"
         DataContext="{StaticResource AccountsVM}"
-        Title="Tài khoản và các loại tài khoản"  Height="450" Width="800">
+        Title="Tài khoản và các loại tài khoản"  Height="600" Width="1000">
 
     <Grid>
         <Grid.RowDefinitions>
@@ -31,7 +31,7 @@
         <uc:ControlBarUC  Tag="{Binding Title, ElementName=accountsWindow}"></uc:ControlBarUC>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition MaxWidth="250"></ColumnDefinition>
+                <ColumnDefinition MaxWidth="350"></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition ></ColumnDefinition>
             </Grid.ColumnDefinitions>
@@ -51,7 +51,7 @@
                         <TextBox 
                         Text="{Binding HoVaTen, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
-                        materialDesign:HintAssist.Hint="Mật khẩu" 
+                        materialDesign:HintAssist.Hint="Họ và tên" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                         </TextBox>
                         <TextBox 
@@ -60,23 +60,22 @@
                         materialDesign:HintAssist.Hint="Tài khoản" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                         </TextBox>
-                        <Image Source="{Binding ImagePath, UpdateSourceTrigger=PropertyChanged}" Stretch="UniformToFill" Width="150" Height="150"></Image>
+                        <TextBox 
+                        Text="{Binding MatKhau, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Mật khẩu" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                        </TextBox>
+                        <Image Source="{Binding ImagePath, UpdateSourceTrigger=PropertyChanged}" Stretch="Uniform" Width="250" Height="200"></Image>
                         <Button 
                             HorizontalAlignment="Center"
                         Command="{Binding OpenFolderCommand}"
-                        Content="Chọn"
+                        Content="Chọn ảnh"
                         Margin="5"
                             FontSize="8"
                         Width="100">
                         </Button>
-                        <Button 
-                            HorizontalAlignment="Center"
-                        Command="{Binding SaveFileCommand}"
-                        Content="Lưu"
-                        Margin="5"
-                            FontSize="8"
-                        Width="100">
-                        </Button>
+                        
                         <TextBox 
                         Text="{Binding SDT, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
@@ -90,20 +89,20 @@
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                         </TextBox>
                         <ComboBox
-                            Text="{Binding TenRoleTaiKhoan}"
+                            Text="{Binding TenRoleTaiKhoan, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         materialDesign:HintAssist.Hint="Cấp bậc" 
                             DisplayMemberPath="RoleTK.Ten"
-
+                            SelectedItem="{Binding SelectedItemRole, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                             ItemsSource="{Binding ListRoleAccounts}">
                         </ComboBox>
                         
                         
-                        <TextBox 
+                        <DatePicker 
                         Text="{Binding NgayTao, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Ngày tạo tài khoản" 
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                        </TextBox>
+                        Style="{StaticResource MaterialDesignDatePicker}">
+                        </DatePicker>
                     </StackPanel>
                 </ScrollViewer>
             </materialDesign:Card>
@@ -125,11 +124,17 @@
                         Width="100">
                     </Button>
                     <Button 
-                        Command="{Binding DeleteCommand}" 
-                        Content="Xóa"
+                        Command="{Binding UnDeleteCommand}" 
+                        Content="Kích hoạt"
                         Margin="5"
                         Width="100">
-                    </Button> 
+                    </Button>
+                    <Button 
+                        Command="{Binding DeleteCommand}" 
+                        Content="Tắt"
+                        Margin="5"
+                        Width="100">
+                    </Button>
 
                 </StackPanel>
             </materialDesign:Card>
@@ -143,8 +148,8 @@
                     VerticalScrollBarVisibility="Auto">
                     <ListView 
                         HorizontalAlignment="Center"
-                        ItemsSource="{Binding ListAccounts}"
-                        SelectedItem="{Binding SelectedItem, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                        ItemsSource="{Binding ListAccounts, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
+                        SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <ListView.Resources>
                             <Style TargetType="GridViewColumnHeader">
                                 <Setter Property="FontSize" Value="15"></Setter>
@@ -158,6 +163,7 @@
                                 <GridViewColumn Header="Tài khoản" DisplayMemberBinding="{Binding TaiKhoan.TenTaiKhoan}"></GridViewColumn>
                                 <GridViewColumn Header="Số điện thoại" DisplayMemberBinding="{Binding TaiKhoan.SDT}"></GridViewColumn>
                                 <GridViewColumn Header="Email" DisplayMemberBinding="{Binding TaiKhoan.Email}"></GridViewColumn>
+                                <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TrangThai}"></GridViewColumn>
                                 <GridViewColumn Header="Cấp bậc" DisplayMemberBinding="{Binding RoleTaiKhoan.Ten}"></GridViewColumn>
                                 <GridViewColumn Header="Ngày tạo" DisplayMemberBinding="{Binding TaiKhoan.NgayTao}"></GridViewColumn>
                             </GridView>
@@ -175,7 +181,7 @@
                     HorizontalAlignment="Center"
                     VerticalAlignment="Center">
                     <TextBox 
-                        Text="{Binding TenRoleTaiKhoan2, UpdateSourceTrigger=PropertyChanged}" 
+                        Text="{Binding TenRoleTaiKhoan2, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Cấp bậc" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">

@@ -85,7 +85,7 @@ namespace QuanLyKho.ViewModel
                 LoadVattu();
             LoadComBoBoxUnit();//đổ unit vào combobox
 
-            LoadComBoBoxCus();//đổ cus vào combobox
+            LoadComBoBoxSupp();//đổ cus vào combobox
             AddCommand = new RelayCommand<object>((p) => { return CanAddCommand(); }, (p) => { ExcutedAddCommand(); });
             EditCommand =new RelayCommand<object>((p)=>{ return CanEditCommand(); }, (p) => { ExcutedEditCommand(); });
             DeleteCommand = new RelayCommand<object>((p) => { return CanDelCommand(); }, (p) => { ExcutedDelCommand(); });
@@ -97,7 +97,7 @@ namespace QuanLyKho.ViewModel
             UnitViewModel unit =new UnitViewModel();
             ListUnit = unit.LoadComboboxUnit();
         }
-        public void LoadComBoBoxCus()
+        public void LoadComBoBoxSupp()
         {
 SupplierViewModel sup=new SupplierViewModel();
             ListSupp= sup.LoadComboboxSuppl();

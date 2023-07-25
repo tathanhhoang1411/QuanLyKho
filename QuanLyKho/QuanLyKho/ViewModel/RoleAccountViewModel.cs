@@ -34,5 +34,26 @@ namespace QuanLyKho.ViewModel
             }
             return ListRoleAccounts;
         }
+        public ObservableCollection<RoleAccounts> LoadComboboxRole()
+        {
+
+            ListRoleAccounts = new ObservableCollection<RoleAccounts>();
+            List<RoleTaiKhoan> listRole = DataProvider.Ins.DB.RoleTaiKhoans.Where(x => x.TrangThai == 1).ToList();//Combobox unit chỉ hiện những donvido có trang thai =1
+            //Biến i sẽ là STT tăng dần
+            int i = 1;
+            foreach (RoleTaiKhoan item in listRole)
+
+            {
+
+                RoleAccounts role = new RoleAccounts();
+                //Đổ số thứ tự Khách hàng
+                role.STT = i;
+
+                role.RoleTK = item;
+                ListRoleAccounts.Add(role);
+                i++;
+            }
+            return ListRoleAccounts;
+        }
     }
 }

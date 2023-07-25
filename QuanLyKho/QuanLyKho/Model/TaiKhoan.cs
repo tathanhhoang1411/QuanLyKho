@@ -29,6 +29,7 @@ namespace QuanLyKho.Model
         public int IdRoleTaiKhoan { get; set; }
         public string Email { get; set; }
         public Nullable<System.DateTime> NgayTao { get; set; }
+        public string AnhDaiDien { get; set; }
         public Nullable<int> TrangThai { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

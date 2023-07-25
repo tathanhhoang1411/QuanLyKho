@@ -283,7 +283,11 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <Resource Include="Images\Accounts\anhdaidien.jpg" />
+    <Resource Include="Images\Accounts\0325790327.jpg" />
+    <Resource Include="Images\Accounts\0325793505.jpg" />
+    <Resource Include="Images\Accounts\0325793506.jpg" />
+    <Resource Include="Images\Accounts\0325798778.jpg" />
+    <Resource Include="Images\Accounts\0325895897.jpg" />
     <Content Include="Model\Model1.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>Model1.Context.cs</LastGenOutput>

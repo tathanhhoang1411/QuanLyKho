@@ -11,6 +11,7 @@ namespace QuanLyKho.Model
         public int STT { get; set; }
         public TaiKhoan TaiKhoan { get; set; }
         public RoleTaiKhoan RoleTaiKhoan { get;set; }
+        public string TrangThai { get; set; }
     }
 
 }

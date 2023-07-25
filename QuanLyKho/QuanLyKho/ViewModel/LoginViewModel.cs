@@ -112,7 +112,7 @@ namespace QuanLyKho.ViewModel
 
          
 
-        private  string Base64Encode(string plainText)
+        public  string Base64Encode(string plainText)
         {
             var plainTextBytes = System.Text.Encoding.UTF8.GetBytes(plainText);
             return System.Convert.ToBase64String(plainTextBytes);
@@ -120,7 +120,7 @@ namespace QuanLyKho.ViewModel
 
 
 
-        private  string MD5Hash(string input)
+        public  string MD5Hash(string input)
         {
             StringBuilder hash = new StringBuilder();
             MD5CryptoServiceProvider md5provider = new MD5CryptoServiceProvider();

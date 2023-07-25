@@ -20,7 +20,7 @@
         WindowStartupLocation="CenterScreen"
         DataContext="{StaticResource CustomerVM}"
         Name="customerWindow"
-        Title="Thông tin khách hàng đã có" Height="450" Width="800">
+        Title="Thông tin khách hàng đã có" Height="600" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
@@ -49,6 +49,12 @@
                         Text="{Binding SDT, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Số điện thoại" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                    </TextBox>          
+                    <TextBox 
+                        Text="{Binding DiaChi, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Địa chỉ" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
                     </TextBox>
                     <TextBox 
@@ -81,12 +87,6 @@
                         Margin="5"
                         Width="100">
                     </Button>
-                    <Button 
-                        Command="{Binding DeleteCommand}" 
-                        Content="Xóa"
-                        Margin="5"
-                        Width="100">
-                    </Button>
                 </StackPanel>
             </materialDesign:Card>
 
@@ -110,6 +110,7 @@
                                 <GridViewColumn Header="STT"  DisplayMemberBinding="{Binding STT}"></GridViewColumn>
                                 <GridViewColumn Header="Tên khách hàng" DisplayMemberBinding="{Binding KhachHang.Ten}"></GridViewColumn>
                                 <GridViewColumn Header="Số điện thoại" DisplayMemberBinding="{Binding KhachHang.SDT}"></GridViewColumn>
+                                <GridViewColumn Header="Địa chỉ" DisplayMemberBinding="{Binding KhachHang.Address}"></GridViewColumn>
                                 <GridViewColumn Header="Email" DisplayMemberBinding="{Binding KhachHang.Email}"></GridViewColumn>
                                  <GridViewColumn Header="Thông tin thêm" DisplayMemberBinding="{Binding KhachHang.ThongTinThem}"></GridViewColumn>
                                 </GridView>

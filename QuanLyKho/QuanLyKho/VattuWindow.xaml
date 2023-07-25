@@ -20,7 +20,7 @@
         WindowStartupLocation="CenterScreen"
         Name="vattuWindow"
         DataContext="{StaticResource VattuVM}"
-        Title="Vật tư" Height="450" Width="800">
+        Title="Vật tư" Height="600" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>

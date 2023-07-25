@@ -20,7 +20,7 @@
         WindowStartupLocation="CenterScreen"
         Name="supplierWindow"
         DataContext="{StaticResource SupplierVM}"
-        Title="Nhà cung ứng" Height="450" Width="800">
+        Title="Nhà cung ứng" Height="600" Width="1000">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>

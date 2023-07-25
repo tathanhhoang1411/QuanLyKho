@@ -14,7 +14,6 @@ insert into DonViDo values (N'Tấm(0,3m * 0.3m)',1)
 insert into DonViDo values (N'Bao( 50KG)',1)
 insert into DonViDo values (N'Trụ sắt( 3m)',1)
 insert into DonViDo values (N'Tấm( 2m * 5m',1)
- select * from donvido
 
 create table NhaCungCap
 (
@@ -28,7 +27,7 @@ create table NhaCungCap
 	TrangThai int default(1)
 )
 
-select * from  NhaCungCap
+
 insert into NhaCungCap values(N'Công ty Cổ phân ACT',N'Tân Phú, Đồng Nai','0987545310','act@gmail.com',N'',N'1/1/2010',1)
 insert into NhaCungCap values('ABC Company','123 Main Street, Anytown USA','555-1234','abc@company.com','Specializing in widgets','2021-01-01',1)
 insert into NhaCungCap values('XYZ Corporation','456 High Street, Another Town USA','555-5678','xyz@corporation.com','Providing innovative solutions','2021-02-15',1)
@@ -49,7 +48,7 @@ create table KhachHang
 	Email nvarchar(200),
 	ThongTinThem nvarchar(max)
 )
-select * from KhachHang
+
 
 insert into KhachHang values(N'Nguyễn Thị Hương',N'TP.HCM','0987654321','huong.nguyen@email.com','')
 insert into KhachHang values(N'Trần Văn Nam',N'TP.HCM','0912345678','nam.tran@email.com','')
@@ -71,7 +70,7 @@ create table VatTu
 	foreign key(IdDonViDo) references DonViDo(Id),
 	foreign key(IdNhaCungCap) references NhaCungCap(Id),
 )
-select *from VatTu
+
 insert into VatTu values(N'Gạch ốp tường 111',1,1,1)
 insert into VatTu values(N'Xi Măng Siêu hút nước',1,7,1)
 insert into VatTu values(N'Xi Măng Supper 1',1,3,1)
@@ -82,13 +81,14 @@ insert into VatTu values(N'Tôn Đại Thành',4,3,1)
 create table RoleTaiKhoan
 (
 	Id int identity(1,1) primary key,
-	Ten nvarchar(max)
+	Ten nvarchar(max),
+	TrangThai int default(1)
 )
 
-select * from RoleTaiKhoan
-insert into RoleTaiKhoan(Ten) values(N'Admin')
-insert into RoleTaiKhoan(Ten) values(N'Nhân viên')
-insert into RoleTaiKhoan(Ten) values(N'Quản lý')
+
+insert into RoleTaiKhoan values(N'Admin',1)
+insert into RoleTaiKhoan values(N'Nhân viên',1)
+insert into RoleTaiKhoan values(N'Quản lý',1)
 
 create table TaiKhoan
 (
@@ -101,14 +101,25 @@ create table TaiKhoan
 	Email nvarchar(200),
 	NgayTao DateTime
 	foreign key (IdRoleTaiKhoan) references RoleTaiKhoan(Id),
+	AnhDaiDien nvarchar(max),
 	TrangThai int default(1)
 )
+
 select * from TaiKhoan
-insert into TaiKhoan values(N'TaThanhHoang', N'Tạ Thanh Hoàng', N'db69fc039dcbd2962cb4d28f5891aae1','0325793505', 1,'tathanhhoang.work@gmail.com','7/20/2010',1)
-insert into TaiKhoan values(N'NguyenVanAn', N'Nguyễn Văn An', N'978aae9bb6bee8fb75de3e4830a1be46','0325793506', 2,'nguyenan@gmail.com','7/20/2023',1)
-insert into TaiKhoan values(N'NguyenThiHanh', N'Nguyễn Thị Hạnh', N'978aae9bb6bee8fb75de3e4830a1be46','0325798778', 2,'nguyenhanh@gmail.com','7/20/2023',1)
-insert into TaiKhoan values(N'TranThiKieu', N'Trần Thi Kiều', N'978aae9bb6bee8fb75de3e4830a1be46','0325790327', 2,'kieun@gmail.com','7/20/2023',1)
-insert into TaiKhoan values(N'LeVan', N'Lê Văn', N'978aae9bb6bee8fb75de3e4830a1be46','0325895897', 2,'lvan@gmail.com', '7/20/2023',1)
+insert into TaiKhoan values(N'TaThanhHoang', N'Tạ Thanh Hoàng', N'db69fc039dcbd2962cb4d28f5891aae1','0325793505', 1,'tathanhhoang.work@gmail.com',
+'7/20/2010',' D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\Images\Accounts\0325793505.jpg',1)
+
+insert into TaiKhoan values(N'NguyenVanAn', N'Nguyễn Văn An', N'978aae9bb6bee8fb75de3e4830a1be46','0325793506', 2,'nguyenan@gmail.com',
+'7/20/2023','D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\Images\Accounts\0325793506.jpg',1)
+
+insert into TaiKhoan values(N'NguyenThiHanh', N'Nguyễn Thị Hạnh', N'978aae9bb6bee8fb75de3e4830a1be46','0325798778', 2,'nguyenhanh@gmail.com',
+'7/20/2023','D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\Images\Accounts\0325798778.jpg',1)
+
+insert into TaiKhoan values(N'TranThiKieu', N'Trần Thi Kiều', N'978aae9bb6bee8fb75de3e4830a1be46','0325790327', 2,'kieun@gmail.com',
+'7/20/2023','D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\Images\Accounts\0325790327.jpg',1)
+
+insert into TaiKhoan values(N'LeVan', N'Lê Văn', N'978aae9bb6bee8fb75de3e4830a1be46','0325895897', 2,'lvan@gmail.com',
+'7/20/2023','D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\Images\Accounts\0325895897.jpg',1)
 
 create table BangNhap
 (
@@ -117,7 +128,7 @@ create table BangNhap
 	IdTaiKhoan int not null
 	foreign key (IdTaiKhoan) references TaiKhoan(Id),
 )
-select * from BangNhap
+
 insert into BangNhap values ('7/7/2023',1)
 insert into BangNhap values ('7/7/2023',2)
 insert into BangNhap values ('7/7/2023',3)
@@ -134,7 +145,7 @@ create table ThongTinBangNhap
 	foreign key (IdVatTu) references VatTu(Id),
 	foreign key (IdBangNhap) references BangNhap(Id),
 )
-select * from ThongTinBangNhap
+
 insert into ThongTinBangNhap values(1,1,30,10000,0)
 insert into ThongTinBangNhap values(2,2,100,200000,0)
 insert into ThongTinBangNhap values(3,1,30,100000,0)
@@ -154,7 +165,7 @@ create table BangXuat
 
 	foreign key (IdTaiKhoan) references TaiKhoan(Id)
 )
-select * from BangXuat
+
 insert into BangXuat values ('7/4/2023',4)
 insert into BangXuat values ('7/5/2020',2)
 insert into BangXuat values ('7/7/2023',4)

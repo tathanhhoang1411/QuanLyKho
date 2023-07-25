@@ -13,6 +13,7 @@ using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace QuanLyKho.ViewModel
 {
@@ -38,8 +39,22 @@ namespace QuanLyKho.ViewModel
         private string _TenRoleTaiKhoan;
         public string TenRoleTaiKhoan { get => _TenRoleTaiKhoan; set { _TenRoleTaiKhoan = value; OnPropertyChanged(); } }
 
+        private string _MatKhau;
+        public string MatKhau { get => _MatKhau; set { _MatKhau = value; OnPropertyChanged(); } }
+
         private DateTime _NgayTao;
         public DateTime NgayTao { get => _NgayTao; set { _NgayTao = value; OnPropertyChanged(); } }
+
+        private string _imagePath;
+        public string ImagePath
+        {
+            get { return _imagePath; }
+            set
+            {
+                _imagePath = value;
+                OnPropertyChanged("ImagePath");
+            }
+        }
 
         private Accounts _SelectedItem;
         public Accounts SelectedItem {
@@ -53,8 +68,10 @@ namespace QuanLyKho.ViewModel
                     SDT = SelectedItem.TaiKhoan.SDT;
                     Email = SelectedItem.TaiKhoan.Email;
                     TenRoleTaiKhoan = SelectedItem.RoleTaiKhoan.Ten;
+                    ImagePath = SelectedItem.TaiKhoan.AnhDaiDien;
                     NgayTao = (DateTime)SelectedItem.TaiKhoan.NgayTao;
-
+                    SelectedItemRole.RoleTK = SelectedItem.RoleTaiKhoan;
+                    MatKhau = "";
                 }
             }
         }
@@ -69,11 +86,7 @@ namespace QuanLyKho.ViewModel
             {
                 _SelectedItemRole = value;
                 OnPropertyChanged();
-                if (SelectedItemRole != null)
-                {
-                    TenRoleTaiKhoan2 = SelectedItemRole.RoleTK.Ten;
 
-                }
             }
         }
         public ICommand AddCommand { get;set ; }
@@ -84,28 +97,19 @@ namespace QuanLyKho.ViewModel
         public ICommand SaveFileCommand { get;set ; }
 
 
-        private string _imagePath;
-        public string ImagePath
-        {
-            get { return _imagePath; }
-            set
-            {
-                _imagePath = value;
-                OnPropertyChanged("ImagePath");
-            }
-        }
+
 
         public AcocuntsViewModel()
         {
-
+            NgayTao=DateTime.Now;
             LoadAccount();//đổ danh sách tài khoản vào 
             LoadComboBoxRole();//đổ danh sách role
-            AddCommand = new RelayCommand<object>((p) => { return true; }, (p) => {  });
+            AddCommand = new RelayCommand<object>((p) => { return true; }, (p) => { SaveImage(); ExcutedAddCommand();   });
             EditCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
             DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => {  });
+            UnDeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => {  });
             UnDeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
             OpenFolderCommand = new RelayCommand(OpenImage);
-            SaveFileCommand = new RelayCommand(SaveImage);
         }
 
         private void OpenImage()
@@ -156,13 +160,29 @@ namespace QuanLyKho.ViewModel
         }
             public ObservableCollection<Accounts> LoadComboBoxAcc()
         {
-            var a = this.ListAccounts;
-            return a;
+
+            ListAccounts = new ObservableCollection<Accounts>();
+            List<TaiKhoan> listtk = DataProvider.Ins.DB.TaiKhoans.Where(x => x.TrangThai == 1).ToList();//Combobox unit chỉ hiện những donvido có trang thai =1
+            //Biến i sẽ là STT tăng dần
+            int i = 1;
+            foreach (TaiKhoan item in listtk)
+
+            {
+
+                Accounts acc = new Accounts();
+                //Đổ số thứ tự Khách hàng
+                acc.STT = i;
+
+                acc.TaiKhoan = item;
+                ListAccounts.Add(acc);
+                i++;
+            }
+            return ListAccounts;
         }
         public void LoadComboBoxRole()
         {
             RoleAccountViewModel role = new RoleAccountViewModel();
-            ListRoleAccounts = role.LoadRole();
+            ListRoleAccounts = role.LoadComboboxRole();
         }
         public void LoadAccount()
         {
@@ -184,6 +204,67 @@ namespace QuanLyKho.ViewModel
                 ListAccounts.Add(acc);
                 i++;
             }
+        }
+        private bool CanAddCommand()
+        {
+            if(string.IsNullOrWhiteSpace(HoVaTen) 
+                || string.IsNullOrWhiteSpace(TaiKhoan)
+            )
+            {
+                return false;
+            }
+
+
+            List<TaiKhoan> list = DataProvider.Ins.DB.TaiKhoans.Where(x => x.SDT == SDT ).ToList();
+            if (list.Count() == 0)
+            {
+                foreach (Accounts item in ListAccounts)
+                {
+                    if (item.TaiKhoan.SDT != SDT && item.TaiKhoan.TenTaiKhoan != TaiKhoan)
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+        private void ExcutedAddCommand()
+        {
+            try
+            {
+                LoginViewModel lgVM=new LoginViewModel();
+                string matKhauMoi=lgVM.MD5Hash(lgVM.Base64Encode(MatKhau.Trim()));
+
+                TaiKhoan tk = new TaiKhoan();
+                tk.HoVaTen= HoVaTen.Trim();
+                tk.TenTaiKhoan= TaiKhoan.Trim();
+                tk.MatKhau = matKhauMoi;
+                tk.SDT = SDT.Trim();
+                tk.Email = Email.Trim();
+                tk.IdRoleTaiKhoan=SelectedItemRole.RoleTK.Id;
+                tk.TrangThai = 1;
+                tk.AnhDaiDien=ImagePath.Trim();
+                if (NgayTao>DateTime.Now)
+                {
+                    tk.NgayTao = DateTime.Now;
+                }
+                else
+                {
+                    tk.NgayTao =(DateTime)NgayTao;
+                }
+                DataProvider.Ins.DB.TaiKhoans.Add(tk);
+                DataProvider.Ins.DB.SaveChanges();
+                LoadAccount();
+                MessageBox.Show("Thêm nhân viên: Tài khoản " + TaiKhoan.Trim() + " " + SDT.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Tiến trình thêm bị lỗi", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
     }

@@ -57,6 +57,7 @@
     <EntitySetMapping Name="RoleTaiKhoans">
       <EntityTypeMapping TypeName="QuanLyKhoModel.RoleTaiKhoan">
         <MappingFragment StoreEntitySet="RoleTaiKhoan">
+          <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
           <ScalarProperty Name="Ten" ColumnName="Ten" />
           <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
@@ -66,6 +67,7 @@
       <EntityTypeMapping TypeName="QuanLyKhoModel.TaiKhoan">
         <MappingFragment StoreEntitySet="TaiKhoan">
           <ScalarProperty Name="TrangThai" ColumnName="TrangThai" />
+          <ScalarProperty Name="AnhDaiDien" ColumnName="AnhDaiDien" />
           <ScalarProperty Name="NgayTao" ColumnName="NgayTao" />
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="IdRoleTaiKhoan" ColumnName="IdRoleTaiKhoan" />

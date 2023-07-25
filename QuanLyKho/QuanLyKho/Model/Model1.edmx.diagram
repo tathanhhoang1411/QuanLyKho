@@ -6,25 +6,25 @@
     <edmx:Diagrams>
       <Diagram DiagramId="6e44a5b7ee1d4a66a1f5354d542e0486" Name="Diagram1" ZoomLevel="79">
         <EntityTypeShape EntityType="QuanLyKhoModel.BangNhap" Width="1.5" PointX="6" PointY="8.625" />
-        <EntityTypeShape EntityType="QuanLyKhoModel.BangXuat" Width="1.5" PointX="3" PointY="13.25" />
+        <EntityTypeShape EntityType="QuanLyKhoModel.BangXuat" Width="1.5" PointX="3" PointY="1.125" />
         <EntityTypeShape EntityType="QuanLyKhoModel.DonViDo" Width="1.5" PointX="0.75" PointY="0.75" />
-        <EntityTypeShape EntityType="QuanLyKhoModel.KhachHang" Width="1.5" PointX="3" PointY="1.125" />
+        <EntityTypeShape EntityType="QuanLyKhoModel.KhachHang" Width="1.5" PointX="3" PointY="12.875" />
         <EntityTypeShape EntityType="QuanLyKhoModel.NhaCungCap" Width="1.5" PointX="0.75" PointY="4.25" />
-        <EntityTypeShape EntityType="QuanLyKhoModel.RoleTaiKhoan" Width="1.5" PointX="1.5" PointY="8.875" />
-        <EntityTypeShape EntityType="QuanLyKhoModel.TaiKhoan" Width="1.5" PointX="3.75" PointY="8" />
+        <EntityTypeShape EntityType="QuanLyKhoModel.RoleTaiKhoan" Width="1.5" PointX="1.5" PointY="8.75" />
+        <EntityTypeShape EntityType="QuanLyKhoModel.TaiKhoan" Width="1.5" PointX="3.75" PointY="7.875" />
         <EntityTypeShape EntityType="QuanLyKhoModel.ThongTinBangNhap" Width="1.5" PointX="8.25" PointY="4.375" />
         <EntityTypeShape EntityType="QuanLyKhoModel.ThongTinBangXuat" Width="1.5" PointX="5.25" PointY="4.125" />
         <EntityTypeShape EntityType="QuanLyKhoModel.VatTu" Width="1.5" PointX="3" PointY="4.25" />
-        <AssociationConnector Association="QuanLyKhoModel.FK__BangNhap__IdTaiK__36B12243" />
-        <AssociationConnector Association="QuanLyKhoModel.FK__ThongTinB__IdBan__3B75D760" />
-        <AssociationConnector Association="QuanLyKhoModel.FK__BangXuat__IdTaiK__3E52440B" />
-        <AssociationConnector Association="QuanLyKhoModel.FK__ThongTinB__IdBan__4316F928" />
+        <AssociationConnector Association="QuanLyKhoModel.FK__BangNhap__IdTaiK__37A5467C" />
+        <AssociationConnector Association="QuanLyKhoModel.FK__ThongTinB__IdBan__3C69FB99" />
+        <AssociationConnector Association="QuanLyKhoModel.FK__BangXuat__IdTaiK__3F466844" />
+        <AssociationConnector Association="QuanLyKhoModel.FK__ThongTinB__IdBan__440B1D61" />
         <AssociationConnector Association="QuanLyKhoModel.FK__VatTu__IdDonViDo__2D27B809" />
-        <AssociationConnector Association="QuanLyKhoModel.FK__ThongTinB__IdKha__440B1D61" />
+        <AssociationConnector Association="QuanLyKhoModel.FK__ThongTinB__IdKha__44FF419A" />
         <AssociationConnector Association="QuanLyKhoModel.FK__VatTu__IdNhaCung__2E1BDC42" />
-        <AssociationConnector Association="QuanLyKhoModel.FK__TaiKhoan__NgayTa__32E0915F" />
-        <AssociationConnector Association="QuanLyKhoModel.FK__ThongTinB__IdVat__3A81B327" />
-        <AssociationConnector Association="QuanLyKhoModel.FK__ThongTinB__IdVat__4222D4EF" />
+        <AssociationConnector Association="QuanLyKhoModel.FK__TaiKhoan__NgayTa__33D4B598" />
+        <AssociationConnector Association="QuanLyKhoModel.FK__ThongTinB__IdVat__3B75D760" />
+        <AssociationConnector Association="QuanLyKhoModel.FK__ThongTinB__IdVat__4316F928" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
