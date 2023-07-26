@@ -105,7 +105,6 @@ SupplierViewModel sup=new SupplierViewModel();
         }
         private void Reload()
         {
-            LoadVattu();
             LoadComBoBoxUnit();//đổ unit vào combobox
 
             LoadComBoBoxSupp();//đổ cus vào combobox
