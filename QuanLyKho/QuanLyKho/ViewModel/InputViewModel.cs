@@ -72,7 +72,7 @@ namespace QuanLyKho.ViewModel
                     TenNhaCungCap = SelectedItemInput.NhaCungCap.Ten;
                     SDTNhaCungCap = SelectedItemInput.NhaCungCap.SDT;
                     GiaNhap = (double)SelectedItemInput.ThongTinBangNhap.GiaNhap;
-
+                    TenVatTu = SelectedItemInput.Vattu.Ten;
                     switch ((int)SelectedItemInput.ThongTinBangNhap.TrangThai)
                     {
                         case 0:
