@@ -72,6 +72,7 @@
           <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="IdRoleTaiKhoan" ColumnName="IdRoleTaiKhoan" />
           <ScalarProperty Name="SDT" ColumnName="SDT" />
+          <ScalarProperty Name="MatKhauUnEncry" ColumnName="MatKhauUnEncry" />
           <ScalarProperty Name="MatKhau" ColumnName="MatKhau" />
           <ScalarProperty Name="HoVaTen" ColumnName="HoVaTen" />
           <ScalarProperty Name="TenTaiKhoan" ColumnName="TenTaiKhoan" />

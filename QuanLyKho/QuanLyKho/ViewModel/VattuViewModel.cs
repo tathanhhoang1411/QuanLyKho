@@ -102,6 +102,28 @@ namespace QuanLyKho.ViewModel
 SupplierViewModel sup=new SupplierViewModel();
             ListSupp= sup.LoadComboboxSuppl();
         }
+        public ObservableCollection<VatTus> LoadComboboxVatTu()
+        {
+
+
+            ListVattus = new ObservableCollection<VatTus>();
+            List<VatTu> listVatTu = DataProvider.Ins.DB.VatTus.Where(x => x.TrangThai == 1).ToList();
+            //Biến i sẽ là STT tăng dần
+            int i = 1;
+            foreach (VatTu item in listVatTu)
+
+            {
+
+                VatTus vt = new VatTus();
+                //Đổ số thứ tự Khách hàng
+                vt.STT = i;
+                //Đổ tai khoản
+                vt.VatTu = item;
+                ListVattus.Add(vt);
+                i++;
+            }
+            return ListVattus;
+        }
         public void LoadVattu()
             {
             ListVattus = new ObservableCollection<VatTus>();

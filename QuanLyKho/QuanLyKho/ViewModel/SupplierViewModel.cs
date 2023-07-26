@@ -61,7 +61,7 @@ namespace QuanLyKho.ViewModel
             NgayHopTac = DateTime.Now;
             LoadSuppl();
             AddCommand = new RelayCommand<object>((p) => { return CanAddCommand(); }, (p) => { ExcutedAddCommand(); });
-            EditCommand = new RelayCommand<object>((p) => { return true; }, (p) => { ExcutedEditCommand(); });
+            EditCommand = new RelayCommand<object>((p) => { return CanEditCommand(); }, (p) => { ExcutedEditCommand(); });
             DeleteCommand = new RelayCommand<object>((p) => { return CanDelCommand(); }, (p) => { ExcutedDelCommand(); });
             UnDeleteCommand = new RelayCommand<object>((p) => { return CanDelCommand(); }, (p) => { ExcutedUnDelCommand(); });
         }

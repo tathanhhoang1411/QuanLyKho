@@ -48,7 +48,7 @@
                 <Grid Grid.Row="0">
                     <TextBox materialDesign:HintAssist.Hint="Tên đăng nhập"
                              Style="{StaticResource MaterialDesignFloatingHintTextBox}"
-                             Text="{Binding UserName}">
+                             Text="{Binding UserName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}">
                     </TextBox>
                 </Grid>
                 <Grid Grid.Row="1">
@@ -58,15 +58,14 @@
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="PasswordChanged">
                                 <i:InvokeCommandAction 
-                                    Command="{Binding PasswordChangedCommand}" 
+                                    Command="{Binding PasswordChangedCommand, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" 
                                    CommandParameter="{Binding ElementName=FloatingPasswordBox}"/>
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </PasswordBox>
                 </Grid>
                 <Grid Grid.Row="2">
-                    <CheckBox x:Name="FloatingCheck"
-                                 materialDesign:HintAssist.Hint="Mật khẩu"
+                    <CheckBox 
                               Content="Hiện mật khẩu"
                               HorizontalAlignment="Right"
                               Command="{Binding ShowPassCommand}">

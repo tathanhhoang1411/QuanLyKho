@@ -16,12 +16,12 @@ namespace QuanLyKho.ViewModel
     {
         public bool IsLogin { get; set; }
         private string _UserName;
-        public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged(); } }//onpropertyChanged để nhận sự thay đổi từ UserName
+        public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged("UserName"); } }//onpropertyChanged để nhận sự thay đổi từ UserName
         private string _Password;
-        public string Password { get => _Password; set { _Password = value; OnPropertyChanged(); } }
+        public string Password { get => _Password; set { _Password = value; OnPropertyChanged("Password"); } }
 
         private ObservableCollection<Accounts> _ListAccInfo;
-        public ObservableCollection<Accounts> ListAccInfo { get => _ListAccInfo; set { _ListAccInfo = value; OnPropertyChanged(); } }
+        public ObservableCollection<Accounts> ListAccInfo { get => _ListAccInfo; set { _ListAccInfo = value; OnPropertyChanged("ListAccInfo"); } }
 
         
         public ICommand CloseCommand { get; set; }
@@ -64,9 +64,12 @@ namespace QuanLyKho.ViewModel
             else// có điền thông tin
             {
                  string passEncode = MD5Hash(Base64Encode(Password));
-                 var accCount = DataProvider.Ins.DB.TaiKhoans.Where(x => x.TenTaiKhoan == UserName && x.MatKhau == passEncode).Count();
+                 var accCount = DataProvider.Ins.DB.TaiKhoans.Where(x => x.TenTaiKhoan == UserName && x.MatKhau == passEncode && x.TrangThai==1).Count();
                 if (accCount > 0)
                 {
+
+                    OnPropertyChanged("Password");
+                    OnPropertyChanged("UserName");
                     IsLogin = true;
                     p.Close();
                 }
@@ -93,7 +96,10 @@ namespace QuanLyKho.ViewModel
             acc.TaiKhoan = listAcc;
             acc.RoleTaiKhoan = listAcc.RoleTaiKhoan;
             ListAccInfo.Add(acc);
+            OnPropertyChanged("acc");
+            OnPropertyChanged(nameof(acc));
             return ListAccInfo;
+
         }
         public  bool IsAdmin()//kiểu tra nếu là admin thì sẽ hiện hết các chức năng (sẽ gọi nên mainVM)
         {

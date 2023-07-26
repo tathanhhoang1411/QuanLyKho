@@ -66,12 +66,13 @@ namespace QuanLyKho.ViewModel
                     HoVaTen = SelectedItem.TaiKhoan.HoVaTen;
                     TaiKhoan = SelectedItem.TaiKhoan.TenTaiKhoan;
                     SDT = SelectedItem.TaiKhoan.SDT;
+                    MatKhau = SelectedItem.TaiKhoan.MatKhauUnEncry;
                     Email = SelectedItem.TaiKhoan.Email;
                     TenRoleTaiKhoan = SelectedItem.RoleTaiKhoan.Ten;
                     ImagePath = SelectedItem.TaiKhoan.AnhDaiDien;
                     NgayTao = (DateTime)SelectedItem.TaiKhoan.NgayTao;
                     SelectedItemRole.RoleTK = SelectedItem.RoleTaiKhoan;
-                    MatKhau = "";
+                   
                 }
             }
         }
@@ -104,11 +105,10 @@ namespace QuanLyKho.ViewModel
             NgayTao=DateTime.Now;
             LoadAccount();//đổ danh sách tài khoản vào 
             LoadComboBoxRole();//đổ danh sách role
-            AddCommand = new RelayCommand<object>((p) => { return true; }, (p) => { SaveImage(); ExcutedAddCommand();   });
-            EditCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
-            DeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => {  });
-            UnDeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => {  });
-            UnDeleteCommand = new RelayCommand<object>((p) => { return true; }, (p) => { });
+            AddCommand = new RelayCommand<object>((p) => { return CanAddCommand(); }, (p) => { SaveImage(); ExcutedAddCommand();   });
+            EditCommand = new RelayCommand<object>((p) => { return CanEditCommand(); }, (p) => { ExcutedEditCommand(); });
+            DeleteCommand = new RelayCommand<object>((p) => { return CanDelCommand(); }, (p) => { ExcutedUnDelCommand(); });
+            UnDeleteCommand = new RelayCommand<object>((p) => { return CanDelCommand(); }, (p) => { ExcutedDelCommand(); });
             OpenFolderCommand = new RelayCommand(OpenImage);
         }
 
@@ -199,7 +199,14 @@ namespace QuanLyKho.ViewModel
                 //Đổ số thứ tự tài khoản
                 acc.STT = i;
                 //Đổ tai khoản
-                acc.TaiKhoan = item;
+                switch (item.TrangThai)
+                {
+                    case 0: acc.TrangThai = "Khóa";
+                        break;
+                    case 1:acc.TrangThai = "Không khóa";
+                        break;
+                }
+                    acc.TaiKhoan = item;
                 acc.RoleTaiKhoan = ListRole[0];
                 ListAccounts.Add(acc);
                 i++;
@@ -209,6 +216,13 @@ namespace QuanLyKho.ViewModel
         {
             if(string.IsNullOrWhiteSpace(HoVaTen) 
                 || string.IsNullOrWhiteSpace(TaiKhoan)
+                || string.IsNullOrWhiteSpace(MatKhau)
+                || string.IsNullOrWhiteSpace(SDT)
+                || string.IsNullOrWhiteSpace(Email)
+                || string.IsNullOrWhiteSpace(NgayTao.ToString())
+                || SelectedItemRole == null
+
+
             )
             {
                 return false;
@@ -220,7 +234,7 @@ namespace QuanLyKho.ViewModel
             {
                 foreach (Accounts item in ListAccounts)
                 {
-                    if (item.TaiKhoan.SDT != SDT && item.TaiKhoan.TenTaiKhoan != TaiKhoan)
+                    if (item.TaiKhoan.SDT != SDT && item.TaiKhoan.TenTaiKhoan != TaiKhoan && item.TaiKhoan.AnhDaiDien!=ImagePath)
                     {
                         return true;
                     }
@@ -240,6 +254,7 @@ namespace QuanLyKho.ViewModel
                 tk.HoVaTen= HoVaTen.Trim();
                 tk.TenTaiKhoan= TaiKhoan.Trim();
                 tk.MatKhau = matKhauMoi;
+                tk.MatKhauUnEncry = MatKhau.Trim();
                 tk.SDT = SDT.Trim();
                 tk.Email = Email.Trim();
                 tk.IdRoleTaiKhoan=SelectedItemRole.RoleTK.Id;
@@ -263,6 +278,118 @@ namespace QuanLyKho.ViewModel
             catch (Exception ex)
             {
                 MessageBox.Show("Tiến trình thêm bị lỗi", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+        private bool CanEditCommand()
+        {
+             if (string.IsNullOrWhiteSpace(HoVaTen)
+                || string.IsNullOrWhiteSpace(TaiKhoan)
+                || string.IsNullOrWhiteSpace(MatKhau)
+                || string.IsNullOrWhiteSpace(SDT)
+                || string.IsNullOrWhiteSpace(Email)
+                || string.IsNullOrWhiteSpace(NgayTao.ToString())
+                || string.IsNullOrWhiteSpace(ImagePath)
+                || SelectedItemRole == null)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+
+
+        }
+        private void ExcutedEditCommand()
+        {
+            try
+            {
+                LoginViewModel lgVM = new LoginViewModel();
+                string matKhauMoi = lgVM.MD5Hash(lgVM.Base64Encode(MatKhau.Trim()));
+
+                var tk = DataProvider.Ins.DB.TaiKhoans.Where(x => x.Id == SelectedItem.TaiKhoan.Id).SingleOrDefault();
+                tk.HoVaTen = HoVaTen.Trim();
+                tk.TenTaiKhoan = TaiKhoan.Trim();
+                tk.MatKhau = matKhauMoi;
+                tk.MatKhauUnEncry = MatKhau.Trim();
+                tk.SDT = SDT.Trim();
+                tk.Email = Email.Trim();
+                tk.IdRoleTaiKhoan = SelectedItemRole.RoleTK.Id;
+                tk.TrangThai = 1;
+                tk.AnhDaiDien = ImagePath.Trim();
+                if (NgayTao > DateTime.Now)
+                {
+                    tk.NgayTao = DateTime.Now;
+                }
+                else
+                {
+                    tk.NgayTao = (DateTime)NgayTao;
+                }
+                DataProvider.Ins.DB.SaveChanges();
+                LoadAccount();
+                MessageBox.Show("Sửa thông tin nhân viên: Tài khoản " + TaiKhoan.Trim() + " " + SDT.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Chọn item trước khi sửa ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+        private bool CanDelCommand()
+        {
+
+            if (SelectedItem == null)//Nếu không chọn item nào
+            {
+                return false;
+            }
+            else
+            {
+
+                return true;
+            }
+        }
+        private void ExcutedUnDelCommand()
+        {
+            try
+            {
+                LoginViewModel lgVM = new LoginViewModel();
+                string matKhauMoi = lgVM.MD5Hash(lgVM.Base64Encode(MatKhau.Trim()));
+
+                var tk = DataProvider.Ins.DB.TaiKhoans.Where(x => x.Id == SelectedItem.TaiKhoan.Id).SingleOrDefault();
+                tk.TrangThai = 1;
+                DataProvider.Ins.DB.SaveChanges();
+                LoadAccount();
+                MessageBox.Show("Mở khóa nhân viên: Tài khoản " + TaiKhoan.Trim() + " " + SDT.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Tiến trình bị lỗi", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
+        }
+        private void ExcutedDelCommand()
+        {
+            try
+            {
+                LoginViewModel lgVM = new LoginViewModel();
+                string matKhauMoi = lgVM.MD5Hash(lgVM.Base64Encode(MatKhau.Trim()));
+
+                var tk = DataProvider.Ins.DB.TaiKhoans.Where(x => x.Id == SelectedItem.TaiKhoan.Id).SingleOrDefault();
+                tk.TrangThai = 0;
+                DataProvider.Ins.DB.SaveChanges();
+                LoadAccount();
+                MessageBox.Show("Khóa nhân viên: Tài khoản " + TaiKhoan.Trim() + " " + SDT.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Tiến trình bị lỗi", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }

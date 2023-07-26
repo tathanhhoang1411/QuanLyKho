@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.Windows.Input;
 
 namespace QuanLyKho.ViewModel
 {
@@ -81,10 +82,17 @@ namespace QuanLyKho.ViewModel
                 }
             } 
         }
+        //command cho các nút chức năng thêm xóa sửa
+        public ICommand AddCommand { get; set; }
+        public ICommand EditCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
         public OutputViewModel()
         {
             LoadOutput();
             LoadComBoBoxAcc();
+            AddCommand = new RelayCommand<object>((p) => { return false; }, (p) => { });
+            EditCommand = new RelayCommand<object>((p) => { return false; }, (p) => { });
+            DeleteCommand = new RelayCommand<object>((p) => { return false; }, (p) => { });
         }
         public void LoadComBoBoxAcc() 
         {
@@ -100,6 +108,7 @@ namespace QuanLyKho.ViewModel
                 from outp in DataProvider.Ins.DB.BangXuats
                 join acc in DataProvider.Ins.DB.TaiKhoans on outp.IdTaiKhoan equals acc.Id
                 join outpinf in DataProvider.Ins.DB.ThongTinBangXuats on outp.Id equals outpinf.IdBangXuat
+                where outpinf.TrangThai==0
                 join vattu in DataProvider.Ins.DB.VatTus on outpinf.IdVatTu equals vattu.Id
                 join suppl in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals suppl.Id
                 join cus in DataProvider.Ins.DB.KhachHangs on outpinf.IdKhachHang equals cus.Id

@@ -96,6 +96,7 @@ create table TaiKhoan
 	TenTaiKhoan nvarchar(max),
 	HoVaTen nvarchar(100),
 	MatKhau nvarchar(max),
+	MatKhauUnEncry nvarchar(max),
     SDT nvarchar(20),
 	IdRoleTaiKhoan int not null,
 	Email nvarchar(200),
@@ -106,19 +107,20 @@ create table TaiKhoan
 )
 
 select * from TaiKhoan
-insert into TaiKhoan values(N'TaThanhHoang', N'Tạ Thanh Hoàng', N'db69fc039dcbd2962cb4d28f5891aae1','0325793505', 1,'tathanhhoang.work@gmail.com',
+
+insert into TaiKhoan values(N'TaThanhHoang', N'Tạ Thanh Hoàng', N'db69fc039dcbd2962cb4d28f5891aae1','admin','0325793505', 1,'tathanhhoang.work@gmail.com',
 '7/20/2010',' D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\Images\Accounts\0325793505.jpg',1)
 
-insert into TaiKhoan values(N'NguyenVanAn', N'Nguyễn Văn An', N'978aae9bb6bee8fb75de3e4830a1be46','0325793506', 2,'nguyenan@gmail.com',
+insert into TaiKhoan values(N'NguyenVanAn', N'Nguyễn Văn An', N'978aae9bb6bee8fb75de3e4830a1be46','satff','0325793506', 2,'nguyenan@gmail.com',
 '7/20/2023','D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\Images\Accounts\0325793506.jpg',1)
 
-insert into TaiKhoan values(N'NguyenThiHanh', N'Nguyễn Thị Hạnh', N'978aae9bb6bee8fb75de3e4830a1be46','0325798778', 2,'nguyenhanh@gmail.com',
+insert into TaiKhoan values(N'NguyenThiHanh', N'Nguyễn Thị Hạnh', N'978aae9bb6bee8fb75de3e4830a1be46','satff','0325798778', 2,'nguyenhanh@gmail.com',
 '7/20/2023','D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\Images\Accounts\0325798778.jpg',1)
 
-insert into TaiKhoan values(N'TranThiKieu', N'Trần Thi Kiều', N'978aae9bb6bee8fb75de3e4830a1be46','0325790327', 2,'kieun@gmail.com',
+insert into TaiKhoan values(N'TranThiKieu', N'Trần Thi Kiều', N'978aae9bb6bee8fb75de3e4830a1be46','satff','0325790327', 2,'kieun@gmail.com',
 '7/20/2023','D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\Images\Accounts\0325790327.jpg',1)
 
-insert into TaiKhoan values(N'LeVan', N'Lê Văn', N'978aae9bb6bee8fb75de3e4830a1be46','0325895897', 2,'lvan@gmail.com',
+insert into TaiKhoan values(N'LeVan', N'Lê Văn', N'978aae9bb6bee8fb75de3e4830a1be46','satff','0325895897', 2,'lvan@gmail.com',
 '7/20/2023','D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\Images\Accounts\0325895897.jpg',1)
 
 create table BangNhap

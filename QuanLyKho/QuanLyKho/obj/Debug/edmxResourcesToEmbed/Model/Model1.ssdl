@@ -64,6 +64,7 @@
     <Property Name="TenTaiKhoan" Type="nvarchar(max)" />
     <Property Name="HoVaTen" Type="nvarchar" MaxLength="100" />
     <Property Name="MatKhau" Type="nvarchar(max)" />
+    <Property Name="MatKhauUnEncry" Type="nvarchar(max)" />
     <Property Name="SDT" Type="nvarchar" MaxLength="20" />
     <Property Name="IdRoleTaiKhoan" Type="int" Nullable="false" />
     <Property Name="Email" Type="nvarchar" MaxLength="200" />

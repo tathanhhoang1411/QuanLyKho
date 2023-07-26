@@ -25,6 +25,7 @@ namespace QuanLyKho.Model
         public string TenTaiKhoan { get; set; }
         public string HoVaTen { get; set; }
         public string MatKhau { get; set; }
+        public string MatKhauUnEncry { get; set; }
         public string SDT { get; set; }
         public int IdRoleTaiKhoan { get; set; }
         public string Email { get; set; }

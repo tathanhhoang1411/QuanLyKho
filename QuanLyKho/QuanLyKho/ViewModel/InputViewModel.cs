@@ -5,6 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
+using System.Windows.Documents;
+using System.Windows.Input;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Windows.Forms;
 
 namespace QuanLyKho.ViewModel
 {
@@ -19,7 +23,12 @@ namespace QuanLyKho.ViewModel
         private ObservableCollection<Accounts> _ListAcc;
         public ObservableCollection<Accounts> ListAcc { get => _ListAcc; set { _ListAcc = value; OnPropertyChanged(); } }
 
+
+        private ObservableCollection<VatTus> _ListVattu;
+        public ObservableCollection<VatTus> ListVattu { get => _ListVattu; set { _ListVattu = value; OnPropertyChanged(); } }
+
         //Các trường này sẽ binding qua view 
+
 
         private string _TenVatTu;
         public string TenVatTu { get => _TenVatTu; set { _TenVatTu = value; OnPropertyChanged(); } }
@@ -59,7 +68,6 @@ namespace QuanLyKho.ViewModel
                 {
                     HoVaTenNhanVienNhapKho = SelectedItemInput.TaiKhoan.HoVaTen;
                     SDTNhanVienNhapKho = SelectedItemInput.TaiKhoan.SDT;
-                    TenVatTu = SelectedItemInput.Vattu.Ten;
                     Count = (int)SelectedItemInput.ThongTinBangNhap.Count;
                     TenNhaCungCap = SelectedItemInput.NhaCungCap.Ten;
                     SDTNhaCungCap = SelectedItemInput.NhaCungCap.SDT;
@@ -70,14 +78,29 @@ namespace QuanLyKho.ViewModel
                         case 0:
                             TrangThai = "Hoàn thành";
                             break;
-                        case 1:
+                        case 2:
                             TrangThai = "Đang trong quá trình";
                             break;
                         default:
                             break;
                     }
                     NgayNhap = (DateTime)SelectedItemInput.BangNhap.NgayNhap;
+                    SelectedItemAcc.TaiKhoan = SelectedItemInput.TaiKhoan;
+                    SelectedItemSupp.NhaCungCap=SelectedItemInput.NhaCungCap;
+                    SelectedItemVattu.VatTu = SelectedItemInput.Vattu;
                 }
+            }
+        }
+        //chọn item nhà cung cấp 
+        private VatTus _SelectedItemVattu;
+        public VatTus SelectedItemVattu
+        {
+            get => _SelectedItemVattu; set
+            {
+                _SelectedItemVattu = value;
+                OnPropertyChanged();
+
+
             }
         }
         //chọn item nhà cung cấp 
@@ -88,10 +111,7 @@ namespace QuanLyKho.ViewModel
             {
                 _SelectedItemSupp = value; 
                 OnPropertyChanged();
-                if (SelectedItemSupp != null)
-                {
-                    SDTNhaCungCap = SelectedItemSupp.NhaCungCap.SDT;
-                    }
+
                  
                 }
             }
@@ -104,25 +124,35 @@ namespace QuanLyKho.ViewModel
             {
                 _SelectedItemAcc = value;
                 OnPropertyChanged();
-                if (SelectedItemAcc != null)
-                {
-                    SDTNhanVienNhapKho = SelectedItemAcc.TaiKhoan.SDT;
-                }
+
 
             }
         }
-
+        //command cho các nút chức năng thêm xóa sửa
+        public ICommand AddCommand { get; set; }
+        public ICommand EditCommand { get; set; }
+        public ICommand DeleteCommand { get; set; }
 
         public InputViewModel()
         {
+            NgayNhap=DateTime.Now;
             LoadInput();
             LoadComBoBoxSupp();
             LoadComBoBoxAcc();
+            LoadComBoBoxVattu();
+            AddCommand = new RelayCommand<object>((p) => { return CanAddCommand(); }, (p) => { ExcutedAddCommand(); });
+            EditCommand = new RelayCommand<object>((p) => { return false; }, (p) => {  });
+            DeleteCommand = new RelayCommand<object>((p) => { return false; }, (p) => { });
         }
         public void LoadComBoBoxAcc()
         {
             AcocuntsViewModel accVM = new AcocuntsViewModel();
             ListAcc = accVM.LoadComboBoxAcc();
+        }
+        public void LoadComBoBoxVattu()
+        {
+            VattuViewModel vtVM = new VattuViewModel();
+            ListVattu = vtVM.LoadComboboxVatTu();
         }
         public void LoadComBoBoxSupp()
         {
@@ -137,7 +167,7 @@ namespace QuanLyKho.ViewModel
             var  listInput = (
                 from inp in DataProvider.Ins.DB.BangNhaps
                 join acc in DataProvider.Ins.DB.TaiKhoans on inp.IdTaiKhoan equals acc.Id
-                join inpinf in DataProvider.Ins.DB.ThongTinBangNhaps on inp.Id equals inpinf.IdBangNhap
+                join inpinf in DataProvider.Ins.DB.ThongTinBangNhaps on inp.Id equals inpinf.IdBangNhap where inpinf.TrangThai==0
                 join vattu in DataProvider.Ins.DB.VatTus on inpinf.IdVatTu equals vattu.Id
                 join suppl in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals suppl.Id
                 select new  { inp,acc,inpinf,vattu,suppl}).ToList();
@@ -169,6 +199,64 @@ namespace QuanLyKho.ViewModel
                 i++;
             }
 
+
+        }
+        private bool CanAddCommand()
+        {
+
+            if ( string.IsNullOrWhiteSpace(Count.ToString())
+               || string.IsNullOrWhiteSpace(HoVaTenNhanVienNhapKho)
+               || string.IsNullOrWhiteSpace(GiaNhap.ToString())
+               || string.IsNullOrWhiteSpace(TenNhaCungCap)
+               || string.IsNullOrWhiteSpace(NgayNhap.ToString()))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        private void ExcutedAddCommand()
+        {
+            try
+            {
+                //bảng nhập
+                BangNhap bn = new BangNhap();
+                if (NgayNhap > DateTime.Now)
+                {
+                    bn.NgayNhap = DateTime.Now;
+                }
+                else
+                {
+                    bn.NgayNhap = (DateTime)NgayNhap;
+                }
+                bn.IdTaiKhoan = SelectedItemAcc.TaiKhoan.Id;
+                DataProvider.Ins.DB.BangNhaps.Add(bn);
+
+
+
+                //thông tin bảng nhập
+                ThongTinBangNhap ttbn = new ThongTinBangNhap();
+                ttbn.IdVatTu = SelectedItemVattu.VatTu.Id;
+                ttbn.IdBangNhap =bn.Id;
+                ttbn.Count = Count;
+                ttbn.GiaNhap = GiaNhap;
+                ttbn.TrangThai = 0;
+                DataProvider.Ins.DB.ThongTinBangNhaps.Add(ttbn);
+
+
+                DataProvider.Ins.DB.SaveChanges();
+                LoadInput();
+
+                MessageBox.Show("Thêm thẻ nhập: " + SelectedItemVattu.VatTu.Ten.Trim() +Count+ " " + NgayNhap.ToString() +" do nhân viên"+SelectedItemAcc.TaiKhoan.TenTaiKhoan+"nhập"+ " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Tiến trình thêm bị lỗi", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
 
         }
     }

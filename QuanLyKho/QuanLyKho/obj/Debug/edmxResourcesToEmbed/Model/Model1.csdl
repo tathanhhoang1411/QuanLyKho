@@ -124,6 +124,7 @@
     <Property Name="TenTaiKhoan" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="HoVaTen" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
     <Property Name="MatKhau" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="MatKhauUnEncry" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
     <Property Name="SDT" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
     <Property Name="IdRoleTaiKhoan" Type="Int32" Nullable="false" />
     <Property Name="Email" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
