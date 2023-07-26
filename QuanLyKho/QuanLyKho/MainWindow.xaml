@@ -267,6 +267,15 @@
                                         </GridView>
                                     </ListView.View>
                                 </ListView>
+                                <Button ToolTip="Load lại danh sách thông tin tài khoản đăng nhập"
+                                     Height="auto"
+                                        Content="Làm mới"
+                                    Style="{StaticResource MaterialDesignRaisedButton}"
+                                    Margin="5"
+                                    Command="{Binding LoadWindowCommand,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                        Width="100">
+
+                                </Button>
                             </StackPanel>
                         </materialDesign:Card>
                     </Grid>

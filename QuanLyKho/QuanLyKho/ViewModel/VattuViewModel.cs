@@ -30,6 +30,7 @@ namespace QuanLyKho.ViewModel
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand UnDeleteCommand { get; set; }
+        public ICommand ReloadCommand { get; set; }
 
         private VatTus _SelectedItem;
         public VatTus SelectedItem
@@ -90,7 +91,7 @@ namespace QuanLyKho.ViewModel
             EditCommand =new RelayCommand<object>((p)=>{ return CanEditCommand(); }, (p) => { ExcutedEditCommand(); });
             DeleteCommand = new RelayCommand<object>((p) => { return CanDelCommand(); }, (p) => { ExcutedDelCommand(); });
             UnDeleteCommand = new RelayCommand<object>((p) => { return CanDelCommand(); }, (p) => { ExcutedUnDelCommand(); });
-
+            ReloadCommand = new RelayCommand<object>((p) => { return true; }, (p) => { Reload(); });
         }
         public void LoadComBoBoxUnit()
         {
@@ -101,6 +102,13 @@ namespace QuanLyKho.ViewModel
         {
 SupplierViewModel sup=new SupplierViewModel();
             ListSupp= sup.LoadComboboxSuppl();
+        }
+        private void Reload()
+        {
+            LoadVattu();
+            LoadComBoBoxUnit();//đổ unit vào combobox
+
+            LoadComBoBoxSupp();//đổ cus vào combobox
         }
         public ObservableCollection<VatTus> LoadComboboxVatTu()
         {

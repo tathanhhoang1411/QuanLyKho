@@ -28,9 +28,10 @@ namespace QuanLyKho.ViewModel
         public ICommand AccountsWindowCommand { get; set; }
         public ICommand InputWindowCommand { get; set; }
         public ICommand OutputWindowCommand { get; set; }
-        public ICommand VattuWindowCommand { get; set; }
+        public ICommand VattuWindowCommand { get; set; }  
         public ICommand SupplierWindowCommand { get; set; }
         public ICommand CustomerWindowCommand { get; set; }
+        public ICommand LoadWindowCommand { get; set; }
         // mọi thứ xử lý sẽ nằm trong này 
         public MainViewModel()
         {
@@ -84,6 +85,12 @@ namespace QuanLyKho.ViewModel
                 mainVM.Hide();
                 AccountsWindow wd = new AccountsWindow();
                 wd.ShowDialog();
+            });
+            LoadWindowCommand = new RelayCommand<object>((p) => {
+                return true;
+            }, (p) =>
+            {
+                ListAccInfo = loginVM.AccLogins();
             });
             InputWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -164,7 +171,8 @@ namespace QuanLyKho.ViewModel
 
                 i++;
             }
-   
+ 
         }
+
     }
 }

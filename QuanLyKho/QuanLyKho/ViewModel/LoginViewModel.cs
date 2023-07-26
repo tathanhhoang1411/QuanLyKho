@@ -33,8 +33,8 @@ namespace QuanLyKho.ViewModel
         {
             
             IsLogin = false;
-            Password = "admin";
-            UserName = "TaThanhHoang";
+            Password = "";
+            UserName = "";
             ShowPassCommand = new RelayCommand<Window>((p) => { return isField(); }, (p) => { MessageBox.Show("Chức năng đang xây dựng, vui lòng chờ bảng nâng cấp"); });
             LoginCommand = new RelayCommand<Window>((p) => { return isField(); }, (p) => { Login(p); });
             CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { p.Close(); });
@@ -96,8 +96,6 @@ namespace QuanLyKho.ViewModel
             acc.TaiKhoan = listAcc;
             acc.RoleTaiKhoan = listAcc.RoleTaiKhoan;
             ListAccInfo.Add(acc);
-            OnPropertyChanged("acc");
-            OnPropertyChanged(nameof(acc));
             return ListAccInfo;
 
         }

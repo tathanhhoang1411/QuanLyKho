@@ -97,6 +97,12 @@
                         Margin="5"
                         Width="100">
                     </Button>
+                    <Button 
+                        Command="{Binding ReloadCommand,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                        Content="Làm mới"
+                        Margin="5"
+                        Width="100">
+                    </Button>
                 </StackPanel>
             </materialDesign:Card>
 

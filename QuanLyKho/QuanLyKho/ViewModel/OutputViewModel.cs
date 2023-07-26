@@ -107,10 +107,13 @@ namespace QuanLyKho.ViewModel
             var listOutput = (
                 from outp in DataProvider.Ins.DB.BangXuats
                 join acc in DataProvider.Ins.DB.TaiKhoans on outp.IdTaiKhoan equals acc.Id
+                where acc.TrangThai == 1
                 join outpinf in DataProvider.Ins.DB.ThongTinBangXuats on outp.Id equals outpinf.IdBangXuat
                 where outpinf.TrangThai==0
                 join vattu in DataProvider.Ins.DB.VatTus on outpinf.IdVatTu equals vattu.Id
+                where vattu.TrangThai == 1
                 join suppl in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals suppl.Id
+                where suppl.TrangThai == 1
                 join cus in DataProvider.Ins.DB.KhachHangs on outpinf.IdKhachHang equals cus.Id
                 select new { outp, acc, outpinf, vattu, suppl,cus }).ToList();
             foreach (var item in listOutput)

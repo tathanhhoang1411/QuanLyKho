@@ -166,10 +166,10 @@ namespace QuanLyKho.ViewModel
             ListInputs = new ObservableCollection<Inputs>();
             var  listInput = (
                 from inp in DataProvider.Ins.DB.BangNhaps
-                join acc in DataProvider.Ins.DB.TaiKhoans on inp.IdTaiKhoan equals acc.Id
+                join acc in DataProvider.Ins.DB.TaiKhoans on inp.IdTaiKhoan equals acc.Id where acc.TrangThai == 1
                 join inpinf in DataProvider.Ins.DB.ThongTinBangNhaps on inp.Id equals inpinf.IdBangNhap where inpinf.TrangThai==0
-                join vattu in DataProvider.Ins.DB.VatTus on inpinf.IdVatTu equals vattu.Id
-                join suppl in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals suppl.Id
+                join vattu in DataProvider.Ins.DB.VatTus on inpinf.IdVatTu equals vattu.Id where vattu.TrangThai==1
+                join suppl in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals suppl.Id where suppl.TrangThai==1
                 select new  { inp,acc,inpinf,vattu,suppl}).ToList();
             foreach(var  item in listInput )
             {
