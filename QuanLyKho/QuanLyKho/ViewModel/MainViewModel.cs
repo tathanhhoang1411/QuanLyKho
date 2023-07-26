@@ -91,6 +91,7 @@ namespace QuanLyKho.ViewModel
             }, (p) =>
             {
                 ListAccInfo = loginVM.AccLogins();
+                LoadTonKho();
             });
             InputWindowCommand = new RelayCommand<object>((p) => { return true; }, (p) =>
             {
@@ -137,7 +138,7 @@ namespace QuanLyKho.ViewModel
         void LoadTonKho()
         {
             ListTonKho = new ObservableCollection<TonKho>();
-            List<VatTu>  ListVatTu = DataProvider.Ins.DB.VatTus.ToList();
+            List<VatTu>  ListVatTu = DataProvider.Ins.DB.VatTus.Where(x=>x.TrangThai==1).ToList();
             //Biến i sẽ là STT tăng dần
             int i = 1;
             foreach (VatTu item in ListVatTu)
