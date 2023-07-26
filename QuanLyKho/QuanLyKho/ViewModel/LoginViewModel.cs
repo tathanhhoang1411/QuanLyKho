@@ -33,8 +33,8 @@ namespace QuanLyKho.ViewModel
         {
             
             IsLogin = false;
-            Password = "";
-            UserName = "";
+            Password = "admin";
+            UserName = "TaThanhHoang";
             ShowPassCommand = new RelayCommand<Window>((p) => { return isField(); }, (p) => { MessageBox.Show("Chức năng đang xây dựng, vui lòng chờ bảng nâng cấp"); });
             LoginCommand = new RelayCommand<Window>((p) => { return isField(); }, (p) => { Login(p); });
             CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { p.Close(); });

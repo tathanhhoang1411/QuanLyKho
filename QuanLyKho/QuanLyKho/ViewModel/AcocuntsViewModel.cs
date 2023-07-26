@@ -96,6 +96,7 @@ namespace QuanLyKho.ViewModel
         public ICommand UnDeleteCommand { get;set ; }
         public ICommand OpenFolderCommand { get;set ; }
         public ICommand SaveFileCommand { get;set ; }
+        public ICommand ReLoadCommand { get;set ; }
 
 
 
@@ -109,6 +110,7 @@ namespace QuanLyKho.ViewModel
             EditCommand = new RelayCommand<object>((p) => { return CanEditCommand(); }, (p) => { ExcutedEditCommand(); });
             DeleteCommand = new RelayCommand<object>((p) => { return CanDelCommand(); }, (p) => { ExcutedUnDelCommand(); });
             UnDeleteCommand = new RelayCommand<object>((p) => { return CanDelCommand(); }, (p) => { ExcutedDelCommand(); });
+            ReLoadCommand = new RelayCommand<object>((p) => { return true; }, (p) => { LoadComboBoxRole(); });
             OpenFolderCommand = new RelayCommand(OpenImage);
         }
 

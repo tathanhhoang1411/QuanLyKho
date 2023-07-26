@@ -134,14 +134,18 @@ SupplierViewModel sup=new SupplierViewModel();
         public void LoadVattu()
             {
             ListVattus = new ObservableCollection<VatTus>();
-            List<VatTu> ListVatTu = DataProvider.Ins.DB.VatTus.ToList();
+            var ListVatTu = (from vattu in DataProvider.Ins.DB.VatTus
+                                    join nhacc in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals nhacc.Id
+                                    where nhacc.TrangThai == 1
+                                    join donvi in DataProvider.Ins.DB.DonViDoes on vattu.IdDonViDo equals donvi.Id
+                                    where donvi.TrangThai == 1
+                                    select new { vattu, nhacc, donvi}).ToList(); 
             //Biến i sẽ là STT tăng dần
             int i = 1;
-            foreach (VatTu item in ListVatTu)
+            foreach (var item in ListVatTu)
             {
-                List<ThongTinBangNhap> ListInputInfo = DataProvider.Ins.DB.ThongTinBangNhaps.Where(p => p.IdVatTu == item.Id).ToList();
-                List<ThongTinBangXuat> ListOutputInfo = DataProvider.Ins.DB.ThongTinBangXuats.Where(p => p.IdVatTu == item.Id).ToList();
-                List<DonViDo> DonViDo = DataProvider.Ins.DB.DonViDoes.Where(p => p.Id == item.IdDonViDo).ToList();
+                List<ThongTinBangNhap> ListInputInfo = DataProvider.Ins.DB.ThongTinBangNhaps.Where(p => p.IdVatTu == item.vattu.Id).ToList();
+                List<ThongTinBangXuat> ListOutputInfo = DataProvider.Ins.DB.ThongTinBangXuats.Where(p => p.IdVatTu == item.vattu.Id).ToList();
                 int sumInput = 0;
                 int sumOutput = 0;
                 int a = ListVatTu.Count();
@@ -162,9 +166,9 @@ SupplierViewModel sup=new SupplierViewModel();
                 //Đổ số lượng vật tư  
                 vtu.Count = sumInput - sumOutput;
                 //Đổ vật tư 
-                vtu.VatTu = item;
-                vtu.NhaCungCap = item.NhaCungCap;
-                switch (item.TrangThai)
+                vtu.VatTu = item.vattu;
+                vtu.NhaCungCap = item.nhacc;
+                switch (item.vattu.TrangThai)
                 {
                     case 1:
                         vtu.TrangThai = "Kích hoạt";
@@ -175,7 +179,7 @@ SupplierViewModel sup=new SupplierViewModel();
                     default:
                         break;
                 }
-                vtu.DonViDo = DonViDo[0];
+                vtu.DonViDo = item.donvi;
                 ListVattus.Add(vtu);
 
                 i++;

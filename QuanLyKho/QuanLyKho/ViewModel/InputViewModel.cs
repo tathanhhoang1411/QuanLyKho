@@ -132,6 +132,7 @@ namespace QuanLyKho.ViewModel
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
+        public ICommand ReLoadCommand { get; set; }
 
         public InputViewModel()
         {
@@ -141,8 +142,14 @@ namespace QuanLyKho.ViewModel
             LoadComBoBoxAcc();
             LoadComBoBoxVattu();
             AddCommand = new RelayCommand<object>((p) => { return CanAddCommand(); }, (p) => { ExcutedAddCommand(); });
-            EditCommand = new RelayCommand<object>((p) => { return false; }, (p) => {  });
+            EditCommand = new RelayCommand<object>((p) => { return CanEditCommand(); }, (p) => { ExcutedEditCommand(); });
             DeleteCommand = new RelayCommand<object>((p) => { return false; }, (p) => { });
+            ReLoadCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+                LoadInput();
+                LoadComBoBoxSupp();
+                LoadComBoBoxAcc();
+                LoadComBoBoxVattu();
+            });
         }
         public void LoadComBoBoxAcc()
         {
@@ -201,6 +208,7 @@ namespace QuanLyKho.ViewModel
 
 
         }
+
         private bool CanAddCommand()
         {
 
@@ -209,6 +217,24 @@ namespace QuanLyKho.ViewModel
                || string.IsNullOrWhiteSpace(GiaNhap.ToString())
                || string.IsNullOrWhiteSpace(TenNhaCungCap)
                || string.IsNullOrWhiteSpace(NgayNhap.ToString()))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+        private bool CanEditCommand()
+        {
+
+            if (string.IsNullOrWhiteSpace(Count.ToString())
+               || string.IsNullOrWhiteSpace(HoVaTenNhanVienNhapKho)
+               || string.IsNullOrWhiteSpace(GiaNhap.ToString())
+               || string.IsNullOrWhiteSpace(TenNhaCungCap)
+               || string.IsNullOrWhiteSpace(NgayNhap.ToString())
+               || SelectedItemInput==null)
             {
                 return false;
             }
@@ -249,7 +275,7 @@ namespace QuanLyKho.ViewModel
                 DataProvider.Ins.DB.SaveChanges();
                 LoadInput();
 
-                MessageBox.Show("Thêm thẻ nhập: " + SelectedItemVattu.VatTu.Ten.Trim() +Count+ " " + NgayNhap.ToString() +" do nhân viên"+SelectedItemAcc.TaiKhoan.TenTaiKhoan+"nhập"+ " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Thêm thẻ nhập: " + SelectedItemVattu.VatTu.Ten.Trim() +" giá: "+Count+ " " + NgayNhap.ToString() +" do nhân viên: "+SelectedItemAcc.TaiKhoan.TenTaiKhoan+"nhập"+ " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
             }
@@ -258,6 +284,44 @@ namespace QuanLyKho.ViewModel
                 MessageBox.Show("Tiến trình thêm bị lỗi", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
+        private void ExcutedEditCommand()
+        {
+            try
+            {
+                var listInput = (
+                (
+                 from inp in DataProvider.Ins.DB.BangNhaps
+                 join acc in DataProvider.Ins.DB.TaiKhoans on inp.IdTaiKhoan equals acc.Id
+                 where acc.TrangThai == 1 && acc.Id == SelectedItemAcc.TaiKhoan.Id
+                join inpinf in DataProvider.Ins.DB.ThongTinBangNhaps on inp.Id equals inpinf.IdBangNhap
+                where inpinf.TrangThai == 0 
+                 join vattu in DataProvider.Ins.DB.VatTus on inpinf.IdVatTu equals vattu.Id
+                where vattu.TrangThai == 1 && vattu.Id == SelectedItemVattu.VatTu.Id
+                 join suppl in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals suppl.Id
+                where suppl.TrangThai == 1 && suppl.Id == SelectedItemSupp.NhaCungCap.Id
+                 select new { inp, acc, inpinf, vattu, suppl })).SingleOrDefault();
+
+
+                
+                listInput.inpinf.GiaNhap = GiaNhap;
+                listInput.inpinf.Count = Count;
+                listInput.inp.NgayNhap = (DateTime)NgayNhap;
+
+                listInput.inp.IdTaiKhoan = SelectedItemAcc.TaiKhoan.Id;
+
+                listInput.inpinf.IdVatTu = SelectedItemVattu.VatTu.Id;
+
+
+                DataProvider.Ins.DB.SaveChanges();
+                LoadInput();
+                MessageBox.Show("Sửa thông tin thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Tiến trình lỗi", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
