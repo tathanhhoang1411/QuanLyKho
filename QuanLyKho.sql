@@ -105,9 +105,12 @@ create table TaiKhoan
 	AnhDaiDien nvarchar(max),
 	TrangThai int default(1)
 )
-
+select * from VatTu
+select * from DonViDo
 select * from TaiKhoan
-
+select * from BangNhap
+select * from ThongTinBangNhap
+delete from TaiKhoan where id=  12
 insert into TaiKhoan values(N'TaThanhHoang', N'Tạ Thanh Hoàng', N'db69fc039dcbd2962cb4d28f5891aae1','admin','0325793505', 1,'tathanhhoang.work@gmail.com',
 '7/20/2010',' D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\Images\Accounts\0325793505.jpg',1)
 
@@ -196,6 +199,10 @@ insert into ThongTinBangXuat values(1,4,3,5,5000,0)
 insert into ThongTinBangXuat values(1,5,3,5,5000,0)
 
 
-select *from BangNhap
-select *from BangXuat
+select *from vattu
+select *from ThongTinBangNhap
 
+select * from bangnhap,Thongtinbangnhap,taikhoan,vattu,nhacungcap
+where bangnhap.IdTaiKhoan=TaiKhoan.Id and ThongTinBangNhap.IdBangNhap=BangNhap.Id AND ThongTinBangNhap.IdVatTu=VatTu.Id AND VatTu.IdNhaCungCap=NhaCungCap.Id 
+
+and TaiKhoan.id=1 ANd VatTu.Id=1 and NhaCungCap.Id=1 and ThongTinBangNhap.Id=1

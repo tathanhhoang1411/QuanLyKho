@@ -9,6 +9,7 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Windows.Forms;
+using System.Windows.Media.Media3D;
 
 namespace QuanLyKho.ViewModel
 {
@@ -176,6 +177,7 @@ namespace QuanLyKho.ViewModel
                 join acc in DataProvider.Ins.DB.TaiKhoans on inp.IdTaiKhoan equals acc.Id where acc.TrangThai == 1
                 join inpinf in DataProvider.Ins.DB.ThongTinBangNhaps on inp.Id equals inpinf.IdBangNhap where inpinf.TrangThai==0
                 join vattu in DataProvider.Ins.DB.VatTus on inpinf.IdVatTu equals vattu.Id where vattu.TrangThai==1
+                join donvi in DataProvider.Ins.DB.DonViDoes on vattu.IdDonViDo equals donvi.Id where donvi.TrangThai==1
                 join suppl in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals suppl.Id where suppl.TrangThai==1
                 select new  { inp,acc,inpinf,vattu,suppl}).ToList();
             foreach(var  item in listInput )
@@ -300,14 +302,23 @@ namespace QuanLyKho.ViewModel
                 where vattu.TrangThai == 1 && vattu.Id == SelectedItemVattu.VatTu.Id
                  join suppl in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals suppl.Id
                 where suppl.TrangThai == 1 && suppl.Id == SelectedItemSupp.NhaCungCap.Id
+
+                 join donvi in DataProvider.Ins.DB.DonViDoes on vattu.IdDonViDo equals donvi.Id
+                 where donvi.TrangThai == 1
                  select new { inp, acc, inpinf, vattu, suppl })).SingleOrDefault();
 
 
                 
-                listInput.inpinf.GiaNhap = GiaNhap;
+                listInput.inpinf.GiaNhap = (double)GiaNhap;
                 listInput.inpinf.Count = Count;
-                listInput.inp.NgayNhap = (DateTime)NgayNhap;
-
+                if (NgayNhap > DateTime.Now)
+                {
+                    listInput.inp.NgayNhap = DateTime.Now;
+                }
+                else
+                {
+                    listInput.inp.NgayNhap = (DateTime)NgayNhap;
+                }
                 listInput.inp.IdTaiKhoan = SelectedItemAcc.TaiKhoan.Id;
 
                 listInput.inpinf.IdVatTu = SelectedItemVattu.VatTu.Id;
