@@ -224,7 +224,7 @@ namespace QuanLyKho.ViewModel
               
                 DataProvider.Ins.DB.SaveChanges();
                 LoadSuppl();
-                MessageBox.Show("Sửa thông tin nhà cung cấp" + TenNhaCungCap.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Sửa thông tin nhà cung cấp" + TenNhaCungCap.Trim().ToUpper() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             catch (Exception ex)
@@ -254,7 +254,7 @@ namespace QuanLyKho.ViewModel
                 nhacc.TrangThai = 1;// dùng
                 DataProvider.Ins.DB.SaveChanges();
                 LoadSuppl();
-                MessageBox.Show("Kích hoạt nhà cung cấp" + TenNhaCungCap.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Kích hoạt nhà cung cấp" + TenNhaCungCap.Trim().ToUpper() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             catch (Exception ex)
@@ -271,7 +271,7 @@ namespace QuanLyKho.ViewModel
                 nhacc.TrangThai = 0;// 
                 DataProvider.Ins.DB.SaveChanges();
                 LoadSuppl();
-                MessageBox.Show("Tắt nhà cung cấp" + TenNhaCungCap.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Tắt nhà cung cấp" + TenNhaCungCap.Trim().ToUpper() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             catch (Exception ex)

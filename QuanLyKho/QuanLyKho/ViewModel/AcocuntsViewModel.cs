@@ -273,7 +273,7 @@ namespace QuanLyKho.ViewModel
                 DataProvider.Ins.DB.TaiKhoans.Add(tk);
                 DataProvider.Ins.DB.SaveChanges();
                 LoadAccount();
-                MessageBox.Show("Thêm nhân viên: Tài khoản " + TaiKhoan.Trim() + " " + SDT.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Thêm nhân viên: Tài khoản " + TaiKhoan.Trim().ToUpper() + " " + SDT.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
             }
@@ -330,7 +330,7 @@ namespace QuanLyKho.ViewModel
                 }
                 DataProvider.Ins.DB.SaveChanges();
                 LoadAccount();
-                MessageBox.Show("Sửa thông tin nhân viên: Tài khoản " + TaiKhoan.Trim() + " " + SDT.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Sửa thông tin nhân viên: Tài khoản " + TaiKhoan.Trim().ToUpper() + " " + SDT.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
             }
@@ -364,7 +364,7 @@ namespace QuanLyKho.ViewModel
                 tk.TrangThai = 1;
                 DataProvider.Ins.DB.SaveChanges();
                 LoadAccount();
-                MessageBox.Show("Mở khóa nhân viên: Tài khoản " + TaiKhoan.Trim() + " " + SDT.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Mở khóa nhân viên: Tài khoản " + TaiKhoan.Trim().ToUpper() + " " + SDT.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
             }
@@ -385,7 +385,7 @@ namespace QuanLyKho.ViewModel
                 tk.TrangThai = 0;
                 DataProvider.Ins.DB.SaveChanges();
                 LoadAccount();
-                MessageBox.Show("Khóa nhân viên: Tài khoản " + TaiKhoan.Trim() + " " + SDT.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Khóa nhân viên: Tài khoản " + TaiKhoan.Trim().ToUpper() + " " + SDT.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
             }

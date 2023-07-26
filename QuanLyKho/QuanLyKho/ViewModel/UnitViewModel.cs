@@ -149,7 +149,7 @@ namespace QuanLyKho.ViewModel
                 LoadUnit();
                
 
-                MessageBox.Show("Thêm đơn vị "+TenDonViDo.Trim()+ " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Thêm đơn vị "+TenDonViDo.Trim().ToUpper() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 
             }
             catch(Exception ex)
@@ -181,7 +181,7 @@ namespace QuanLyKho.ViewModel
                 donvido.Ten = TenDonViDo.Trim();
                 DataProvider.Ins.DB.SaveChanges();
                 LoadUnit();
-                MessageBox.Show("Sửa đơn vị " + TenDonViDo.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Sửa đơn vị " + TenDonViDo.Trim().ToUpper() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             catch (Exception ex)
@@ -213,7 +213,7 @@ namespace QuanLyKho.ViewModel
                 DataProvider.Ins.DB.SaveChanges();
                 SelectedItem.DonViDo.Ten = TenDonViDo.Trim();
                 LoadUnit();
-                MessageBox.Show("Tắt dùng đơn vị " + TenDonViDo.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Tắt dùng đơn vị " + TenDonViDo.Trim().ToUpper() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             catch (Exception ex)
@@ -231,7 +231,7 @@ namespace QuanLyKho.ViewModel
                 DataProvider.Ins.DB.SaveChanges();
                 SelectedItem.DonViDo.Ten = TenDonViDo.Trim();
                 LoadUnit();
-                MessageBox.Show("Bật dùng đơn vị " + TenDonViDo.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Bật dùng đơn vị " + TenDonViDo.Trim().ToUpper() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             catch (Exception ex)

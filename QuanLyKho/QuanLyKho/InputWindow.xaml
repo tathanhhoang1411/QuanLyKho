@@ -156,8 +156,9 @@
                                 <GridViewColumn Header="SDT nhân viên " DisplayMemberBinding="{Binding TaiKhoan.SDT}"></GridViewColumn>
                                 <GridViewColumn Header="Tên vật tư" DisplayMemberBinding="{Binding Vattu.Ten}"></GridViewColumn>
                                 <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding ThongTinBangNhap.Count}"></GridViewColumn>
-                                <GridViewColumn Header="Tên đơn vị cung ứng" DisplayMemberBinding="{Binding Vattu.NhaCungCap.Ten}"></GridViewColumn>
                                 <GridViewColumn Header="Giá nhập kho" DisplayMemberBinding="{Binding ThongTinBangNhap.GiaNhap}"></GridViewColumn>
+                                <GridViewColumn Header="Đơn vị tính" DisplayMemberBinding="{Binding ThongTinBangNhap.VatTu.DonViDo.Ten}"></GridViewColumn>
+                                <GridViewColumn Header="Tên đơn vị cung ứng" DisplayMemberBinding="{Binding Vattu.NhaCungCap.Ten}"></GridViewColumn>
                                 <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TrangThai}"></GridViewColumn>
                                 <GridViewColumn Header="Ngày nhập" DisplayMemberBinding="{Binding BangNhap.NgayNhap}"></GridViewColumn>
                             </GridView>

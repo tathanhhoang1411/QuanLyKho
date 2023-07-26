@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using QuanLyKho.Model;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,8 @@ using System.Windows.Input;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using System.Windows.Forms;
 using System.Windows.Media.Media3D;
+
+using MessageBox = System.Windows.MessageBox;
 
 namespace QuanLyKho.ViewModel
 {
@@ -144,7 +147,7 @@ namespace QuanLyKho.ViewModel
             LoadComBoBoxVattu();
             AddCommand = new RelayCommand<object>((p) => { return CanAddCommand(); }, (p) => { ExcutedAddCommand(); });
             EditCommand = new RelayCommand<object>((p) => { return CanEditCommand(); }, (p) => { ExcutedEditCommand(); });
-            DeleteCommand = new RelayCommand<object>((p) => { return false; }, (p) => { });
+            DeleteCommand = new RelayCommand<object>((p) => { return CanDelCommand(); }, (p) => { ExcutedDelCommand(); });
             ReLoadCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
                 LoadInput();
                 LoadComBoBoxSupp();
@@ -173,7 +176,7 @@ namespace QuanLyKho.ViewModel
             int i = 1;
             ListInputs = new ObservableCollection<Inputs>();
             var  listInput = (
-                from inp in DataProvider.Ins.DB.BangNhaps
+                from inp in DataProvider.Ins.DB.BangNhaps 
                 join acc in DataProvider.Ins.DB.TaiKhoans on inp.IdTaiKhoan equals acc.Id where acc.TrangThai == 1
                 join inpinf in DataProvider.Ins.DB.ThongTinBangNhaps on inp.Id equals inpinf.IdBangNhap where inpinf.TrangThai==0
                 join vattu in DataProvider.Ins.DB.VatTus on inpinf.IdVatTu equals vattu.Id where vattu.TrangThai==1
@@ -218,7 +221,8 @@ namespace QuanLyKho.ViewModel
                || string.IsNullOrWhiteSpace(HoVaTenNhanVienNhapKho)
                || string.IsNullOrWhiteSpace(GiaNhap.ToString())
                || string.IsNullOrWhiteSpace(TenNhaCungCap)
-               || string.IsNullOrWhiteSpace(NgayNhap.ToString()))
+               || string.IsNullOrWhiteSpace(NgayNhap.ToString())
+               || SelectedItemInput != null)
             {
                 return false;
             }
@@ -244,6 +248,14 @@ namespace QuanLyKho.ViewModel
             {
                 return true;
             }
+        }
+        private bool CanDelCommand()
+        {
+            if(SelectedItemInput == null)
+            {
+                return false;
+            }
+            return true;
         }
         private void ExcutedAddCommand()
         {
@@ -272,18 +284,22 @@ namespace QuanLyKho.ViewModel
                 ttbn.GiaNhap = GiaNhap;
                 ttbn.TrangThai = 0;
                 DataProvider.Ins.DB.ThongTinBangNhaps.Add(ttbn);
-
-
                 DataProvider.Ins.DB.SaveChanges();
                 LoadInput();
 
-                MessageBox.Show("Thêm thẻ nhập: " + SelectedItemVattu.VatTu.Ten.Trim() +" giá: "+Count+ " " + NgayNhap.ToString() +" do nhân viên: "+SelectedItemAcc.TaiKhoan.TenTaiKhoan+"nhập"+ " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Thêm thẻ nhập: " +
+                    SelectedItemVattu.VatTu.Ten.Trim().ToUpper() +
+                    ", giá: "+ GiaNhap.ToString() + 
+                    ", số lượng: " + Count +
+                    ", do nhân viên: "+
+                    SelectedItemAcc.TaiKhoan.TenTaiKhoan+
+                    " nhập thành công!", "Thông báo", MessageBoxButton.OK);
 
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Tiến trình thêm bị lỗi", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Tiến trình thêm bị lỗi", "Thông báo", MessageBoxButton.OK);
             }
 
         }
@@ -295,13 +311,14 @@ namespace QuanLyKho.ViewModel
                 (
                  from inp in DataProvider.Ins.DB.BangNhaps
                  join acc in DataProvider.Ins.DB.TaiKhoans on inp.IdTaiKhoan equals acc.Id
-                 where acc.TrangThai == 1 && acc.Id == SelectedItemAcc.TaiKhoan.Id
+                 where acc.TrangThai == 1 
                 join inpinf in DataProvider.Ins.DB.ThongTinBangNhaps on inp.Id equals inpinf.IdBangNhap
-                where inpinf.TrangThai == 0 
+                where inpinf.TrangThai == 0  where  inpinf.Id == SelectedItemInput.ThongTinBangNhap.Id
+                 where inpinf.IdBangNhap==inp.Id
                  join vattu in DataProvider.Ins.DB.VatTus on inpinf.IdVatTu equals vattu.Id
-                where vattu.TrangThai == 1 && vattu.Id == SelectedItemVattu.VatTu.Id
+                where vattu.TrangThai == 1 
                  join suppl in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals suppl.Id
-                where suppl.TrangThai == 1 && suppl.Id == SelectedItemSupp.NhaCungCap.Id
+                where suppl.TrangThai == 1 
 
                  join donvi in DataProvider.Ins.DB.DonViDoes on vattu.IdDonViDo equals donvi.Id
                  where donvi.TrangThai == 1
@@ -320,18 +337,68 @@ namespace QuanLyKho.ViewModel
                     listInput.inp.NgayNhap = (DateTime)NgayNhap;
                 }
                 listInput.inp.IdTaiKhoan = SelectedItemAcc.TaiKhoan.Id;
-
+                listInput.vattu.IdNhaCungCap = SelectedItemSupp.NhaCungCap.Id;
                 listInput.inpinf.IdVatTu = SelectedItemVattu.VatTu.Id;
 
 
                 DataProvider.Ins.DB.SaveChanges();
                 LoadInput();
-                MessageBox.Show("Sửa thông tin thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Sửa thông tin nhập vật tư: "+TenVatTu.Trim().ToUpper()+
+                    ", số lượng: "+Count.ToString().Trim()+
+                    ", với giá nhập: "+GiaNhap.ToString().Trim()+
+                    " thành công!", "Thông báo", MessageBoxButton.OK);
 
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Tiến trình lỗi", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Tiến trình lỗi", "Thông báo", MessageBoxButton.OK);
+            }
+        }
+
+        private void ExcutedDelCommand()
+        {
+            MessageBoxResult result = MessageBox.Show("Xóa thông tin nhập vật tư: "+
+                TenVatTu.Trim().ToUpper()+" đã nhập vào ngày: "+
+                (DateTime)SelectedItemInput.BangNhap.NgayNhap+
+                " ?","Thông báo",MessageBoxButton.YesNo);
+            if (result == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    var listInput = (
+                    (
+                     from inp in DataProvider.Ins.DB.BangNhaps
+                     join acc in DataProvider.Ins.DB.TaiKhoans on inp.IdTaiKhoan equals acc.Id
+                     where acc.TrangThai == 1
+                     join inpinf in DataProvider.Ins.DB.ThongTinBangNhaps on inp.Id equals inpinf.IdBangNhap
+                     where inpinf.TrangThai == 0
+                     where inpinf.Id == SelectedItemInput.ThongTinBangNhap.Id
+                     where inpinf.IdBangNhap == inp.Id
+                     join vattu in DataProvider.Ins.DB.VatTus on inpinf.IdVatTu equals vattu.Id
+                     where vattu.TrangThai == 1
+                     join suppl in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals suppl.Id
+                     where suppl.TrangThai == 1
+
+                     join donvi in DataProvider.Ins.DB.DonViDoes on vattu.IdDonViDo equals donvi.Id
+                     where donvi.TrangThai == 1
+                     select new { inp, acc, inpinf, vattu, suppl })).SingleOrDefault();
+
+
+
+                    listInput.inpinf.TrangThai = 1;//chỉ hiện trạng thái bằng 0 nên 1 sẽ  ẩn
+
+                    DataProvider.Ins.DB.SaveChanges();
+                    LoadInput();
+                    MessageBox.Show("Xóa thông tin nhập vật tư: " + TenVatTu.Trim().ToUpper() +
+                        ", số lượng: " + Count.ToString().Trim() +
+                        ", với giá nhập: " + GiaNhap.ToString().Trim() +
+                        " thành công!", "Thông báo", MessageBoxButton.OK);
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Tiến trình lỗi", "Thông báo", MessageBoxButton.OK);
+                }
             }
         }
     }

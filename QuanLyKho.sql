@@ -199,8 +199,9 @@ insert into ThongTinBangXuat values(1,4,3,5,5000,0)
 insert into ThongTinBangXuat values(1,5,3,5,5000,0)
 
 
-select *from vattu
-select *from ThongTinBangNhap
+select *from ThongTinBangXuat
+select *from BangXuat
+select *from Khachhang
 
 select * from bangnhap,Thongtinbangnhap,taikhoan,vattu,nhacungcap
 where bangnhap.IdTaiKhoan=TaiKhoan.Id and ThongTinBangNhap.IdBangNhap=BangNhap.Id AND ThongTinBangNhap.IdVatTu=VatTu.Id AND VatTu.IdNhaCungCap=NhaCungCap.Id 

@@ -51,6 +51,27 @@ namespace QuanLyKho.ViewModel
             AddCommand = new RelayCommand<object>((p) => { return CanAddCommand(); }, (p) => { ExcutedAddCommand(); });
             EditCommand = new RelayCommand<object>((p) => { return CanEditCommand(); }, (p) => { ExcutedEditCommand(); });
         }
+        public ObservableCollection<Customers> LoadComboboxCus()
+        {
+
+            ListCustomers = new ObservableCollection<Customers>();
+            List<KhachHang> list = DataProvider.Ins.DB.KhachHangs.ToList();
+            //Biến i sẽ là STT tăng dần
+            int i = 1;
+            foreach (KhachHang item in list)
+
+            {
+
+                Customers cus = new Customers();
+                //Đổ số thứ tự Khách hàng
+                cus.STT = i;
+                //Đổ tai khoản
+                cus.KhachHang = item;
+                ListCustomers.Add(cus);
+                i++;
+            }
+            return ListCustomers;
+        }
         private bool CanAddCommand()
         {
             if(string.IsNullOrWhiteSpace(TenKhachHang) 
@@ -98,7 +119,7 @@ namespace QuanLyKho.ViewModel
                 DataProvider.Ins.DB.KhachHangs.Add(kh);
                 DataProvider.Ins.DB.SaveChanges();
                 LoadCustomer();
-                MessageBox.Show("Thêm khách mua hàng" + TenKhachHang.Trim() +" "+SDT.Trim()+" thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Thêm khách mua hàng" + TenKhachHang.Trim().ToUpper() + " "+SDT.Trim()+" thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
             }
@@ -134,7 +155,7 @@ namespace QuanLyKho.ViewModel
                 khachhang.ThongTinThem = ThongTinThem.Trim();
                 DataProvider.Ins.DB.SaveChanges();
                 LoadCustomer();
-                MessageBox.Show("Sửa Thông tin " + TenKhachHang.Trim() +" "+SDT.Trim()+ " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Sửa Thông tin " + TenKhachHang.Trim().ToUpper() + " "+SDT.Trim()+ " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             catch (Exception ex)
@@ -142,6 +163,31 @@ namespace QuanLyKho.ViewModel
                 MessageBox.Show("Tiến trình lỗi", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
+        }
+        public string Find(string sdt)
+        {
+            try
+            {
+                string ten;
+                if (sdt == null)
+                {
+                    ten = "";
+                }
+                else
+                {
+                    var kh = DataProvider.Ins.DB.KhachHangs.Where(p => p.SDT == sdt).ToList();
+                    ten = kh[0].Ten;
+                    
+                }
+                return ten;
+            }
+            catch(Exception err)
+            {
+
+                MessageBox.Show("Lỗi");
+                string ten = "";
+                return ten;
+            }
         }
         public void LoadCustomer()
         {

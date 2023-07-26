@@ -31,7 +31,7 @@
         <uc:ControlBarUC  Tag="{Binding Title, ElementName=outputWindow}"></uc:ControlBarUC>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition MaxWidth="250"></ColumnDefinition>
+                <ColumnDefinition MaxWidth="400"></ColumnDefinition>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition></ColumnDefinition>
             </Grid.ColumnDefinitions>
@@ -43,26 +43,52 @@
                     <StackPanel 
                     Orientation="Vertical"
                     HorizontalAlignment="Center"
-                    VerticalAlignment="Center">
+                    VerticalAlignment="Center" Width="300">
+                        <DockPanel >
 
-                        <TextBox 
+                            <TextBox 
+                        Text="{Binding SDTKhachHang, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="SDT khách hàng" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                            </TextBox>
+                            <TextBox
+                        Foreground="OrangeRed" HorizontalAlignment="Right"
                         Text="{Binding TenKhachHang, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
-                        materialDesign:HintAssist.Hint="Tên khách hàng" 
+                        materialDesign:HintAssist.Hint=" khách hàng" 
                         Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                        </TextBox>
-                        <TextBox 
-                        Text="{Binding SDT, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                            </TextBox>
+                        </DockPanel>
+
+                        <ComboBox
+                       Text="{Binding TenVatTu,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}"
                         Margin="5" 
-                        materialDesign:HintAssist.Hint="SDT" 
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                        </TextBox>
-                        <TextBox 
-                        Text="{Binding TenVatTu, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                        materialDesign:HintAssist.Hint="Vật tư" 
+                        Style="{StaticResource MaterialDesignComboBox}"
+                            DisplayMemberPath="VatTu.Ten"
+                            ItemsSource="{Binding ListVattu, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                            SelectedItem="{Binding SelectedItemVattu, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+
+                        </ComboBox>
+                        <ComboBox 
+                        Text="{Binding TenNhaCungCap, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
-                        materialDesign:HintAssist.Hint="Tên vật tư" 
-                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
-                        </TextBox>
+                        materialDesign:HintAssist.Hint="Tên đơn vị cung cấp" 
+                        Style="{StaticResource MaterialDesignComboBox}"
+                        DisplayMemberPath="NhaCungCap.Ten"
+                            ItemsSource="{Binding ListSupp, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                            SelectedItem="{Binding SelectedItemSupp, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                        </ComboBox>
+                        <ComboBox 
+                        Text="{Binding TenTaiKhoan, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="TaiKhoan" 
+                        Style="{StaticResource MaterialDesignComboBox}"
+                        DisplayMemberPath="TaiKhoan.TenTaiKhoan"
+                            ItemsSource="{Binding ListAcc, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                            SelectedItem="{Binding SelectedItemAcc, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+                        </ComboBox>
                         <TextBox 
                         Text="{Binding Count, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
@@ -90,7 +116,7 @@
                               materialDesign:HintAssist.Hint="SDT Nhân viên xuất kho">
                             
                         </Label>
-                        <TextBox 
+                        <TextBox IsReadOnly="True"
                         Text="{Binding TrangThai, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
                         materialDesign:HintAssist.Hint="Trạng thái" 
@@ -129,6 +155,12 @@
                         Margin="5"
                         Width="100">
                     </Button>
+                    <Button 
+                        Command="{Binding ReLoadCommand}" 
+                        Content="Làm mới"
+                        Margin="5"
+                        Width="100">
+                    </Button>
                 </StackPanel>
             </materialDesign:Card>
 
@@ -152,7 +184,9 @@
                                 <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
                                 <GridViewColumn Header="SDT khách mua" DisplayMemberBinding="{Binding KhachHang.SDT}"></GridViewColumn>
                                 <GridViewColumn Header="Tên vật tư" DisplayMemberBinding="{Binding Vattu.Ten}"></GridViewColumn>
+                                <GridViewColumn Header="Tên nhà cung cấp" DisplayMemberBinding="{Binding NhaCungCap.Ten}"></GridViewColumn>
                                 <GridViewColumn Header="Số lượng" DisplayMemberBinding="{Binding ThongTinBangXuat.Count}"></GridViewColumn>
+                                <GridViewColumn Header="Đơn vị tính" DisplayMemberBinding="{Binding ThongTinBangXuat.VatTu.DonViDo.Ten}"></GridViewColumn>
                                 <GridViewColumn Header="Giá xuất kho" DisplayMemberBinding="{Binding ThongTinBangXuat.GiaXuat}"></GridViewColumn>
                                 <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TrangThai}"></GridViewColumn>
                                 <GridViewColumn Header="Nhân viên xuất kho" DisplayMemberBinding="{Binding TaiKhoan.HoVaTen}"></GridViewColumn>

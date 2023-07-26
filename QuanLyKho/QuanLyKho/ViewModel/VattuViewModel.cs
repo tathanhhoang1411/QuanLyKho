@@ -222,7 +222,7 @@ SupplierViewModel sup=new SupplierViewModel();
                     DataProvider.Ins.DB.VatTus.Add(vt);
                     DataProvider.Ins.DB.SaveChanges();
                     LoadVattu();
-                    MessageBox.Show("Thêm vật tư " + TenVatTu.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Thêm vật tư " + TenVatTu.Trim().ToUpper() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
             }
@@ -256,7 +256,7 @@ SupplierViewModel sup=new SupplierViewModel();
                 vattu.IdNhaCungCap=SelectedItemSupp.NhaCungCap.Id;
                 DataProvider.Ins.DB.SaveChanges();
                 LoadVattu();
-                MessageBox.Show("Sửa Vật tư " + TenVatTu.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Sửa Vật tư " + TenVatTu.Trim().ToUpper() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch (Exception ex)
             {
@@ -284,7 +284,7 @@ SupplierViewModel sup=new SupplierViewModel();
                 vattu.TrangThai = 0;//khong dùng
                 DataProvider.Ins.DB.SaveChanges();
                 LoadVattu();
-                MessageBox.Show("Tắt dùng vật tư " + TenDonViDo.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Tắt dùng vật tư " + TenDonViDo.Trim().ToUpper() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             catch (Exception ex)
@@ -301,7 +301,7 @@ SupplierViewModel sup=new SupplierViewModel();
                 vattu.TrangThai = 1;// dùng
                 DataProvider.Ins.DB.SaveChanges();
                 LoadVattu();
-                MessageBox.Show("Bật dùng đơn vị " + TenDonViDo.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Bật dùng đơn vị " + TenDonViDo.Trim().ToUpper() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             }
             catch (Exception ex)
