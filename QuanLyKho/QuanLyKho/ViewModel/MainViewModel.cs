@@ -40,7 +40,7 @@ namespace QuanLyKho.ViewModel
             var loginVM = loginWindow.DataContext as LoginViewModel;
             LoadedWindowCommand = new RelayCommand<Window>((p) => { return true; }, (p) =>
             {
-
+               
                 Isloaded = true;
                 if (p == null)
                     return;

@@ -80,15 +80,7 @@
                             ItemsSource="{Binding ListSupp, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                             SelectedItem="{Binding SelectedItemSupp, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                         </ComboBox>
-                        <ComboBox 
-                        Text="{Binding TenTaiKhoan, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
-                        Margin="5" 
-                        materialDesign:HintAssist.Hint="TaiKhoan" 
-                        Style="{StaticResource MaterialDesignComboBox}"
-                        DisplayMemberPath="TaiKhoan.TenTaiKhoan"
-                            ItemsSource="{Binding ListAcc, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
-                            SelectedItem="{Binding SelectedItemAcc, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
-                        </ComboBox>
+
                         <TextBox 
                         Text="{Binding Count, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
                         Margin="5" 
@@ -110,6 +102,15 @@
                             ItemsSource="{Binding ListAcc}"
                             SelectedItem="{Binding SelectedItemAcc}">
 
+                        </ComboBox>
+                        <ComboBox 
+                        Text="{Binding TenTaiKhoan, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="TaiKhoan" 
+                        Style="{StaticResource MaterialDesignComboBox}"
+                        DisplayMemberPath="TaiKhoan.TenTaiKhoan"
+                            ItemsSource="{Binding ListAcc, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                            SelectedItem="{Binding SelectedItemAcc, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
                         </ComboBox>
                         <Label
                             Content="{Binding SDTNhanVienXuatKho}"

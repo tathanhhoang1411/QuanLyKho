@@ -150,6 +150,14 @@ namespace QuanLyKho.ViewModel
             DeleteCommand = new RelayCommand<object>((p) => { return CanDelCommand(); }, (p) => { ExcutedDelCommand(); });
             ReLoadCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
                 LoadInput();
+                SelectedItemAcc = null;
+                SelectedItemSupp= null;
+                SelectedItemVattu = null;
+                Count= 0;
+                GiaNhap = 0;
+                TrangThai = "";
+                NgayNhap = DateTime.Now;
+
                 LoadComBoBoxSupp();
                 LoadComBoBoxAcc();
                 LoadComBoBoxVattu();
@@ -220,6 +228,9 @@ namespace QuanLyKho.ViewModel
             if ( string.IsNullOrWhiteSpace(Count.ToString())
                || string.IsNullOrWhiteSpace(HoVaTenNhanVienNhapKho)
                || string.IsNullOrWhiteSpace(GiaNhap.ToString())
+               || string.IsNullOrWhiteSpace(Count.ToString())
+               || GiaNhap < 0
+               || Count < 0
                || string.IsNullOrWhiteSpace(TenNhaCungCap)
                || string.IsNullOrWhiteSpace(NgayNhap.ToString())
                || SelectedItemInput != null)
@@ -238,6 +249,9 @@ namespace QuanLyKho.ViewModel
             if (string.IsNullOrWhiteSpace(Count.ToString())
                || string.IsNullOrWhiteSpace(HoVaTenNhanVienNhapKho)
                || string.IsNullOrWhiteSpace(GiaNhap.ToString())
+               || string.IsNullOrWhiteSpace(Count.ToString())
+               || GiaNhap < 0
+               || Count < 0
                || string.IsNullOrWhiteSpace(TenNhaCungCap)
                || string.IsNullOrWhiteSpace(NgayNhap.ToString())
                || SelectedItemInput==null)
@@ -310,10 +324,12 @@ namespace QuanLyKho.ViewModel
                 var listInput = (
                 (
                  from inp in DataProvider.Ins.DB.BangNhaps
+                 where inp.Id == SelectedItemInput.BangNhap.Id
                  join acc in DataProvider.Ins.DB.TaiKhoans on inp.IdTaiKhoan equals acc.Id
                  where acc.TrangThai == 1 
                 join inpinf in DataProvider.Ins.DB.ThongTinBangNhaps on inp.Id equals inpinf.IdBangNhap
-                where inpinf.TrangThai == 0  where  inpinf.Id == SelectedItemInput.ThongTinBangNhap.Id
+                where inpinf.TrangThai == 0
+                 where inpinf.Id == SelectedItemInput.ThongTinBangNhap.Id
                  where inpinf.IdBangNhap==inp.Id
                  join vattu in DataProvider.Ins.DB.VatTus on inpinf.IdVatTu equals vattu.Id
                 where vattu.TrangThai == 1 

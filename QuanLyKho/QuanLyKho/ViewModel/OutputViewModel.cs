@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Windows.Input;
 using System.Windows.Navigation;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace QuanLyKho.ViewModel
 {
@@ -165,6 +166,17 @@ namespace QuanLyKho.ViewModel
                 LoadComBoBoxAcc();
                 LoadComBoBoxVattu();
                 LoadComBoBoxCus();
+                SelectedItemAcc = null;
+                SelectedItemCus = null;
+                SelectedItemSupp= null;
+                SelectedItemVattu= null;
+                SDTKhachHang = "";
+                TenKhachHang = "";
+                Count = 0;
+                GiaXuat =0;
+                TrangThai = "";
+                SDTNhanVienXuatKho = "";
+                NgayXuat = DateTime.Now;
             });
         }
         public void LoadComBoBoxCus()
@@ -200,10 +212,14 @@ namespace QuanLyKho.ViewModel
                 where outpinf.TrangThai==0
                 join vattu in DataProvider.Ins.DB.VatTus on outpinf.IdVatTu equals vattu.Id
                 where vattu.TrangThai == 1
+                join donvi in DataProvider.Ins.DB.DonViDoes on vattu.IdDonViDo equals donvi.Id
+                where donvi.TrangThai == 1
                 join suppl in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals suppl.Id
                 where suppl.TrangThai == 1
                 join cus in DataProvider.Ins.DB.KhachHangs on outpinf.IdKhachHang equals cus.Id
                 select new { outp, acc, outpinf, vattu, suppl,cus }).ToList();
+
+
             foreach (var item in listOutput)
             {
                 Outputs outps = new Outputs();
@@ -284,6 +300,7 @@ namespace QuanLyKho.ViewModel
         {
             try
             {
+               
                 //bảng xuất
                 BangXuat bx = new BangXuat();
                 if (NgayXuat > DateTime.Now)
@@ -296,6 +313,7 @@ namespace QuanLyKho.ViewModel
                 }
                 bx.IdTaiKhoan = SelectedItemAcc.TaiKhoan.Id;
                 DataProvider.Ins.DB.BangXuats.Add(bx);
+                DataProvider.Ins.DB.SaveChanges();
 
 
                 //thông tin bảng xuất
@@ -303,10 +321,10 @@ namespace QuanLyKho.ViewModel
                 ttbx.IdVatTu = SelectedItemVattu.VatTu.Id;
                 ttbx.IdBangXuat = bx.Id;
                 ttbx.Count = Count;
-                List<KhachHang> list = DataProvider.Ins.DB.KhachHangs.Where(p => p.SDT == SDTKhachHang.Trim()).ToList();
-                if (list.Count > 0)
+                KhachHang list = DataProvider.Ins.DB.KhachHangs.Where(p => p.SDT == SDTKhachHang.Trim()).SingleOrDefault();
+                if (list != null)// đã tồn tại khách hàng
                 {
-                    ttbx.IdKhachHang = list[0].Id;
+                    ttbx.IdKhachHang = list.Id;
 
                 }
                 else
@@ -314,11 +332,19 @@ namespace QuanLyKho.ViewModel
                     KhachHang kh=new KhachHang();
                     kh.SDT= SDTKhachHang.Trim();
                     kh.ThongTinThem = "Chưa có thông tin";
+                    kh.Ten = "";
+                    kh.Email = "";
+                    kh.Address = "";
+                    
                     DataProvider.Ins.DB.KhachHangs.Add(kh);
                     DataProvider.Ins.DB.SaveChanges();
                     MessageBox.Show("Khách hàng mới!","Thông báo",MessageBoxButton.OK, MessageBoxImage.Information);
+
                 }
-                ttbx.GiaXuat = GiaXuat;
+                KhachHang newlist = DataProvider.Ins.DB.KhachHangs.Where(p => p.SDT == SDTKhachHang.Trim()).SingleOrDefault();
+                ttbx.IdKhachHang = newlist.Id;
+                ttbx.GiaXuat = (double)GiaXuat;
+                ttbx.Count = (int)Count;
                 ttbx.TrangThai = 0;
                 DataProvider.Ins.DB.ThongTinBangXuats.Add(ttbx);
                 DataProvider.Ins.DB.SaveChanges();
@@ -345,9 +371,9 @@ namespace QuanLyKho.ViewModel
         {
             try
             {
-                var listOutPut = (
+                var listOutPut = 
                 (
-                 from outp in DataProvider.Ins.DB.BangXuats
+                 from outp in DataProvider.Ins.DB.BangXuats where outp.Id == SelectedItemOutPut.BangXuat.Id
                  join acc in DataProvider.Ins.DB.TaiKhoans on outp.IdTaiKhoan equals acc.Id
                  where acc.TrangThai == 1
                  join outpinf in DataProvider.Ins.DB.ThongTinBangXuats on outp.Id equals outpinf.IdBangXuat
@@ -361,7 +387,7 @@ namespace QuanLyKho.ViewModel
                  join cus in DataProvider.Ins.DB.KhachHangs on outpinf.IdKhachHang equals cus.Id
                  join donvi in DataProvider.Ins.DB.DonViDoes on vattu.IdDonViDo equals donvi.Id
                  where donvi.TrangThai == 1
-                 select new { outp, acc, outpinf, vattu, suppl,cus })).SingleOrDefault();
+                 select new { outp, acc, outpinf, vattu, suppl,cus }).SingleOrDefault();
 
 
 
@@ -378,8 +404,26 @@ namespace QuanLyKho.ViewModel
                 listOutPut.outp.IdTaiKhoan = SelectedItemAcc.TaiKhoan.Id;
                 listOutPut.vattu.IdNhaCungCap = SelectedItemSupp.NhaCungCap.Id;
                 listOutPut.outpinf.IdVatTu = SelectedItemVattu.VatTu.Id;
+                KhachHang list = DataProvider.Ins.DB.KhachHangs.Where(p => p.SDT == SDTKhachHang.Trim()).SingleOrDefault();
+                if (list !=null)// đã tồn tại khách hàng
+                {
+                   listOutPut.outpinf.IdKhachHang= list.Id;
 
-
+                }
+                else
+                {
+                    KhachHang kh = new KhachHang();
+                    kh.SDT = SDTKhachHang.Trim();
+                    kh.ThongTinThem = "Chưa có thông tin";
+                    kh.Ten = "";
+                    kh.Email = "";
+                    kh.Address = "";
+                    DataProvider.Ins.DB.KhachHangs.Add(kh);
+                    DataProvider.Ins.DB.SaveChanges();
+                    MessageBox.Show("Khách hàng mới!", "Thông báo", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                KhachHang newlist = DataProvider.Ins.DB.KhachHangs.Where(p => p.SDT == SDTKhachHang.Trim()).SingleOrDefault();
+                listOutPut.outpinf.IdKhachHang = newlist.Id;
                 DataProvider.Ins.DB.SaveChanges();
                 LoadOutput();
                 MessageBox.Show("Sửa thông tin xuất vật tư: " + TenVatTu.Trim().ToUpper() +
@@ -405,23 +449,22 @@ namespace QuanLyKho.ViewModel
                 try
                 {
                     var listOutput = (
-                    (
-                     from outp in DataProvider.Ins.DB.BangXuats
-                     join acc in DataProvider.Ins.DB.TaiKhoans on outp.IdTaiKhoan equals acc.Id
-                     where acc.TrangThai == 1
-                     join outpinf in DataProvider.Ins.DB.ThongTinBangXuats on outp.Id equals outpinf.IdBangXuat
-                     where outpinf.TrangThai == 0
-                     where outpinf.Id == SelectedItemOutPut.ThongTinBangXuat.Id
-                     where outpinf.IdBangXuat == outp.Id
-                     join vattu in DataProvider.Ins.DB.VatTus on outpinf.IdVatTu equals vattu.Id
-                     where vattu.TrangThai == 1
-                     join suppl in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals suppl.Id
-                     where suppl.TrangThai == 1
-                     join cus in DataProvider.Ins.DB.KhachHangs on outpinf.IdKhachHang equals cus.Id
-                     join donvi in DataProvider.Ins.DB.DonViDoes on vattu.IdDonViDo equals donvi.Id
-                     where donvi.TrangThai == 1
-                     select new { outp, acc, outpinf, vattu, suppl,cus })).SingleOrDefault();
-
+                 from outp in DataProvider.Ins.DB.BangXuats
+                 where outp.Id == SelectedItemOutPut.BangXuat.Id
+                 join acc in DataProvider.Ins.DB.TaiKhoans on outp.IdTaiKhoan equals acc.Id
+                 where acc.TrangThai == 1
+                 join outpinf in DataProvider.Ins.DB.ThongTinBangXuats on outp.Id equals outpinf.IdBangXuat
+                 where outpinf.TrangThai == 0
+                 where outpinf.Id == SelectedItemOutPut.ThongTinBangXuat.Id
+                 where outpinf.IdBangXuat == outp.Id
+                 join vattu in DataProvider.Ins.DB.VatTus on outpinf.IdVatTu equals vattu.Id
+                 where vattu.TrangThai == 1
+                 join suppl in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals suppl.Id
+                 where suppl.TrangThai == 1
+                 join cus in DataProvider.Ins.DB.KhachHangs on outpinf.IdKhachHang equals cus.Id
+                 join donvi in DataProvider.Ins.DB.DonViDoes on vattu.IdDonViDo equals donvi.Id
+                 where donvi.TrangThai == 1
+                 select new { outp, acc, outpinf, vattu, suppl, cus }).SingleOrDefault();
 
 
                     listOutput.outpinf.TrangThai = 1;//chỉ hiện trạng thái bằng 0 nên 1 sẽ  ẩn
