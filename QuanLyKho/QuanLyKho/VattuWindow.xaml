@@ -127,10 +127,9 @@
                                 <GridViewColumn Header="Vật tư" DisplayMemberBinding="{Binding VatTu.Ten}"></GridViewColumn>
                                 <GridViewColumn Header="Đơn vị tính" DisplayMemberBinding="{Binding DonViDo.Ten}"></GridViewColumn>
                                 <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TrangThai}"></GridViewColumn>
-                                
+
                                 <GridViewColumn Header="Hiện có" DisplayMemberBinding="{Binding Count}"></GridViewColumn>
-                                <GridViewColumn Header="Đơn vị cung cấp" DisplayMemberBinding="{Binding NhaCungCap.Ten}"></GridViewColumn>
-                                <GridViewColumn Header="Địa chỉ" DisplayMemberBinding="{Binding VatTu.NhaCungCap.Address}"></GridViewColumn>
+                           
                                 
                             </GridView>
                         </ListView.View>

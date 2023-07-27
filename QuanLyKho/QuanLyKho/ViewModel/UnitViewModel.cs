@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.Xml;
 using System.Xml.Linq;
+using System.Windows.Data;
 
 namespace QuanLyKho.ViewModel
 {
@@ -30,7 +31,6 @@ namespace QuanLyKho.ViewModel
         public ICommand EditCommand { get; set; }
         public ICommand DeleteCommand { get; set; }
         public ICommand UnDeleteCommand { get; set; }
-
 
         private Unites _SelectedItem;
         public Unites SelectedItem
@@ -53,7 +53,9 @@ namespace QuanLyKho.ViewModel
             EditCommand = new RelayCommand<object>((p) => { return false; }, (p) => { ExcutedEditCommand(); });
             DeleteCommand = new RelayCommand<object>((p) => { return CanDelCommand(); }, (p) => { ExcutedDelCommand(); });
             UnDeleteCommand = new RelayCommand<object>((p) => { return CanDelCommand(); }, (p) => { ExcutedUnDelCommand(); });
+
         }
+
         private void LoadUnit()
         {
             ListDonViDoes = new ObservableCollection<Unites>();

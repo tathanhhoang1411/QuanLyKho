@@ -148,33 +148,52 @@
                 Grid.Column="2"
                 Margin="5" 
                 VerticalAlignment="Stretch">
+                
                 <ScrollViewer 
                     HorizontalScrollBarVisibility="Auto"
                     VerticalScrollBarVisibility="Auto">
-                    <ListView 
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <DockPanel >
+                                <TextBox DockPanel.Dock="Left"
+                            Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Tài khoản" 
+                        Style="{StaticResource MaterialDesignFloatingHintTextBox}">
+                                </TextBox>
+                                <DatePicker DockPanel.Dock="Left"
+                            Text="{Binding SearchDate, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" 
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Ngày tạo tài khoản" 
+                        Style="{StaticResource MaterialDesignFilledDatePicker}">
+                                </DatePicker>
+                            </DockPanel>
+                        </StackPanel>
+                        <ListView 
                         HorizontalAlignment="Center"
                         ItemsSource="{Binding ListAccounts, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                         SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                        <ListView.Resources>
-                            <Style TargetType="GridViewColumnHeader">
-                                <Setter Property="FontSize" Value="15"></Setter>
-                                <Setter Property="Foreground" Value="DarkSlateBlue"></Setter>
-                            </Style>
-                        </ListView.Resources>
-                        <ListView.View >
-                            <GridView>
-                                <GridViewColumn Header="Id" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
-                                <GridViewColumn Header="Họ và tên" DisplayMemberBinding="{Binding TaiKhoan.HoVaTen}"></GridViewColumn>
-                                <GridViewColumn Header="Tài khoản" DisplayMemberBinding="{Binding TaiKhoan.TenTaiKhoan}"></GridViewColumn>
-                                <GridViewColumn Header="Mật khẩu" DisplayMemberBinding="{Binding TaiKhoan.MatKhauUnEncry}"></GridViewColumn>
-                                <GridViewColumn Header="Số điện thoại" DisplayMemberBinding="{Binding TaiKhoan.SDT}"></GridViewColumn>
-                                <GridViewColumn Header="Email" DisplayMemberBinding="{Binding TaiKhoan.Email}"></GridViewColumn>
-                                <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TrangThai}"></GridViewColumn>
-                                <GridViewColumn Header="Cấp bậc" DisplayMemberBinding="{Binding RoleTaiKhoan.Ten}"></GridViewColumn>
-                                <GridViewColumn Header="Ngày tạo" DisplayMemberBinding="{Binding TaiKhoan.NgayTao}"></GridViewColumn>
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                            <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="FontSize" Value="15"></Setter>
+                                    <Setter Property="Foreground" Value="DarkSlateBlue"></Setter>
+                                </Style>
+                            </ListView.Resources>
+                            <ListView.View >
+                                <GridView>
+                                    <GridViewColumn Header="Id" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
+                                    <GridViewColumn Header="Họ và tên" DisplayMemberBinding="{Binding TaiKhoan.HoVaTen}"></GridViewColumn>
+                                    <GridViewColumn Header="Tài khoản" DisplayMemberBinding="{Binding TaiKhoan.TenTaiKhoan}"></GridViewColumn>
+                                    <GridViewColumn Header="Mật khẩu" DisplayMemberBinding="{Binding TaiKhoan.MatKhauUnEncry}"></GridViewColumn>
+                                    <GridViewColumn Header="Số điện thoại" DisplayMemberBinding="{Binding TaiKhoan.SDT}"></GridViewColumn>
+                                    <GridViewColumn Header="Email" DisplayMemberBinding="{Binding TaiKhoan.Email}"></GridViewColumn>
+                                    <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TrangThai}"></GridViewColumn>
+                                    <GridViewColumn Header="Cấp bậc" DisplayMemberBinding="{Binding RoleTaiKhoan.Ten}"></GridViewColumn>
+                                    <GridViewColumn Header="Ngày tạo" DisplayMemberBinding="{Binding TaiKhoan.NgayTao}"></GridViewColumn>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
                 </ScrollViewer>
             </materialDesign:Card>
 <!--Manage loại tài khoản-->

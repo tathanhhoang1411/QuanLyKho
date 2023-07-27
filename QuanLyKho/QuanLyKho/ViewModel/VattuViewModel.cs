@@ -32,6 +32,7 @@ namespace QuanLyKho.ViewModel
         public ICommand UnDeleteCommand { get; set; }
         public ICommand ReloadCommand { get; set; }
 
+
         private VatTus _SelectedItem;
         public VatTus SelectedItem
         {
@@ -106,8 +107,11 @@ SupplierViewModel sup=new SupplierViewModel();
         private void Reload()
         {
             LoadComBoBoxUnit();//đổ unit vào combobox
-
             LoadComBoBoxSupp();//đổ cus vào combobox
+            SelectedItemSupp = null;
+            SelectedItem = null;
+            SelectedItemUnit = null;
+            TenVatTu = "";
         }
         public ObservableCollection<VatTus> LoadComboboxVatTu()
         {
@@ -135,11 +139,12 @@ SupplierViewModel sup=new SupplierViewModel();
             {
             ListVattus = new ObservableCollection<VatTus>();
             var ListVatTu = (from vattu in DataProvider.Ins.DB.VatTus
+                             where vattu.TrangThai == 1
                                     join nhacc in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals nhacc.Id
                                     where nhacc.TrangThai == 1
                                     join donvi in DataProvider.Ins.DB.DonViDoes on vattu.IdDonViDo equals donvi.Id
                                     where donvi.TrangThai == 1
-                                    select new { vattu, nhacc, donvi}).ToList(); 
+                                    select new { vattu, nhacc, donvi}).ToList();
             //Biến i sẽ là STT tăng dần
             int i = 1;
             foreach (var item in ListVatTu)
@@ -179,10 +184,11 @@ SupplierViewModel sup=new SupplierViewModel();
                     default:
                         break;
                 }
+                i++;
                 vtu.DonViDo = item.donvi;
                 ListVattus.Add(vtu);
+                DataProvider.Ins.DB.SaveChanges();
 
-                i++;
             }
         }
         private bool CanAddCommand()
@@ -215,8 +221,7 @@ SupplierViewModel sup=new SupplierViewModel();
                     VatTu vt = new VatTu();
                     vt.Ten = TenVatTu.Trim();
                     vt.IdNhaCungCap = SelectedItemSupp.NhaCungCap.Id;
-                vt.TrangThai = 1;
-
+                    vt.TrangThai = 1;
                     vt.IdDonViDo = SelectedItemUnit.DonViDo.Id;
 
                     DataProvider.Ins.DB.VatTus.Add(vt);

@@ -6,9 +6,9 @@
     <edmx:Diagrams>
       <Diagram DiagramId="6e44a5b7ee1d4a66a1f5354d542e0486" Name="Diagram1" ZoomLevel="79">
         <EntityTypeShape EntityType="QuanLyKhoModel.BangNhap" Width="1.5" PointX="6" PointY="11.125" />
-        <EntityTypeShape EntityType="QuanLyKhoModel.BangXuat" Width="1.5" PointX="3" PointY="15.75" />
+        <EntityTypeShape EntityType="QuanLyKhoModel.BangXuat" Width="1.5" PointX="3" PointY="1.625" />
         <EntityTypeShape EntityType="QuanLyKhoModel.DonViDo" Width="1.5" PointX="0.75" PointY="5.25" />
-        <EntityTypeShape EntityType="QuanLyKhoModel.KhachHang" Width="1.5" PointX="3" PointY="1.625" />
+        <EntityTypeShape EntityType="QuanLyKhoModel.KhachHang" Width="1.5" PointX="3" PointY="15.25" />
         <EntityTypeShape EntityType="QuanLyKhoModel.NhaCungCap" Width="1.5" PointX="0.75" PointY="0.75" />
         <EntityTypeShape EntityType="QuanLyKhoModel.RoleTaiKhoan" Width="1.5" PointX="1.5" PointY="11.25" />
         <EntityTypeShape EntityType="QuanLyKhoModel.TaiKhoan" Width="1.5" PointX="3.75" PointY="10.25" />

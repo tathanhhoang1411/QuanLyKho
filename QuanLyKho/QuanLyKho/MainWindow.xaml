@@ -232,7 +232,7 @@
                                             <GridViewColumn Header="Tên vật tư" DisplayMemberBinding="{Binding Vattu.Ten}"></GridViewColumn>
                                             <GridViewColumn Header="Hiện có" DisplayMemberBinding="{Binding Count}" ></GridViewColumn>
                                             <GridViewColumn Header="Đơn vị tính" DisplayMemberBinding="{Binding DonViDo.Ten}" ></GridViewColumn>
-                                            <GridViewColumn Header="Đơn vị cung cấp" DisplayMemberBinding="{Binding Vattu.NhaCungCap.Ten}" ></GridViewColumn>
+                                         
                                         </GridView>
                                     </ListView.View>
                                 </ListView>

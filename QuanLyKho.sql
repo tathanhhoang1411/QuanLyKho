@@ -10,10 +10,11 @@ create table DonViDo
 	Ten nvarchar(max),
 	TrangThai int default(1)
 )
+
 insert into DonViDo values (N'Tấm(0,3m * 0.3m)',1)
 insert into DonViDo values (N'Bao( 50KG)',1)
 insert into DonViDo values (N'Trụ sắt( 3m)',1)
-insert into DonViDo values (N'Tấm( 2m * 5m',1)
+insert into DonViDo values (N'Tấm( 2m * 5m)',1)
 
 create table NhaCungCap
 (
@@ -105,12 +106,9 @@ create table TaiKhoan
 	AnhDaiDien nvarchar(max),
 	TrangThai int default(1)
 )
-select * from VatTu
-select * from DonViDo
-select * from TaiKhoan
-select * from BangNhap
-select * from ThongTinBangNhap
-delete from TaiKhoan where id=  12
+
+
+
 insert into TaiKhoan values(N'TaThanhHoang', N'Tạ Thanh Hoàng', N'db69fc039dcbd2962cb4d28f5891aae1','admin','0325793505', 1,'tathanhhoang.work@gmail.com',
 '7/20/2010',' D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\Images\Accounts\0325793505.jpg',1)
 
@@ -198,3 +196,16 @@ insert into ThongTinBangXuat values(1,1,3,5,5000,0)
 insert into ThongTinBangXuat values(1,4,3,5,5000,0)
 insert into ThongTinBangXuat values(1,5,3,5,5000,0)
 
+
+
+--xóa
+delete from ThongTinBangNhap
+delete from ThongTinBangXuat
+delete from BangNhap
+delete from BangXuat
+delete from TaiKhoan
+delete from RoleTaiKhoan
+delete from VatTu
+delete from KhachHang
+delete from DonViDo
+delete from NhaCungCap

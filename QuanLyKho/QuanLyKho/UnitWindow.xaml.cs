@@ -23,5 +23,10 @@ namespace QuanLyKho
         {
             InitializeComponent();
         }
+
+        private void GridViewColumnHeader_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
