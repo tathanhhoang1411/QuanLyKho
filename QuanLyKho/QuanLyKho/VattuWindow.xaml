@@ -112,28 +112,48 @@
                 VerticalAlignment="Stretch">
                 <ScrollViewer 
                     VerticalScrollBarVisibility="Auto">
-                    <ListView HorizontalAlignment="Center"
+                    <StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBox 
+                                  Margin="5"
+                                 Text="{Binding SearchName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                               materialDesign:HintAssist.Hint="Tên vật tư"
+                               Style="{StaticResource MaterialDesignFilledTextBox}">
+                            </TextBox>
+                            <TextBox 
+                                  Margin="5"
+                                 Text="{Binding SearchDonVi,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                               materialDesign:HintAssist.Hint="Đơn vị"
+                               Style="{StaticResource MaterialDesignFilledTextBox}">
+                            </TextBox>
+                            <StackPanel Orientation="Horizontal">
+                                <ToggleButton Style="{StaticResource MaterialDesignActionDarkToggleButton}"  IsChecked="True"></ToggleButton>
+                                <Label Content="Trạng thái" VerticalAlignment="Center"></Label>
+                            </StackPanel>
+                        </StackPanel>
+                        <ListView HorizontalAlignment="Center"
                         ItemsSource="{Binding ListVattus, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
                         SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
-                        <ListView.Resources>
-                            <Style TargetType="GridViewColumnHeader">
-                                <Setter Property="FontSize" Value="15"></Setter>
-                                <Setter Property="Foreground" Value="DarkSlateBlue"></Setter>
-                            </Style>
-                        </ListView.Resources>
-                        <ListView.View>
-                            <GridView>
-                                <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
-                                <GridViewColumn Header="Vật tư" DisplayMemberBinding="{Binding VatTu.Ten}"></GridViewColumn>
-                                <GridViewColumn Header="Đơn vị tính" DisplayMemberBinding="{Binding DonViDo.Ten}"></GridViewColumn>
-                                <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TrangThai}"></GridViewColumn>
+                            <ListView.Resources>
+                                <Style TargetType="GridViewColumnHeader">
+                                    <Setter Property="FontSize" Value="15"></Setter>
+                                    <Setter Property="Foreground" Value="DarkSlateBlue"></Setter>
+                                </Style>
+                            </ListView.Resources>
+                            <ListView.View>
+                                <GridView>
+                                    <GridViewColumn Header="STT" DisplayMemberBinding="{Binding STT}"></GridViewColumn>
+                                    <GridViewColumn Header="Vật tư" DisplayMemberBinding="{Binding VatTu.Ten}"></GridViewColumn>
+                                    <GridViewColumn Header="Đơn vị tính" DisplayMemberBinding="{Binding DonViDo.Ten}"></GridViewColumn>
+                                    <GridViewColumn Header="Trạng thái" DisplayMemberBinding="{Binding TrangThai}"></GridViewColumn>
 
-                                <GridViewColumn Header="Hiện có" DisplayMemberBinding="{Binding Count}"></GridViewColumn>
-                           
-                                
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                                    <GridViewColumn Header="Hiện có" DisplayMemberBinding="{Binding Count}"></GridViewColumn>
+
+
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </StackPanel>
                 </ScrollViewer>
             </materialDesign:Card>
         </Grid>

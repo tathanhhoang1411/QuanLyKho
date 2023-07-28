@@ -16,12 +16,12 @@ namespace QuanLyKho.ViewModel
     {
         public bool IsLogin { get; set; }
         private string _UserName;
-        public string UserName { get => _UserName; set { _UserName = value; OnPropertyChanged("UserName"); } }//onpropertyChanged để nhận sự thay đổi từ UserName
+        public string UserName { get => _UserName; set { SetProperty(ref _UserName, value); } }//onpropertyChanged để nhận sự thay đổi từ UserName
         private string _Password;
-        public string Password { get => _Password; set { _Password = value; OnPropertyChanged("Password"); } }
+        public string Password { get => _Password; set { SetProperty(ref _Password, value);  } }
 
         private ObservableCollection<Accounts> _ListAccInfo;
-        public ObservableCollection<Accounts> ListAccInfo { get => _ListAccInfo; set { _ListAccInfo = value; OnPropertyChanged("ListAccInfo"); } }
+        public ObservableCollection<Accounts> ListAccInfo { get => _ListAccInfo; set { SetProperty(ref _ListAccInfo, value); } }
 
         
         public ICommand CloseCommand { get; set; }
@@ -35,12 +35,12 @@ namespace QuanLyKho.ViewModel
             IsLogin = false;
             Password = "admin";
             UserName = "TaThanhHoang";
-            ShowPassCommand = new RelayCommand<Window>((p) => { return isField(); }, (p) => { MessageBox.Show("Chức năng đang xây dựng, vui lòng chờ bảng nâng cấp"); });
-            LoginCommand = new RelayCommand<Window>((p) => { return isField(); }, (p) => { Login(p); });
+            ShowPassCommand = new RelayCommand<Window>((p) => { return IsField(); }, (p) => { MessageBox.Show("Chức năng đang xây dựng, vui lòng chờ bảng nâng cấp"); });
+            LoginCommand = new RelayCommand<Window>((p) => { return IsField(); }, (p) => { Login(p); });
             CloseCommand = new RelayCommand<Window>((p) => { return true; }, (p) => { p.Close(); });
             PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) => { Password = p.Password; });
         }
-        bool isField()// kt để quyết định có hiện chức năng đăng nhập không
+        bool IsField()// kt để quyết định có hiện chức năng đăng nhập không
         {
             if (Password != "" && UserName !="" )
             {
@@ -67,9 +67,6 @@ namespace QuanLyKho.ViewModel
                  var accCount = DataProvider.Ins.DB.TaiKhoans.Where(x => x.TenTaiKhoan == UserName && x.MatKhau == passEncode && x.TrangThai==1).Count();
                 if (accCount > 0)
                 {
-
-                    OnPropertyChanged("Password");
-                    OnPropertyChanged("UserName");
                     IsLogin = true;
                     p.Close();
                 }

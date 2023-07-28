@@ -32,7 +32,11 @@ namespace QuanLyKho.ViewModel
         public ObservableCollection<VatTus> ListVattu { get => _ListVattu; set { _ListVattu = value; OnPropertyChanged(); } }
 
         //Các trường này sẽ binding qua view 
+        private DateTime _StartDay;
+        public DateTime StartDay { get => _StartDay; set { SetProperty(ref _StartDay, value); LoadFillterDay();LoadInput(); } }
 
+        private DateTime _EndDay;
+        public DateTime EndDay { get => _EndDay; set { SetProperty(ref _EndDay, value); LoadFillterDay(); LoadInput(); } }
 
         private string _TenVatTu;
         public string TenVatTu { get => _TenVatTu; set { _TenVatTu = value; OnPropertyChanged(); } }
@@ -132,6 +136,18 @@ namespace QuanLyKho.ViewModel
 
             }
         }
+        //chọn item search tài khoản
+        private Accounts _SelectedItemSearchAcc;
+        public Accounts SelectedItemSearchAcc
+        {
+            get => _SelectedItemSearchAcc; 
+            set
+            {
+                SetProperty(ref _SelectedItemSearchAcc, value); LoadInput();
+
+
+            }
+        }
         //command cho các nút chức năng thêm xóa sửa
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
@@ -141,6 +157,8 @@ namespace QuanLyKho.ViewModel
         public InputViewModel()
         {
             NgayNhap=DateTime.Now;
+            StartDay = DateTime.Parse("1/1/2020") ;
+            EndDay = DateTime.Now;
             LoadInput();
             LoadComBoBoxSupp();
             LoadComBoBoxAcc();
@@ -157,7 +175,8 @@ namespace QuanLyKho.ViewModel
                 GiaNhap = 0;
                 TrangThai = "";
                 NgayNhap = DateTime.Now;
-
+                StartDay = DateTime.Parse("1/1/2020");
+                EndDay = DateTime.Now;
                 LoadComBoBoxSupp();
                 LoadComBoBoxAcc();
                 LoadComBoBoxVattu();
@@ -180,28 +199,50 @@ namespace QuanLyKho.ViewModel
         }
         public void LoadInput()
         {
+         
+            if(StartDay!=null || EndDay != null)
+            {
+                if (SelectedItemSearchAcc != null)
+                {
+                    LoadFillterAcc();
+                    return;
+                }
+                LoadFillterDay();
+                return;
+            }
+
+                LoadAllInput();
+            
+        }
+        private void LoadAllInput()
+        {
             //Biến i sẽ là STT tăng dần
             int i = 1;
             ListInputs = new ObservableCollection<Inputs>();
-            var  listInput = (
-                from inp in DataProvider.Ins.DB.BangNhaps 
-                join acc in DataProvider.Ins.DB.TaiKhoans on inp.IdTaiKhoan equals acc.Id where acc.TrangThai == 1
-                join inpinf in DataProvider.Ins.DB.ThongTinBangNhaps on inp.Id equals inpinf.IdBangNhap where inpinf.TrangThai==0
-                join vattu in DataProvider.Ins.DB.VatTus on inpinf.IdVatTu equals vattu.Id where vattu.TrangThai==1
-                join donvi in DataProvider.Ins.DB.DonViDoes on vattu.IdDonViDo equals donvi.Id where donvi.TrangThai==1
-                join suppl in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals suppl.Id where suppl.TrangThai==1
-                select new  { inp,acc,inpinf,vattu,suppl}).ToList();
-            foreach(var  item in listInput )
+            var listInput = (
+                from inp in DataProvider.Ins.DB.BangNhaps
+                join acc in DataProvider.Ins.DB.TaiKhoans on inp.IdTaiKhoan equals acc.Id
+                where acc.TrangThai == 1
+                join inpinf in DataProvider.Ins.DB.ThongTinBangNhaps on inp.Id equals inpinf.IdBangNhap
+                where inpinf.TrangThai == 0
+                join vattu in DataProvider.Ins.DB.VatTus on inpinf.IdVatTu equals vattu.Id
+                where vattu.TrangThai == 1
+                join donvi in DataProvider.Ins.DB.DonViDoes on vattu.IdDonViDo equals donvi.Id
+                where donvi.TrangThai == 1
+                join suppl in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals suppl.Id
+                where suppl.TrangThai == 1
+                select new { inp, acc, inpinf, vattu, suppl }).ToList();
+            foreach (var item in listInput)
             {
                 Inputs inps = new Inputs();
                 inps.STT = i;
                 //Đổ bangnhap
                 inps.BangNhap = item.inp;
                 inps.TaiKhoan = item.acc;
-                inps.ThongTinBangNhap= item.inpinf;
+                inps.ThongTinBangNhap = item.inpinf;
                 inps.Vattu = item.vattu;
                 inps.NhaCungCap = item.suppl;
-                string trangThai="";
+                string trangThai = "";
                 switch ((int)item.inpinf.TrangThai)
                 {
                     case 0:
@@ -218,10 +259,199 @@ namespace QuanLyKho.ViewModel
                 ListInputs.Add(inps);
                 i++;
             }
+        }
+        private void LoadFillterAcc()
+        {
+            //Biến i sẽ là STT tăng dần
+            int i = 1;
+            ListInputs = new ObservableCollection<Inputs>();
+            var listInput = (
+                from inp in DataProvider.Ins.DB.BangNhaps
+                where  inp.TaiKhoan.TenTaiKhoan == SelectedItemSearchAcc.TaiKhoan.TenTaiKhoan
+                join acc in DataProvider.Ins.DB.TaiKhoans on inp.IdTaiKhoan equals acc.Id
+                where acc.TrangThai == 1
+                join inpinf in DataProvider.Ins.DB.ThongTinBangNhaps on inp.Id equals inpinf.IdBangNhap
+                where inpinf.TrangThai == 0 
+                join vattu in DataProvider.Ins.DB.VatTus on inpinf.IdVatTu equals vattu.Id
+                where vattu.TrangThai == 1
+                join donvi in DataProvider.Ins.DB.DonViDoes on vattu.IdDonViDo equals donvi.Id
+                where donvi.TrangThai == 1
+                join suppl in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals suppl.Id
+                where suppl.TrangThai == 1
+                select new { inp, acc, inpinf, vattu, suppl }).ToList();
+            foreach (var item in listInput)
+            {
+                Inputs inps = new Inputs();
+                inps.STT = i;
+                //Đổ bangnhap
+                inps.BangNhap = item.inp;
+                inps.TaiKhoan = item.acc;
+                inps.ThongTinBangNhap = item.inpinf;
+                inps.Vattu = item.vattu;
+                inps.NhaCungCap = item.suppl;
+                string trangThai = "";
+                switch ((int)item.inpinf.TrangThai)
+                {
+                    case 0:
+                        trangThai = "Hoàn thành";
+                        break;
+                    case 1:
+                        trangThai = "Đang thực hiện";
+                        break;
+                    default:
+                        break;
+                }
 
+                inps.TrangThai = trangThai.ToString();
+                ListInputs.Add(inps);
+                i++;
+            }
+        }
+        private void LoadFillterDay()
+        {
+            if (StartDay == null)
+            {
+                //Biến i sẽ là STT tăng dần
+                int i = 1;
+                ListInputs = new ObservableCollection<Inputs>();
+                var listInput = (
+                    from inp in DataProvider.Ins.DB.BangNhaps
+                    where  inp.NgayNhap <= (DateTime)EndDay
+                    join acc in DataProvider.Ins.DB.TaiKhoans on inp.IdTaiKhoan equals acc.Id
+                    where acc.TrangThai == 1
+                    join inpinf in DataProvider.Ins.DB.ThongTinBangNhaps on inp.Id equals inpinf.IdBangNhap
+                    where inpinf.TrangThai == 0
+                    join vattu in DataProvider.Ins.DB.VatTus on inpinf.IdVatTu equals vattu.Id
+                    where vattu.TrangThai == 1
+                    join donvi in DataProvider.Ins.DB.DonViDoes on vattu.IdDonViDo equals donvi.Id
+                    where donvi.TrangThai == 1
+                    join suppl in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals suppl.Id
+                    where suppl.TrangThai == 1
+                    select new { inp, acc, inpinf, vattu, suppl }).ToList();
+                foreach (var item in listInput)
+                {
+                    Inputs inps = new Inputs();
+                    inps.STT = i;
+                    //Đổ bangnhap
+                    inps.BangNhap = item.inp;
+                    inps.TaiKhoan = item.acc;
+                    inps.ThongTinBangNhap = item.inpinf;
+                    inps.Vattu = item.vattu;
+                    inps.NhaCungCap = item.suppl;
+                    string trangThai = "";
+                    switch ((int)item.inpinf.TrangThai)
+                    {
+                        case 0:
+                            trangThai = "Hoàn thành";
+                            break;
+                        case 1:
+                            trangThai = "Đang thực hiện";
+                            break;
+                        default:
+                            break;
+                    }
+
+                    inps.TrangThai = trangThai.ToString();
+                    ListInputs.Add(inps);
+                    i++;
+                }
+            }
+            if (EndDay == null)
+            {
+                //Biến i sẽ là STT tăng dần
+                int i = 1;
+                ListInputs = new ObservableCollection<Inputs>();
+                var listInput = (
+                    from inp in DataProvider.Ins.DB.BangNhaps
+                    where inp.NgayNhap >= (DateTime)StartDay 
+                    join acc in DataProvider.Ins.DB.TaiKhoans on inp.IdTaiKhoan equals acc.Id
+                    where acc.TrangThai == 1
+                    join inpinf in DataProvider.Ins.DB.ThongTinBangNhaps on inp.Id equals inpinf.IdBangNhap
+                    where inpinf.TrangThai == 0
+                    join vattu in DataProvider.Ins.DB.VatTus on inpinf.IdVatTu equals vattu.Id
+                    where vattu.TrangThai == 1
+                    join donvi in DataProvider.Ins.DB.DonViDoes on vattu.IdDonViDo equals donvi.Id
+                    where donvi.TrangThai == 1
+                    join suppl in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals suppl.Id
+                    where suppl.TrangThai == 1
+                    select new { inp, acc, inpinf, vattu, suppl }).ToList();
+                foreach (var item in listInput)
+                {
+                    Inputs inps = new Inputs();
+                    inps.STT = i;
+                    //Đổ bangnhap
+                    inps.BangNhap = item.inp;
+                    inps.TaiKhoan = item.acc;
+                    inps.ThongTinBangNhap = item.inpinf;
+                    inps.Vattu = item.vattu;
+                    inps.NhaCungCap = item.suppl;
+                    string trangThai = "";
+                    switch ((int)item.inpinf.TrangThai)
+                    {
+                        case 0:
+                            trangThai = "Hoàn thành";
+                            break;
+                        case 1:
+                            trangThai = "Đang thực hiện";
+                            break;
+                        default:
+                            break;
+                    }
+
+                    inps.TrangThai = trangThai.ToString();
+                    ListInputs.Add(inps);
+                    i++;
+                }
+            }
+            if(StartDay!=null && EndDay!=null)
+            {
+                //Biến i sẽ là STT tăng dần
+                int i = 1;
+                ListInputs = new ObservableCollection<Inputs>();
+                var listInput = (
+                    from inp in DataProvider.Ins.DB.BangNhaps
+                    where inp.NgayNhap >= (DateTime)StartDay && inp.NgayNhap <= (DateTime)EndDay
+                    join acc in DataProvider.Ins.DB.TaiKhoans on inp.IdTaiKhoan equals acc.Id
+                    where acc.TrangThai == 1
+                    join inpinf in DataProvider.Ins.DB.ThongTinBangNhaps on inp.Id equals inpinf.IdBangNhap
+                    where inpinf.TrangThai == 0
+                    join vattu in DataProvider.Ins.DB.VatTus on inpinf.IdVatTu equals vattu.Id
+                    where vattu.TrangThai == 1
+                    join donvi in DataProvider.Ins.DB.DonViDoes on vattu.IdDonViDo equals donvi.Id
+                    where donvi.TrangThai == 1
+                    join suppl in DataProvider.Ins.DB.NhaCungCaps on vattu.IdNhaCungCap equals suppl.Id
+                    where suppl.TrangThai == 1
+                    select new { inp, acc, inpinf, vattu, suppl }).ToList();
+                foreach (var item in listInput)
+                {
+                    Inputs inps = new Inputs();
+                    inps.STT = i;
+                    //Đổ bangnhap
+                    inps.BangNhap = item.inp;
+                    inps.TaiKhoan = item.acc;
+                    inps.ThongTinBangNhap = item.inpinf;
+                    inps.Vattu = item.vattu;
+                    inps.NhaCungCap = item.suppl;
+                    string trangThai = "";
+                    switch ((int)item.inpinf.TrangThai)
+                    {
+                        case 0:
+                            trangThai = "Hoàn thành";
+                            break;
+                        case 1:
+                            trangThai = "Đang thực hiện";
+                            break;
+                        default:
+                            break;
+                    }
+
+                    inps.TrangThai = trangThai.ToString();
+                    ListInputs.Add(inps);
+                    i++;
+                }
+            }
 
         }
-
         private bool CanAddCommand()
         {
 

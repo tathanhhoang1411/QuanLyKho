@@ -171,6 +171,33 @@
                 VerticalAlignment="Stretch">
                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
                     VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <DatePicker 
+                                Text="{Binding StartDay,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                               Margin="5"
+                               materialDesign:HintAssist.Hint="Ngày bắt đầu"
+                               Style="{StaticResource MaterialDesignFilledDatePicker}">
+                                </DatePicker>
+                                <DatePicker 
+                                Text="{Binding EndDay,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                               Margin="5"
+                               materialDesign:HintAssist.Hint="Ngày kết thúc"
+                               Style="{StaticResource MaterialDesignFilledDatePicker}">
+                                </DatePicker>
+                                <ComboBox
+                     
+                        Margin="5" 
+                        materialDesign:HintAssist.Hint="Nhân viên nhập kho" 
+                        Style="{StaticResource MaterialDesignComboBox}"
+                            DisplayMemberPath="TaiKhoan.HoVaTen"
+                            ItemsSource="{Binding ListAcc, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                            SelectedItem="{Binding SelectedItemSearchAcc, UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}">
+
+                                </ComboBox>
+                            </StackPanel>
+                        </StackPanel>
                     <ListView HorizontalAlignment="Center"
                         ItemsSource="{Binding ListOutputs}"
                         SelectedItem="{Binding SelectedItemOutPut, Mode=OneWayToSource,UpdateSourceTrigger=PropertyChanged}">
@@ -195,6 +222,7 @@
                             </GridView>
                         </ListView.View>
                     </ListView>
+                    </StackPanel>
                 </ScrollViewer>
             </materialDesign:Card>
         </Grid>

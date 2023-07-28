@@ -20,7 +20,7 @@
         WindowStartupLocation="CenterScreen"
         Name="mainWindow"
         DataContext="{StaticResource MainVM}"
-        Title="Phần mềm quản lý kho" Height="700" Width="1000">
+        Title="Phần mềm quản lý kho" Height="800"  Width="1300">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
             <i:InvokeCommandAction Command="{Binding LoadedWindowCommand}" 
@@ -156,18 +156,14 @@
                                 <Setter Property="VerticalAlignment" Value="Center"></Setter>
                             </Style>
                         </Grid.Resources>
-                        <DatePicker
-                               Margin="5"
-                               materialDesign:HintAssist.Hint="Ngày bắt đầu"
-                               Style="{StaticResource MaterialDesignFilledDatePicker}">
-                        </DatePicker>
-                        <DatePicker Grid.Column="1"
-                               Margin="5"
-                               materialDesign:HintAssist.Hint="Ngày kết thúc"
-                               Style="{StaticResource MaterialDesignFilledDatePicker}">
-                        </DatePicker>
-                        <Grid Grid.Column="2">
-                            <Button
+                        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="3">
+                            <TextBox 
+                                  Margin="5"
+                                 Text="{Binding SearchName,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}"
+                               materialDesign:HintAssist.Hint="Tên vật tư"
+                               Style="{StaticResource MaterialDesignFilledTextBox}">
+                            </TextBox>
+                            <Button 
                                ToolTip="Lọc"
                                Margin="5"
                                materialDesign:ButtonProgressAssist.IsIndeterminate="True"
@@ -178,7 +174,8 @@
                                Style="{StaticResource MaterialDesignRaisedButton}"
                                 Background="OrangeRed">
                             </Button>
-                        </Grid>
+
+                        </StackPanel>
                         <Separator Grid.Row="1" Grid.ColumnSpan="3" ></Separator>
                         <Grid Grid.Column="0" Grid.Row="2" >
                             <materialDesign:Card 

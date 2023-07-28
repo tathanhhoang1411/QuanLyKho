@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media.Media3D;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace QuanLyKho.ViewModel
@@ -17,11 +18,15 @@ namespace QuanLyKho.ViewModel
     public class MainViewModel : BaseViewModel
     {
         private ObservableCollection<TonKho> _ListTonKho;
-        public ObservableCollection<TonKho> ListTonKho { get => _ListTonKho; set { _ListTonKho = value; OnPropertyChanged(); } }
+        public ObservableCollection<TonKho> ListTonKho { get => _ListTonKho; set { SetProperty(ref _ListTonKho, value); } }
 
         private ObservableCollection<Accounts> _ListAccInfo;
-        public ObservableCollection<Accounts> ListAccInfo { get => _ListAccInfo; set { _ListAccInfo = value; OnPropertyChanged(); } }
-        
+        public ObservableCollection<Accounts> ListAccInfo { get => _ListAccInfo; set { SetProperty(ref _ListAccInfo, value); } }
+
+        private string _SearchName;
+        public string  SearchName { get => _SearchName; set { SetProperty(ref _SearchName, value); LoadTonKho(); } }
+
+
         private  bool Isloaded = false;
         public ICommand LoadedWindowCommand { get; set; }
         public ICommand UnitWindowCommand { get; set; }
@@ -137,15 +142,27 @@ namespace QuanLyKho.ViewModel
 
         void LoadTonKho()
         {
+
+            if (SearchName == null)
+            {
+                LoadAllTonKho();
+            }
+            else
+            {
+                LoadSearchNameTonKho();
+            }
+        }
+       private void LoadAllTonKho()
+        {
             ListTonKho = new ObservableCollection<TonKho>();
-            List<VatTu>  ListVatTu = DataProvider.Ins.DB.VatTus.Where(x=>x.TrangThai==1).ToList();
+            List<VatTu> ListVatTu = DataProvider.Ins.DB.VatTus.Where(x => x.TrangThai == 1).ToList();
             //Biến i sẽ là STT tăng dần
             int i = 1;
             foreach (VatTu item in ListVatTu)
             {
                 List<ThongTinBangNhap> ListInputInfo = DataProvider.Ins.DB.ThongTinBangNhaps.Where(p => p.IdVatTu == item.Id).ToList();
                 List<ThongTinBangXuat> ListOutputInfo = DataProvider.Ins.DB.ThongTinBangXuats.Where(p => p.IdVatTu == item.Id).ToList();
-                List<DonViDo> DonViDo=DataProvider.Ins.DB.DonViDoes.Where(p=>p.Id==item.IdDonViDo).ToList();
+                List<DonViDo> DonViDo = DataProvider.Ins.DB.DonViDoes.Where(p => p.Id == item.IdDonViDo).ToList();
                 int sumInput = 0;
                 int sumOutput = 0;
                 int a = ListVatTu.Count();
@@ -172,8 +189,46 @@ namespace QuanLyKho.ViewModel
 
                 i++;
             }
- 
-        }
+        } 
+        private void LoadSearchNameTonKho()
+        {
+            ListTonKho = new ObservableCollection<TonKho>();
 
+            List<VatTu> ListVatTu = DataProvider.Ins.DB.VatTus.Where(x => x.TrangThai == 1 && x.Ten.Contains(SearchName.Trim())).ToList();
+            //Biến i sẽ là STT tăng dần
+            int i = 1;
+            foreach (VatTu item in ListVatTu)
+            {
+                List<ThongTinBangNhap> ListInputInfo = DataProvider.Ins.DB.ThongTinBangNhaps.Where(p => p.IdVatTu == item.Id).ToList();
+                List<ThongTinBangXuat> ListOutputInfo = DataProvider.Ins.DB.ThongTinBangXuats.Where(p => p.IdVatTu == item.Id).ToList();
+                List<DonViDo> DonViDo = DataProvider.Ins.DB.DonViDoes.Where(p => p.Id == item.IdDonViDo).ToList();
+                int sumInput = 0;
+                int sumOutput = 0;
+                int a = ListVatTu.Count();
+                if (ListInputInfo != null)
+                {
+                    sumInput = (int)ListInputInfo.Sum(p => p.Count);
+                    //tổng số lượng của tất cả Danh sách inputinfo thỏa điều kiện: IdVatTu==Id của vật tư 
+                }
+                if (ListOutputInfo != null)
+                {
+                    sumOutput = (int)ListOutputInfo.Sum(p => p.Count);
+                    //tổng số lượng của tất cả Danh sách outputinfo thỏa điều kiện: IdVatTu==Id của vật tư 
+                }
+
+                TonKho tonkho = new TonKho();
+                //Đổ số thứ tự vật tư 
+                tonkho.STT = i;
+                //Đổ số lượng vật tư  
+                tonkho.Count = sumInput - sumOutput;
+                //Đổ vật tư 
+                tonkho.Vattu = item;
+                tonkho.DonViDo = DonViDo[0];
+                ListTonKho.Add(tonkho);
+
+                i++;
+            }
+        }
+  
     }
 }
