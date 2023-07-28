@@ -149,10 +149,15 @@ namespace QuanLyKho.ViewModel
             {
                 return false;
             }
-            else
+            if (SDT.Length < 9)
             {
-                return true;
+                return false;
             }
+            if (!int.TryParse(SDT, out int n))
+            {
+                return false;
+            }
+            return true;
         }
         private void ExcutedEditCommand()
         {

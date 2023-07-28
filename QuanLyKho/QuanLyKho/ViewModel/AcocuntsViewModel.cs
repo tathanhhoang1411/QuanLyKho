@@ -110,10 +110,22 @@ namespace QuanLyKho.ViewModel
             EditCommand = new RelayCommand<object>((p) => { return CanEditCommand(); }, (p) => { ExcutedEditCommand(); });
             DeleteCommand = new RelayCommand<object>((p) => { return CanDelCommand(); }, (p) => { ExcutedUnDelCommand(); });
             UnDeleteCommand = new RelayCommand<object>((p) => { return CanDelCommand(); }, (p) => { ExcutedDelCommand(); });
-            ReLoadCommand = new RelayCommand<object>((p) => { return true; }, (p) => { LoadComboBoxRole(); });
+            ReLoadCommand = new RelayCommand<object>((p) => { return true; }, (p) => { LoadComboBoxRole(); Reload(); });
             OpenFolderCommand = new RelayCommand(OpenImage);
         }
-
+        private void Reload()
+        {
+            
+            HoVaTen = "";
+            TaiKhoan = "";
+            SDT = "";
+            Email = "nhanvien@gmail.com";
+            ImagePath = "";
+            SelectedItemRole = null;
+            MatKhau = "";
+            SelectedItem = null;
+            SelectedItemRole = null;
+        }
         private void OpenImage()
         {
             Microsoft.Win32.OpenFileDialog dlg = new Microsoft.Win32.OpenFileDialog();
@@ -252,35 +264,52 @@ namespace QuanLyKho.ViewModel
 
             return false;
         }
+        private bool ktTaiKhoan()
+        {
+            TaiKhoan tk = DataProvider.Ins.DB.TaiKhoans.Where(p => p.SDT == SDT.Trim() && p.TenTaiKhoan==TaiKhoan.Trim()
+            && p.Email==Email.Trim()).SingleOrDefault();
+            if (tk == null)
+            {
+                return true;
+            }
+            return false;
+        }
         private void ExcutedAddCommand()
         {
             try
             {
-                LoginViewModel lgVM=new LoginViewModel();
-                string matKhauMoi=lgVM.MD5Hash(lgVM.Base64Encode(MatKhau.Trim()));
-
-                TaiKhoan tk = new TaiKhoan();
-                tk.HoVaTen= HoVaTen.Trim();
-                tk.TenTaiKhoan= TaiKhoan.Trim();
-                tk.MatKhau = matKhauMoi;
-                tk.MatKhauUnEncry = MatKhau.Trim();
-                tk.SDT = SDT.Trim();
-                tk.Email = Email.Trim();
-                tk.IdRoleTaiKhoan=SelectedItemRole.RoleTK.Id;
-                tk.TrangThai = 1;
-                tk.AnhDaiDien=ImagePath.Trim();
-                if (NgayTao>DateTime.Now)
+                if (ktTaiKhoan() == true)
                 {
-                    tk.NgayTao = DateTime.Now;
+                    LoginViewModel lgVM = new LoginViewModel();
+                    string matKhauMoi = lgVM.MD5Hash(lgVM.Base64Encode(MatKhau.Trim()));
+
+                    TaiKhoan tk = new TaiKhoan();
+                    tk.HoVaTen = HoVaTen.Trim();
+                    tk.TenTaiKhoan = TaiKhoan.Trim();
+                    tk.MatKhau = matKhauMoi;
+                    tk.MatKhauUnEncry = MatKhau.Trim();
+                    tk.SDT = SDT.Trim();
+                    tk.Email = Email.Trim();
+                    tk.IdRoleTaiKhoan = SelectedItemRole.RoleTK.Id;
+                    tk.TrangThai = 1;
+                    tk.AnhDaiDien = ImagePath.Trim();
+                    if (NgayTao > DateTime.Now)
+                    {
+                        tk.NgayTao = DateTime.Now;
+                    }
+                    else
+                    {
+                        tk.NgayTao = (DateTime)NgayTao;
+                    }
+                    DataProvider.Ins.DB.TaiKhoans.Add(tk);
+                    DataProvider.Ins.DB.SaveChanges();
+                    LoadAccount();
+                    MessageBox.Show("Thêm nhân viên: Tài khoản " + TaiKhoan.Trim().ToUpper() + " " + SDT.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
                 else
                 {
-                    tk.NgayTao =(DateTime)NgayTao;
+                    MessageBox.Show("Thông tin bạn đã nhập: Tài khoản " + TaiKhoan.Trim().ToUpper() + " " + SDT.Trim() + " đã tồn tại ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
-                DataProvider.Ins.DB.TaiKhoans.Add(tk);
-                DataProvider.Ins.DB.SaveChanges();
-                LoadAccount();
-                MessageBox.Show("Thêm nhân viên: Tài khoản " + TaiKhoan.Trim().ToUpper() + " " + SDT.Trim() + " thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
 
             }
@@ -303,12 +332,16 @@ namespace QuanLyKho.ViewModel
             {
                 return false;
             }
-            else
+            if (SDT.Length < 9)
             {
-                return true;
+                return false;
+            }
+            if (!int.TryParse(SDT, out int n))
+            {
+                return false;
             }
 
-
+            return true;
         }
         private void ExcutedEditCommand()
         {
