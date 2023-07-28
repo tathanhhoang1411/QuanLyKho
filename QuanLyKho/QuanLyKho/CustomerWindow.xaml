@@ -87,6 +87,12 @@
                         Margin="5"
                         Width="100">
                     </Button>
+                    <Button 
+                        Command="{Binding ReloadCommand}" 
+                        Content="Làm mới" 
+                        Margin="5"
+                        Width="100">
+                    </Button>
                 </StackPanel>
             </materialDesign:Card>
 
@@ -97,8 +103,8 @@
                 <ScrollViewer 
                     VerticalScrollBarVisibility="Auto">
                     <ListView HorizontalAlignment="Center"
-                        ItemsSource="{Binding ListCustomers}"
-                        SelectedItem="{Binding SelectedItem, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                        ItemsSource="{Binding ListCustomers, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedItem="{Binding SelectedItem, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                         <ListView.Resources>
                             <Style TargetType="GridViewColumnHeader">
                                 <Setter Property="FontSize" Value="15"></Setter>

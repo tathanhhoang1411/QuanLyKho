@@ -45,11 +45,20 @@ namespace QuanLyKho.ViewModel
         }
         public ICommand AddCommand { get; set; }
         public ICommand EditCommand { get; set; }
+        public ICommand ReloadCommand { get; set; }
         public CustomerViewModel()
         {
             LoadCustomer();
             AddCommand = new RelayCommand<object>((p) => { return CanAddCommand(); }, (p) => { ExcutedAddCommand(); });
             EditCommand = new RelayCommand<object>((p) => { return CanEditCommand(); }, (p) => { ExcutedEditCommand(); });
+            ReloadCommand = new RelayCommand<object>((p) => { return true; }, (p) => {
+                LoadCustomer();
+                TenKhachHang = "";
+                SDT = "";
+                Email = "Khachhang@gmail.com";
+                ThongTinThem = "";
+                DiaChi = "";
+            });
         }
         public ObservableCollection<Customers> LoadComboboxCus()
         {
@@ -74,16 +83,20 @@ namespace QuanLyKho.ViewModel
         }
         private bool CanAddCommand()
         {
-            if(string.IsNullOrWhiteSpace(TenKhachHang) 
-                || string.IsNullOrWhiteSpace(SDT)
-                ||string.IsNullOrWhiteSpace(Email)
-                || string.IsNullOrWhiteSpace(DiaChi)
-                || SelectedItem != null)
+
+            if(string.IsNullOrWhiteSpace(SDT)|| SelectedItem != null)
+            {
+
+                return false;
+            }
+            if(SDT.Length < 9 )
             {
                 return false;
             }
-
-
+            if(!int.TryParse(SDT, out int n))
+            {
+                return false;
+            }
             List<KhachHang> list = DataProvider.Ins.DB.KhachHangs.Where(x => x.SDT == SDT).ToList();
             if (list.Count() == 0)
             {
@@ -131,11 +144,8 @@ namespace QuanLyKho.ViewModel
         }
         private bool CanEditCommand()
         {
-            if (SelectedItem==null 
-                || string.IsNullOrWhiteSpace(TenKhachHang) 
-                || string.IsNullOrWhiteSpace(SDT) 
-                ||string.IsNullOrWhiteSpace(Email)
-                || string.IsNullOrWhiteSpace(DiaChi))
+            if (SelectedItem==null || string.IsNullOrWhiteSpace(SDT) 
+)
             {
                 return false;
             }

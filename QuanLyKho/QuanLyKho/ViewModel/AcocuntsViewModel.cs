@@ -229,7 +229,14 @@ namespace QuanLyKho.ViewModel
             {
                 return false;
             }
-
+            if (SDT.Length < 9)
+            {
+                return false;
+            }
+            if (!int.TryParse(SDT, out int n))
+            {
+                return false;
+            }
 
             List<TaiKhoan> list = DataProvider.Ins.DB.TaiKhoans.Where(x => x.SDT == SDT ).ToList();
             if (list.Count() == 0)
