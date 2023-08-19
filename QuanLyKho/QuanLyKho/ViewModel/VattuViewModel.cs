@@ -137,7 +137,7 @@ SupplierViewModel sup=new SupplierViewModel();
         }
         private void csdf()
         {
-            MessageBox.Show("fcdskvdzseg");
+            MessageBox.Show("fcdskvdzsegbhrrrrrrrrrrrrrrrrrrrrrrrrrrt");
         }
         public void LoadVattu()
             {
