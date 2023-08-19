@@ -135,6 +135,10 @@ SupplierViewModel sup=new SupplierViewModel();
             }
             return ListVattus;
         }
+        private void csdf()
+        {
+            MessageBox.Show("fcdskvdzseg");
+        }
         public void LoadVattu()
             {
             ListVattus = new ObservableCollection<VatTus>();
