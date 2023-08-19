@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\
+D:\WORK\WPF\WPF\QuanLyKho\QuanLyKho\QuanLyKho\obj\Debug\
 QuanLyKho
 none
 false
 DEBUG;TRACE
-D:\WORK\WPF\WPF\PhanMemQuanLyKho\QuanLyKho\QuanLyKho\QuanLyKho\App.xaml
+D:\WORK\WPF\WPF\QuanLyKho\QuanLyKho\QuanLyKho\App.xaml
 12-1605968893
 2739969757
 49-707471753
-133-1015636591
+133-995485227
 AccountsWindow.xaml;CustomerWindow.xaml;InputWindow.xaml;LoginWindow.xaml;MainWindow.xaml;OutputWindow.xaml;ResourceXAML\MainReSource.xaml;ResourceXAML\Style.xaml;SupplierWindow.xaml;UnitWindow.xaml;UserControlQuanLyKho\ControlBarUC.xaml;VattuWindow.xaml;
 
 False
